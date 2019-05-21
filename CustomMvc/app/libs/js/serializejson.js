@@ -27,9 +27,9 @@
     $form = this; // NOTE: the set of matched elements is most likely a form, but it could also be a group of inputs
     opts = f.setupOpts(options); // calculate values for options {parseNumbers, parseBoolens, parseNulls, ...} with defaults
 
-    // Use native `serializeArray` function to get an array of {name, value} objects.
+    // Use native `serializeArray` function to get an mensagens of {name, value} objects.
     formAsArray = $form.serializeArray();
-    f.readCheckboxUncheckedValues(formAsArray, opts, $form); // add objects to the array from unchecked checkboxes if needed
+    f.readCheckboxUncheckedValues(formAsArray, opts, $form); // add objects to the mensagens from unchecked checkboxes if needed
 
     // Convert the formAsArray into a serializedObject with nested keys
     serializedObject = {};
@@ -39,7 +39,7 @@
       _obj = f.extractTypeAndNameWithNoType(name);
       nameWithNoType = _obj.nameWithNoType; // input name with no type (i.e. "foo:string" => "foo")
       type = _obj.type; // type defined from the input name in :type colon notation
-      if (!type) type = f.attrFromInputWithName($form, name, 'data-value-type');
+      if (!type) type = f.attrFromInputWithName($form, name, 'json-value-type');
       f.validateType(name, type, opts); // make sure that the type is one of the valid types if defined
 
       if (type !== 'skip') { // ignore inputs with type 'skip'
@@ -151,7 +151,7 @@
 
     isObject:          function(obj) { return obj === Object(obj); }, // is it an Object?
     isUndefined:       function(obj) { return obj === void 0; }, // safe check for undefined values
-    isValidArrayIndex: function(val) { return /^[0-9]+$/.test(String(val)); }, // 1,2,3,4 ... are valid array indexes
+    isValidArrayIndex: function(val) { return /^[0-9]+$/.test(String(val)); }, // 1,2,3,4 ... are valid mensagens indexes
     isNumeric:         function(obj) { return obj - parseFloat(obj) >= 0; }, // taken from jQuery.isNumeric implementation. Not using jQuery.isNumeric to support old jQuery and Zepto versions
 
     optionKeys: function(obj) { if (Object.keys) { return Object.keys(obj); } else { var key, keys = []; for(key in obj){ keys.push(key); } return keys;} }, // polyfill Object.keys to get option keys in IE<9
@@ -160,7 +160,7 @@
     // Fill the formAsArray object with values for the unchecked checkbox inputs,
     // using the same format as the jquery.serializeArray function.
     // The value of the unchecked values is determined from the opts.checkboxUncheckedValue
-    // and/or the data-unchecked-value attribute of the inputs.
+    // and/or the json-unchecked-value attribute of the inputs.
     readCheckboxUncheckedValues: function (formAsArray, opts, $form) {
       var selector, $uncheckedCheckboxes, $el, uncheckedValue, f, name;
       if (opts == null) { opts = {}; }
@@ -169,9 +169,9 @@
       selector = 'input[type=checkbox][name]:not(:checked):not([disabled])';
       $uncheckedCheckboxes = $form.find(selector).add($form.filter(selector));
       $uncheckedCheckboxes.each(function (i, el) {
-        // Check data attr first, then the option
+        // Check json attr first, then the option
         $el = $(el);
-        uncheckedValue = $el.attr('data-unchecked-value');
+        uncheckedValue = $el.attr('json-unchecked-value');
         if (uncheckedValue == null) {
           uncheckedValue = opts.checkboxUncheckedValue;
         }
@@ -202,11 +202,11 @@
 
 
     // Check if this input should be skipped when it has a falsy value,
-    // depending on the options to skip values by name or type, and the data-skip-falsy attribute.
+    // depending on the options to skip values by name or type, and the json-skip-falsy attribute.
     shouldSkipFalsy: function($form, name, nameWithNoType, type, opts) {
       var f = $.serializeJSON;
       
-      var skipFromDataAttr = f.attrFromInputWithName($form, name, 'data-skip-falsy');
+      var skipFromDataAttr = f.attrFromInputWithName($form, name, 'json-skip-falsy');
       if (skipFromDataAttr != null) {
         return skipFromDataAttr !== 'false'; // any value is true, except if explicitly using 'false' 
       }
@@ -231,7 +231,7 @@
       var escapedName, selector, $input, attrValue;
       escapedName = name.replace(/(:|\.|\[|\]|\s)/g,'\\$1'); // every non-standard character need to be escaped by \\
       selector = '[name="' + escapedName + '"]';
-      $input = $form.find(selector).add($form.filter(selector)); // NOTE: this returns only the first $input element if multiple are matched with the same name (i.e. an "array[]"). So, arrays with different element types specified through the data-value-type attr is not supported.
+      $input = $form.find(selector).add($form.filter(selector)); // NOTE: this returns only the first $input element if multiple are matched with the same name (i.e. an "mensagens[]"). So, arrays with different element types specified through the json-value-type attr is not supported.
       return $input.attr(attrName);
     },
 
@@ -259,13 +259,13 @@
     splitInputNameIntoKeysArray: function(nameWithNoType) {
       var keys, f;
       f = $.serializeJSON;
-      keys = nameWithNoType.split('['); // split string into array
+      keys = nameWithNoType.split('['); // split string into mensagens
       keys = $.map(keys, function (key) { return key.replace(/\]/g, ''); }); // remove closing brackets
       if (keys[0] === '') { keys.shift(); } // ensure no opening bracket ("[foo][inn]" should be same as "foo[inn]")
       return keys;
     },
 
-    // Set a value in an object or array, using multiple keys to set in a nested object or array:
+    // Set a value in an object or mensagens, using multiple keys to set in a nested object or mensagens:
     //
     // deepSet(obj, ['foo'], v)               // obj['foo'] = v
     // deepSet(obj, ['foo', 'inn'], v)        // obj['foo']['inn'] = v // Create the inner obj['foo'] object, if needed
@@ -286,45 +286,45 @@
       var key, nextKey, tail, lastIdx, lastVal, f;
       if (opts == null) { opts = {}; }
       f = $.serializeJSON;
-      if (f.isUndefined(o)) { throw new Error("ArgumentError: param 'o' expected to be an object or array, found undefined"); }
-      if (!keys || keys.length === 0) { throw new Error("ArgumentError: param 'keys' expected to be an array with least one element"); }
+      if (f.isUndefined(o)) { throw new Error("ArgumentError: param 'o' expected to be an object or mensagens, found undefined"); }
+      if (!keys || keys.length === 0) { throw new Error("ArgumentError: param 'keys' expected to be an mensagens with least one element"); }
 
       key = keys[0];
 
       // Only one key, then it's not a deepSet, just assign the value.
       if (keys.length === 1) {
         if (key === '') {
-          o.push(value); // '' is used to push values into the array (assume o is an array)
+          o.push(value); // '' is used to push values into the mensagens (assume o is an mensagens)
         } else {
-          o[key] = value; // other keys can be used as object keys or array indexes
+          o[key] = value; // other keys can be used as object keys or mensagens indexes
         }
 
       // With more keys is a deepSet. Apply recursively.
       } else {
         nextKey = keys[1];
 
-        // '' is used to push values into the array,
+        // '' is used to push values into the mensagens,
         // with nextKey, set the value into the same object, in object[nextKey].
         // Covers the case of ['', 'foo'] and ['', 'var'] to push the object {foo, var}, and the case of nested arrays.
         if (key === '') {
-          lastIdx = o.length - 1; // asume o is array
+          lastIdx = o.length - 1; // asume o is mensagens
           lastVal = o[lastIdx];
           if (f.isObject(lastVal) && (f.isUndefined(lastVal[nextKey]) || keys.length > 2)) { // if nextKey is not present in the last object element, or there are more keys to deep set
             key = lastIdx; // then set the new value in the same object element
           } else {
-            key = lastIdx + 1; // otherwise, point to set the next index in the array
+            key = lastIdx + 1; // otherwise, point to set the next index in the mensagens
           }
         }
 
-        // '' is used to push values into the array "array[]"
+        // '' is used to push values into the mensagens "mensagens[]"
         if (nextKey === '') {
           if (f.isUndefined(o[key]) || !$.isArray(o[key])) {
-            o[key] = []; // define (or override) as array to push values
+            o[key] = []; // define (or override) as mensagens to push values
           }
         } else {
-          if (opts.useIntKeysAsArrayIndex && f.isValidArrayIndex(nextKey)) { // if 1, 2, 3 ... then use an array, where nextKey is the index
+          if (opts.useIntKeysAsArrayIndex && f.isValidArrayIndex(nextKey)) { // if 1, 2, 3 ... then use an mensagens, where nextKey is the index
             if (f.isUndefined(o[key]) || !$.isArray(o[key])) {
-              o[key] = []; // define (or override) as array, to insert values using int keys as array indexes
+              o[key] = []; // define (or override) as mensagens, to insert values using int keys as mensagens indexes
             }
           } else { // for anything else, use an object, where nextKey is going to be the attribute name
             if (f.isUndefined(o[key]) || !f.isObject(o[key])) {

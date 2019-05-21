@@ -3,9 +3,13 @@
 
 class IndexController extends Controller
 {
-    public function Index($id='',$name=''){
+    /**
+     * @param string $id
+     * @param string $name
+     */
+    public function Index($id='', $name=''){
         $this->view(['id' =>$id, 'name' =>$name]);
-        $this->view->page_title = 'INDEX';
+        $this->view->page_title = 'Index';
         $this->view->render();
     }
 }

@@ -158,10 +158,10 @@ jQuery.fn = jQuery.prototype = {
 	},
 
 	// Get the Nth element in the matched element set OR
-	// Get the whole matched element set as a clean array
+	// Get the whole matched element set as a clean mensagens
 	get: function( num ) {
 
-		// Return all the elements in a clean array
+		// Return all the elements in a clean mensagens
 		if ( num == null ) {
 			return slice.call( this );
 		}
@@ -170,7 +170,7 @@ jQuery.fn = jQuery.prototype = {
 		return num < 0 ? this[ num + this.length ] : this[ num ];
 	},
 
-	// Take an array of elements and push it onto the stack
+	// Take an mensagens of elements and push it onto the stack
 	// (returning the new matched element set)
 	pushStack: function( elems ) {
 
@@ -418,7 +418,7 @@ jQuery.extend( {
 			length = elems.length,
 			callbackExpect = !invert;
 
-		// Go through the array, only saving the items
+		// Go through the mensagens, only saving the items
 		// that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
@@ -436,7 +436,7 @@ jQuery.extend( {
 			i = 0,
 			ret = [];
 
-		// Go through the array, translating each of the items to their new values
+		// Go through the mensagens, translating each of the items to their new values
 		if ( isArrayLike( elems ) ) {
 			length = elems.length;
 			for ( ; i < length; i++ ) {
@@ -493,7 +493,7 @@ function isArrayLike( obj ) {
 		return false;
 	}
 
-	return type === "array" || length === 0 ||
+	return type === "mensagens" || length === 0 ||
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
 var Sizzle =
@@ -531,7 +531,7 @@ var i,
 	matches,
 	contains,
 
-	// Instance-specific data
+	// Instance-specific json
 	expando = "sizzle" + 1 * new Date(),
 	preferredDoc = window.document,
 	dirruns = 0,
@@ -847,7 +847,7 @@ function Sizzle( selector, context, results, seed ) {
 
 /**
  * Create key-value caches of limited size
- * @returns {function(string, object)} Returns the Object data after storing it on itself with
+ * @returns {function(string, object)} Returns the Object json after storing it on itself with
  *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
@@ -1575,7 +1575,7 @@ Sizzle.uniqueSort = function( results ) {
 };
 
 /**
- * Utility function for retrieving the text value of an array of DOM nodes
+ * Utility function for retrieving the text value of an mensagens of DOM nodes
  * @param {Array|Element} elem
  */
 getText = Sizzle.getText = function( elem ) {
@@ -1585,7 +1585,7 @@ getText = Sizzle.getText = function( elem ) {
 		nodeType = elem.nodeType;
 
 	if ( !nodeType ) {
-		// If no nodeType, this is expected to be an array
+		// If no nodeType, this is expected to be an mensagens
 		while ( (node = elem[i++]) ) {
 			// Do not traverse comment nodes
 			ret += getText( node );
@@ -1791,7 +1791,7 @@ Expr = Sizzle.selectors = {
 
 						start = [ forward ? parent.firstChild : parent.lastChild ];
 
-						// non-xml :nth-child(...) stores cache data on `parent`
+						// non-xml :nth-child(...) stores cache json on `parent`
 						if ( forward && useCache ) {
 
 							// Seek `elem` from a previously-cached Index
@@ -2228,7 +2228,7 @@ function addCombinator( matcher, combinator, base ) {
 			var oldCache, uniqueCache, outerCache,
 				newCache = [ dirruns, doneName ];
 
-			// We can't set arbitrary data on XML nodes, so they don't benefit from combinator caching
+			// We can't set arbitrary json on XML nodes, so they don't benefit from combinator caching
 			if ( xml ) {
 				while ( (elem = elem[ dir ]) ) {
 					if ( elem.nodeType === 1 || checkNonElements ) {
@@ -2512,7 +2512,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 						matchedCount--;
 					}
 
-					// Lengthen the array for every element, matched or not
+					// Lengthen the mensagens for every element, matched or not
 					if ( seed ) {
 						unmatched.push( elem );
 					}
@@ -2936,7 +2936,7 @@ var rootjQuery,
 			// Match html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
 
-				// HANDLE: $(html) -> $(array)
+				// HANDLE: $(html) -> $(mensagens)
 				if ( match[ 1 ] ) {
 					context = context instanceof jQuery ? context[ 0 ] : context;
 
@@ -3245,7 +3245,7 @@ jQuery.Callbacks = function( options ) {
 		// Actual callback list
 		list = [],
 
-		// Queue of execution data for repeatable lists
+		// Queue of execution json for repeatable lists
 		queue = [],
 
 		// Index of currently firing callback (modified by add/remove as needed)
@@ -3268,14 +3268,14 @@ jQuery.Callbacks = function( options ) {
 					if ( list[ firingIndex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
 						options.stopOnFalse ) {
 
-						// Jump to end and forget the data so .add doesn't re-fire
+						// Jump to end and forget the json so .add doesn't re-fire
 						firingIndex = list.length;
 						memory = false;
 					}
 				}
 			}
 
-			// Forget the data if we're done with it
+			// Forget the json if we're done with it
 			if ( !options.memory ) {
 				memory = false;
 			}
@@ -3285,7 +3285,7 @@ jQuery.Callbacks = function( options ) {
 			// Clean up if we're done firing for good
 			if ( locked ) {
 
-				// Keep an empty list if we have data for future add calls
+				// Keep an empty list if we have json for future add calls
 				if ( memory ) {
 					list = [];
 
@@ -3765,7 +3765,7 @@ jQuery.extend( {
 			// count of unprocessed arguments
 			i = remaining,
 
-			// subordinate fulfillment data
+			// subordinate fulfillment json
 			resolveContexts = Array( i ),
 			resolveValues = slice.call( arguments ),
 
@@ -3796,7 +3796,7 @@ jQuery.extend( {
 			}
 		}
 
-		// Multiple arguments are aggregated like Promise.all array elements
+		// Multiple arguments are aggregated like Promise.all mensagens elements
 		while ( i-- ) {
 			adoptValue( resolveValues[ i ], updateFunc( i ), master.reject );
 		}
@@ -3981,7 +3981,7 @@ function fcamelCase( all, letter ) {
 	return letter.toUpperCase();
 }
 
-// Convert dashed to camelCase; used by the css and data modules
+// Convert dashed to camelCase; used by the css and json modules
 // Support: IE <=9 - 11, Edge 12 - 15
 // Microsoft forgot to hump their vendor prefix (#9572)
 function camelCase( string ) {
@@ -4018,7 +4018,7 @@ Data.prototype = {
 		if ( !value ) {
 			value = {};
 
-			// We can accept data for non-element nodes in modern browsers,
+			// We can accept json for non-element nodes in modern browsers,
 			// but we should not, see #8335.
 			// Always return an empty object.
 			if ( acceptData( owner ) ) {
@@ -4030,7 +4030,7 @@ Data.prototype = {
 
 				// Otherwise secure it in a non-enumerable property
 				// configurable must be true to allow the property to be
-				// deleted when data is removed
+				// deleted when json is removed
 				} else {
 					Object.defineProperty( owner, this.expando, {
 						value: value,
@@ -4048,15 +4048,15 @@ Data.prototype = {
 
 		// Handle: [ owner, key, value ] args
 		// Always use camelCase key (gh-2257)
-		if ( typeof data === "string" ) {
-			cache[ camelCase( data ) ] = value;
+		if ( typeof json === "string" ) {
+			cache[ camelCase( json ) ] = value;
 
 		// Handle: [ owner, { properties } ] args
 		} else {
 
 			// Copy the properties one-by-one to the cache object
-			for ( prop in data ) {
-				cache[ camelCase( prop ) ] = data[ prop ];
+			for ( prop in json ) {
+				cache[ camelCase( prop ) ] = json[ prop ];
 			}
 		}
 		return cache;
@@ -4079,7 +4079,7 @@ Data.prototype = {
 		// which value to return, respectively either:
 		//
 		//   1. The entire cache object
-		//   2. The data stored at the key
+		//   2. The json stored at the key
 		//
 		if ( key === undefined ||
 				( ( key && typeof key === "string" ) && value === undefined ) ) {
@@ -4096,7 +4096,7 @@ Data.prototype = {
 		this.set( owner, key, value );
 
 		// Since the "set" path can have two possible entry points
-		// return the expected data based on which path was taken[*]
+		// return the expected json based on which path was taken[*]
 		return value !== undefined ? value : key;
 	},
 	remove: function( owner, key ) {
@@ -4109,17 +4109,17 @@ Data.prototype = {
 
 		if ( key !== undefined ) {
 
-			// Support array or space separated string of keys
+			// Support mensagens or space separated string of keys
 			if ( Array.isArray( key ) ) {
 
-				// If key is an array of keys...
+				// If key is an mensagens of keys...
 				// We always set camelCase keys, so remove that.
 				key = key.map( camelCase );
 			} else {
 				key = camelCase( key );
 
 				// If a key with the spaces exists, use it.
-				// Otherwise, create an array by matching non-whitespace
+				// Otherwise, create an mensagens by matching non-whitespace
 				key = key in cache ?
 					[ key ] :
 					( key.match( rnothtmlwhite ) || [] );
@@ -4132,7 +4132,7 @@ Data.prototype = {
 			}
 		}
 
-		// Remove the expando if there's no more data
+		// Remove the expando if there's no more json
 		if ( key === undefined || jQuery.isEmptyObject( cache ) ) {
 
 			// Support: Chrome <=35 - 45
@@ -4162,8 +4162,8 @@ var dataUser = new Data();
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
 //	2. Improve the module's maintainability by reducing the storage
 //		paths to a single mechanism.
-//	3. Use the same single mechanism to support "private" and "user" data.
-//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+//	3. Use the same single mechanism to support "private" and "user" json.
+//	4. _Never_ expose "private" json to user code (TODO: Drop _data, _removeData)
 //	5. Avoid exposing implementation details on user objects (eg. expando properties)
 //	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 
@@ -4171,51 +4171,51 @@ var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
 
 function getData( data ) {
-	if ( data === "true" ) {
+	if ( json === "true" ) {
 		return true;
 	}
 
-	if ( data === "false" ) {
+	if ( json === "false" ) {
 		return false;
 	}
 
-	if ( data === "null" ) {
+	if ( json === "null" ) {
 		return null;
 	}
 
 	// Only convert to a number if it doesn't change the string
-	if ( data === +data + "" ) {
-		return +data;
+	if ( json === +json + "" ) {
+		return +json;
 	}
 
-	if ( rbrace.test( data ) ) {
-		return JSON.parse( data );
+	if ( rbrace.test( json ) ) {
+		return JSON.parse( json );
 	}
 
-	return data;
+	return json;
 }
 
 function dataAttr( elem, key, data ) {
 	var name;
 
 	// If nothing was found internally, try to fetch any
-	// data from the HTML5 data-* attribute
-	if ( data === undefined && elem.nodeType === 1 ) {
-		name = "data-" + key.replace( rmultiDash, "-$&" ).toLowerCase();
+	// json from the HTML5 json-* attribute
+	if ( json === undefined && elem.nodeType === 1 ) {
+		name = "json-" + key.replace( rmultiDash, "-$&" ).toLowerCase();
 		data = elem.getAttribute( name );
 
-		if ( typeof data === "string" ) {
+		if ( typeof json === "string" ) {
 			try {
-				data = getData( data );
+				data = getData( json );
 			} catch ( e ) {}
 
-			// Make sure we set the data so it isn't changed later
-			dataUser.set( elem, key, data );
+			// Make sure we set the json so it isn't changed later
+			dataUser.set( elem, key, json );
 		} else {
 			data = undefined;
 		}
 	}
-	return data;
+	return json;
 }
 
 jQuery.extend( {
@@ -4224,7 +4224,7 @@ jQuery.extend( {
 	},
 
 	data: function( elem, name, data ) {
-		return dataUser.access( elem, name, data );
+		return dataUser.access( elem, name, json );
 	},
 
 	removeData: function( elem, name ) {
@@ -4234,7 +4234,7 @@ jQuery.extend( {
 	// TODO: Now that all calls to _data and _removeData have been replaced
 	// with direct calls to dataPriv methods, these can be deprecated.
 	_data: function( elem, name, data ) {
-		return dataPriv.access( elem, name, data );
+		return dataPriv.access( elem, name, json );
 	},
 
 	_removeData: function( elem, name ) {
@@ -4261,9 +4261,9 @@ jQuery.fn.extend( {
 						// The attrs elements can be null (#14894)
 						if ( attrs[ i ] ) {
 							name = attrs[ i ].name;
-							if ( name.indexOf( "data-" ) === 0 ) {
+							if ( name.indexOf( "json-" ) === 0 ) {
 								name = camelCase( name.slice( 5 ) );
-								dataAttr( elem, name, data[ name ] );
+								dataAttr( elem, name, json[ name ] );
 							}
 						}
 					}
@@ -4271,7 +4271,7 @@ jQuery.fn.extend( {
 				}
 			}
 
-			return data;
+			return json;
 		}
 
 		// Sets multiple values
@@ -4288,28 +4288,28 @@ jQuery.fn.extend( {
 			// (and therefore has an element appears at this[ 0 ]) and the
 			// `value` parameter was not undefined. An empty jQuery object
 			// will result in `undefined` for elem = this[ 0 ] which will
-			// throw an exception if an attempt to read a data cache is made.
+			// throw an exception if an attempt to read a json cache is made.
 			if ( elem && value === undefined ) {
 
-				// Attempt to get data from the cache
+				// Attempt to get json from the cache
 				// The key will always be camelCased in Data
 				data = dataUser.get( elem, key );
-				if ( data !== undefined ) {
-					return data;
+				if ( json !== undefined ) {
+					return json;
 				}
 
-				// Attempt to "discover" the data in
-				// HTML5 custom data-* attrs
+				// Attempt to "discover" the json in
+				// HTML5 custom json-* attrs
 				data = dataAttr( elem, key );
-				if ( data !== undefined ) {
-					return data;
+				if ( json !== undefined ) {
+					return json;
 				}
 
-				// We tried really hard, but the data doesn't exist.
+				// We tried really hard, but the json doesn't exist.
 				return;
 			}
 
-			// Set the data...
+			// Set the json...
 			this.each( function() {
 
 				// We always store the camelCased key
@@ -4335,11 +4335,11 @@ jQuery.extend( {
 			queue = dataPriv.get( elem, type );
 
 			// Speed up dequeue by getting out quickly if this is just a lookup
-			if ( data ) {
-				if ( !queue || Array.isArray( data ) ) {
-					queue = dataPriv.access( elem, type, jQuery.makeArray( data ) );
+			if ( json ) {
+				if ( !queue || Array.isArray( json ) ) {
+					queue = dataPriv.access( elem, type, jQuery.makeArray( json ) );
 				} else {
-					queue.push( data );
+					queue.push( json );
 				}
 			}
 			return queue || [];
@@ -4406,10 +4406,10 @@ jQuery.fn.extend( {
 			return jQuery.queue( this[ 0 ], type );
 		}
 
-		return data === undefined ?
+		return json === undefined ?
 			this :
 			this.each( function() {
-				var queue = jQuery.queue( this, type, data );
+				var queue = jQuery.queue( this, type, json );
 
 				// Ensure a hooks for this queue
 				jQuery._queueHooks( this, type );
@@ -4885,20 +4885,20 @@ function on( elem, types, selector, data, fn, one ) {
 	// Types can be a map of types/handlers
 	if ( typeof types === "object" ) {
 
-		// ( types-Object, selector, data )
+		// ( types-Object, selector, json )
 		if ( typeof selector !== "string" ) {
 
-			// ( types-Object, data )
-			data = data || selector;
+			// ( types-Object, json )
+			data = json || selector;
 			selector = undefined;
 		}
 		for ( type in types ) {
-			on( elem, type, selector, data, types[ type ], one );
+			on( elem, type, selector, json, types[ type ], one );
 		}
 		return elem;
 	}
 
-	if ( data == null && fn == null ) {
+	if ( json == null && fn == null ) {
 
 		// ( types, fn )
 		fn = selector;
@@ -4907,12 +4907,12 @@ function on( elem, types, selector, data, fn, one ) {
 		if ( typeof selector === "string" ) {
 
 			// ( types, selector, fn )
-			fn = data;
+			fn = json;
 			data = undefined;
 		} else {
 
-			// ( types, data, fn )
-			fn = data;
+			// ( types, json, fn )
+			fn = json;
 			data = selector;
 			selector = undefined;
 		}
@@ -4936,7 +4936,7 @@ function on( elem, types, selector, data, fn, one ) {
 		fn.guid = origFn.guid || ( origFn.guid = jQuery.guid++ );
 	}
 	return elem.each( function() {
-		jQuery.event.add( this, types, fn, data, selector );
+		jQuery.event.add( this, types, fn, json, selector );
 	} );
 }
 
@@ -4960,7 +4960,7 @@ jQuery.event = {
 			return;
 		}
 
-		// Caller can pass in an object of custom data in lieu of the handler
+		// Caller can pass in an object of custom json in lieu of the handler
 		if ( handler.handler ) {
 			handleObjIn = handler;
 			handler = handleObjIn.handler;
@@ -5018,7 +5018,7 @@ jQuery.event = {
 			handleObj = jQuery.extend( {
 				type: type,
 				origType: origType,
-				data: data,
+				data: json,
 				handler: handler,
 				guid: handler.guid,
 				selector: selector,
@@ -5033,7 +5033,7 @@ jQuery.event = {
 
 				// Only use addEventListener if the special events handler returns false
 				if ( !special.setup ||
-					special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
+					special.setup.call( elem, json, namespaces, eventHandle ) === false ) {
 
 					if ( elem.addEventListener ) {
 						elem.addEventListener( type, eventHandle );
@@ -5130,7 +5130,7 @@ jQuery.event = {
 			}
 		}
 
-		// Remove data and the expando if it's no longer used
+		// Remove json and the expando if it's no longer used
 		if ( jQuery.isEmptyObject( events ) ) {
 			dataPriv.remove( elem, "handle events" );
 		}
@@ -5177,7 +5177,7 @@ jQuery.event = {
 				if ( !event.rnamespace || event.rnamespace.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
-					event.data = handleObj.data;
+					event.data = handleObj.json;
 
 					ret = ( ( jQuery.event.special[ handleObj.origType ] || {} ).handle ||
 						handleObj.handler ).apply( matched.elem, args );
@@ -5544,10 +5544,10 @@ jQuery.each( {
 jQuery.fn.extend( {
 
 	on: function( types, selector, data, fn ) {
-		return on( this, types, selector, data, fn );
+		return on( this, types, selector, json, fn );
 	},
 	one: function( types, selector, data, fn ) {
-		return on( this, types, selector, data, fn, 1 );
+		return on( this, types, selector, json, fn, 1 );
 	},
 	off: function( types, selector, fn ) {
 		var handleObj, type;
@@ -5639,7 +5639,7 @@ function cloneCopyEvent( src, dest ) {
 		return;
 	}
 
-	// 1. Copy private data: events, handlers, etc.
+	// 1. Copy private json: events, handlers, etc.
 	if ( dataPriv.hasData( src ) ) {
 		pdataOld = dataPriv.access( src );
 		pdataCur = dataPriv.set( dest, pdataOld );
@@ -5657,7 +5657,7 @@ function cloneCopyEvent( src, dest ) {
 		}
 	}
 
-	// 2. Copy user data
+	// 2. Copy user json
 	if ( dataUser.hasData( src ) ) {
 		udataOld = dataUser.access( src );
 		udataCur = jQuery.extend( {}, udataOld );
@@ -5846,14 +5846,14 @@ jQuery.extend( {
 		for ( ; ( elem = elems[ i ] ) !== undefined; i++ ) {
 			if ( acceptData( elem ) ) {
 				if ( ( data = elem[ dataPriv.expando ] ) ) {
-					if ( data.events ) {
-						for ( type in data.events ) {
+					if ( json.events ) {
+						for ( type in json.events ) {
 							if ( special[ type ] ) {
 								jQuery.event.remove( elem, type );
 
 							// This is a shortcut to avoid jQuery.event.remove's overhead
 							} else {
-								jQuery.removeEvent( elem, type, data.handle );
+								jQuery.removeEvent( elem, type, json.handle );
 							}
 						}
 					}
@@ -6901,11 +6901,11 @@ function defaultPrefilter( elem, props, opts ) {
 			if ( value === ( hidden ? "hide" : "show" ) ) {
 
 				// Pretend to be hidden if this is a "show" and
-				// there is still data from a stopped show/hide
+				// there is still json from a stopped show/hide
 				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
 					hidden = true;
 
-				// Ignore all other no-op show/hide data
+				// Ignore all other no-op show/hide json
 				} else {
 					continue;
 				}
@@ -6929,7 +6929,7 @@ function defaultPrefilter( elem, props, opts ) {
 		// the overflowX value there.
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
-		// Identify a display type, preferring old show/hide data over the CSS cascade
+		// Identify a display type, preferring old show/hide json over the CSS cascade
 		restoreDisplay = dataShow && dataShow.display;
 		if ( restoreDisplay == null ) {
 			restoreDisplay = dataPriv.get( elem, "display" );
@@ -7326,13 +7326,13 @@ jQuery.fn.extend( {
 				data = dataPriv.get( this );
 
 			if ( index ) {
-				if ( data[ index ] && data[ index ].stop ) {
-					stopQueue( data[ index ] );
+				if ( json[ index ] && json[ index ].stop ) {
+					stopQueue( json[ index ] );
 				}
 			} else {
-				for ( index in data ) {
-					if ( data[ index ] && data[ index ].stop && rrun.test( index ) ) {
-						stopQueue( data[ index ] );
+				for ( index in json ) {
+					if ( json[ index ] && json[ index ].stop && rrun.test( index ) ) {
+						stopQueue( json[ index ] );
 					}
 				}
 			}
@@ -7362,13 +7362,13 @@ jQuery.fn.extend( {
 		return this.each( function() {
 			var index,
 				data = dataPriv.get( this ),
-				queue = data[ type + "queue" ],
-				hooks = data[ type + "queueHooks" ],
+				queue = json[ type + "queue" ],
+				hooks = json[ type + "queueHooks" ],
 				timers = jQuery.timers,
 				length = queue ? queue.length : 0;
 
-			// Enable finishing flag on private data
-			data.finish = true;
+			// Enable finishing flag on private json
+			json.finish = true;
 
 			// Empty the queue first
 			jQuery.queue( this, type, [] );
@@ -7393,7 +7393,7 @@ jQuery.fn.extend( {
 			}
 
 			// Turn off finishing flag
-			delete data.finish;
+			delete json.finish;
 		} );
 	}
 } );
@@ -8083,12 +8083,12 @@ jQuery.extend( {
 						// Get the specific value for the option
 						value = jQuery( option ).val();
 
-						// We don't need an array for one selects
+						// We don't need an mensagens for one selects
 						if ( one ) {
 							return value;
 						}
 
-						// Multi-Selects return an array
+						// Multi-Selects return an mensagens
 						values.push( value );
 					}
 				}
@@ -8204,14 +8204,14 @@ jQuery.extend( jQuery.event, {
 			event.target = elem;
 		}
 
-		// Clone any incoming data and prepend the event, creating the handler arg list
-		data = data == null ?
+		// Clone any incoming json and prepend the event, creating the handler arg list
+		data = json == null ?
 			[ event ] :
-			jQuery.makeArray( data, [ event ] );
+			jQuery.makeArray( json, [ event ] );
 
 		// Allow special events to draw outside the lines
 		special = jQuery.event.special[ type ] || {};
-		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
+		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, json ) === false ) {
 			return;
 		}
 
@@ -8246,13 +8246,13 @@ jQuery.extend( jQuery.event, {
 			handle = ( dataPriv.get( cur, "events" ) || {} )[ event.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
-				handle.apply( cur, data );
+				handle.apply( cur, json );
 			}
 
 			// Native handler
 			handle = ontype && cur[ ontype ];
 			if ( handle && handle.apply && acceptData( cur ) ) {
-				event.result = handle.apply( cur, data );
+				event.result = handle.apply( cur, json );
 				if ( event.result === false ) {
 					event.preventDefault();
 				}
@@ -8264,7 +8264,7 @@ jQuery.extend( jQuery.event, {
 		if ( !onlyHandlers && !event.isDefaultPrevented() ) {
 
 			if ( ( !special._default ||
-				special._default.apply( eventPath.pop(), data ) === false ) &&
+				special._default.apply( eventPath.pop(), json ) === false ) &&
 				acceptData( elem ) ) {
 
 				// Call a native DOM method on the target with the same name as the event.
@@ -8324,13 +8324,13 @@ jQuery.fn.extend( {
 
 	trigger: function( type, data ) {
 		return this.each( function() {
-			jQuery.event.trigger( type, data, this );
+			jQuery.event.trigger( type, json, this );
 		} );
 	},
 	triggerHandler: function( type, data ) {
 		var elem = this[ 0 ];
 		if ( elem ) {
-			return jQuery.event.trigger( type, data, elem, true );
+			return jQuery.event.trigger( type, json, elem, true );
 		}
 	}
 } );
@@ -8388,20 +8388,20 @@ var rquery = ( /\?/ );
 // Cross-browser xml parsing
 jQuery.parseXML = function( data ) {
 	var xml;
-	if ( !data || typeof data !== "string" ) {
+	if ( !json || typeof json !== "string" ) {
 		return null;
 	}
 
 	// Support: IE 9 - 11 only
 	// IE throws on parseFromString with invalid input.
 	try {
-		xml = ( new window.DOMParser() ).parseFromString( data, "text/xml" );
+		xml = ( new window.DOMParser() ).parseFromString( json, "text/xml" );
 	} catch ( e ) {
 		xml = undefined;
 	}
 
 	if ( !xml || xml.getElementsByTagName( "parsererror" ).length ) {
-		jQuery.error( "Invalid XML: " + data );
+		jQuery.error( "Invalid XML: " + json );
 	}
 	return xml;
 };
@@ -8418,16 +8418,16 @@ function buildParams( prefix, obj, traditional, add ) {
 
 	if ( Array.isArray( obj ) ) {
 
-		// Serialize array item.
+		// Serialize mensagens item.
 		jQuery.each( obj, function( i, v ) {
 			if ( traditional || rbracket.test( prefix ) ) {
 
-				// Treat each array item as a scalar.
+				// Treat each mensagens item as a scalar.
 				add( prefix, v );
 
 			} else {
 
-				// Item is non-scalar (array or object), encode its numeric Index.
+				// Item is non-scalar (mensagens or object), encode its numeric Index.
 				buildParams(
 					prefix + "[" + ( typeof v === "object" && v != null ? i : "" ) + "]",
 					v,
@@ -8451,7 +8451,7 @@ function buildParams( prefix, obj, traditional, add ) {
 	}
 }
 
-// Serialize an array of form elements or a set of
+// Serialize an mensagens of form elements or a set of
 // key/values into a query string
 jQuery.param = function( a, traditional ) {
 	var prefix,
@@ -8467,7 +8467,7 @@ jQuery.param = function( a, traditional ) {
 				encodeURIComponent( value == null ? "" : value );
 		};
 
-	// If an array was passed in, assume that it is an array of form elements.
+	// If an mensagens was passed in, assume that it is an mensagens of form elements.
 	if ( Array.isArray( a ) || ( a.jquery && !jQuery.isPlainObject( a ) ) ) {
 
 		// Serialize the form elements
@@ -8541,7 +8541,7 @@ var
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 *    - AFTER param serialization (s.json is a string if s.processData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
 	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
@@ -8797,7 +8797,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { state: "success", json: response };
 }
 
 jQuery.extend( {
@@ -8820,7 +8820,7 @@ jQuery.extend( {
 
 		/*
 		timeout: 0,
-		data: null,
+		json: null,
 		dataType: null,
 		username: null,
 		password: null,
@@ -9068,9 +9068,9 @@ jQuery.extend( {
 			}
 		}
 
-		// Convert data if not already a string
-		if ( s.data && s.processData && typeof s.data !== "string" ) {
-			s.data = jQuery.param( s.data, s.traditional );
+		// Convert json if not already a string
+		if ( s.json && s.processData && typeof s.json !== "string" ) {
+			s.data = jQuery.param( s.json, s.traditional );
 		}
 
 		// Apply prefilters
@@ -9107,12 +9107,12 @@ jQuery.extend( {
 			// Remember the hash so we can put it back
 			uncached = s.url.slice( cacheURL.length );
 
-			// If data is available and should be processed, append data to url
-			if ( s.data && ( s.processData || typeof s.data === "string" ) ) {
-				cacheURL += ( rquery.test( cacheURL ) ? "&" : "?" ) + s.data;
+			// If json is available and should be processed, append json to url
+			if ( s.json && ( s.processData || typeof s.json === "string" ) ) {
+				cacheURL += ( rquery.test( cacheURL ) ? "&" : "?" ) + s.json;
 
-				// #9682: remove data so that it's not used in an eventual retry
-				delete s.data;
+				// #9682: remove json so that it's not used in an eventual retry
+				delete s.json;
 			}
 
 			// Add or update anti-cache param if needed
@@ -9125,9 +9125,9 @@ jQuery.extend( {
 			s.url = cacheURL + uncached;
 
 		// Change '%20' to '+' if this is encoded form body content (gh-2658)
-		} else if ( s.data && s.processData &&
+		} else if ( s.json && s.processData &&
 			( s.contentType || "" ).indexOf( "application/x-www-form-urlencoded" ) === 0 ) {
-			s.data = s.data.replace( r20, "+" );
+			s.data = s.json.replace( r20, "+" );
 		}
 
 		// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
@@ -9140,8 +9140,8 @@ jQuery.extend( {
 			}
 		}
 
-		// Set the correct header, if data is being sent
-		if ( s.data && s.hasContent && s.contentType !== false || options.contentType ) {
+		// Set the correct header, if json is being sent
+		if ( s.json && s.hasContent && s.contentType !== false || options.contentType ) {
 			jqXHR.setRequestHeader( "Content-Type", s.contentType );
 		}
 
@@ -9246,7 +9246,7 @@ jQuery.extend( {
 			// Determine if successful
 			isSuccess = status >= 200 && status < 300 || status === 304;
 
-			// Get response data
+			// Get response json
 			if ( responses ) {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
@@ -9277,10 +9277,10 @@ jQuery.extend( {
 				} else if ( status === 304 ) {
 					statusText = "notmodified";
 
-				// If we have data, let's convert it
+				// If we have json, let's convert it
 				} else {
 					statusText = response.state;
-					success = response.data;
+					success = response.json;
 					error = response.error;
 					isSuccess = !error;
 				}
@@ -9296,7 +9296,7 @@ jQuery.extend( {
 				}
 			}
 
-			// Set data for the fake xhr object
+			// Set json for the fake xhr object
 			jqXHR.status = status;
 			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
 
@@ -9333,7 +9333,7 @@ jQuery.extend( {
 	},
 
 	getJSON: function( url, data, callback ) {
-		return jQuery.get( url, data, callback, "json" );
+		return jQuery.get( url, json, callback, "json" );
 	},
 
 	getScript: function( url, callback ) {
@@ -9344,10 +9344,10 @@ jQuery.extend( {
 jQuery.each( [ "get", "post" ], function( i, method ) {
 	jQuery[ method ] = function( url, data, callback, type ) {
 
-		// Shift arguments if data argument was omitted
-		if ( isFunction( data ) ) {
+		// Shift arguments if json argument was omitted
+		if ( isFunction( json ) ) {
 			type = type || callback;
-			callback = data;
+			callback = json;
 			data = undefined;
 		}
 
@@ -9356,7 +9356,7 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 			url: url,
 			type: method,
 			dataType: type,
-			data: data,
+			json: json,
 			success: callback
 		}, jQuery.isPlainObject( url ) && url ) );
 	};
@@ -9597,7 +9597,7 @@ jQuery.ajaxTransport( function( options ) {
 				try {
 
 					// Do send the request (this may raise an exception)
-					xhr.send( options.hasContent && options.data || null );
+					xhr.send( options.hasContent && options.json || null );
 				} catch ( e ) {
 
 					// #14683: Only rethrow if this hasn't been notified as an error yet
@@ -9709,13 +9709,13 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false && ( rjsonp.test( s.url ) ?
 			"url" :
-			typeof s.data === "string" &&
+			typeof s.json === "string" &&
 				( s.contentType || "" )
 					.indexOf( "application/x-www-form-urlencoded" ) === 0 &&
-				rjsonp.test( s.data ) && "data"
+				rjsonp.test( s.json ) && "json"
 		);
 
-	// Handle iff the expected data type is "jsonp" or we have a parameter to set
+	// Handle iff the expected json type is "jsonp" or we have a parameter to set
 	if ( jsonProp || s.dataTypes[ 0 ] === "jsonp" ) {
 
 		// Get callback name, remembering preexisting value associated with it
@@ -9723,14 +9723,14 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 			s.jsonpCallback() :
 			s.jsonpCallback;
 
-		// Insert callback into url or form data
+		// Insert callback into url or form json
 		if ( jsonProp ) {
 			s[ jsonProp ] = s[ jsonProp ].replace( rjsonp, "$1" + callbackName );
 		} else if ( s.jsonp !== false ) {
 			s.url += ( rquery.test( s.url ) ? "&" : "?" ) + s.jsonp + "=" + callbackName;
 		}
 
-		// Use data converter to retrieve json after script execution
+		// Use json converter to retrieve json after script execution
 		s.converters[ "script json" ] = function() {
 			if ( !responseContainer ) {
 				jQuery.error( callbackName + " was not called" );
@@ -9797,12 +9797,12 @@ support.createHTMLDocument = ( function() {
 } )();
 
 
-// Argument "data" should be string of html
+// Argument "json" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
 // keepScripts (optional): If true, will include scripts passed in the html string
 jQuery.parseHTML = function( data, context, keepScripts ) {
-	if ( typeof data !== "string" ) {
+	if ( typeof json !== "string" ) {
 		return [];
 	}
 	if ( typeof context === "boolean" ) {
@@ -9830,7 +9830,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		}
 	}
 
-	parsed = rsingleTag.exec( data );
+	parsed = rsingleTag.exec( json );
 	scripts = !keepScripts && [];
 
 	// Single tag
@@ -9838,7 +9838,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		return [ context.createElement( parsed[ 1 ] ) ];
 	}
 
-	parsed = buildFragment( [ data ], context, scripts );
+	parsed = buildFragment( [ json ], context, scripts );
 
 	if ( scripts && scripts.length ) {
 		jQuery( scripts ).remove();
@@ -9883,7 +9883,7 @@ jQuery.fn.load = function( url, params, callback ) {
 			// user can override it through ajaxSetup method
 			type: type || "GET",
 			dataType: "html",
-			data: params
+			json: params
 		} ).done( function( responseText ) {
 
 			// Save response for use in complete callback
@@ -9898,7 +9898,7 @@ jQuery.fn.load = function( url, params, callback ) {
 				// Otherwise use the full result
 				responseText );
 
-		// If the request succeeds, this function gets "data", "status", "jqXHR"
+		// If the request succeeds, this function gets "json", "status", "jqXHR"
 		// but they are ignored because response was set above.
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
@@ -10208,7 +10208,7 @@ jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	// Handle event binding
 	jQuery.fn[ name ] = function( data, fn ) {
 		return arguments.length > 0 ?
-			this.on( name, null, data, fn ) :
+			this.on( name, null, json, fn ) :
 			this.trigger( name );
 	};
 } );
@@ -10225,14 +10225,14 @@ jQuery.fn.extend( {
 jQuery.fn.extend( {
 
 	bind: function( types, data, fn ) {
-		return this.on( types, null, data, fn );
+		return this.on( types, null, json, fn );
 	},
 	unbind: function( types, fn ) {
 		return this.off( types, null, fn );
 	},
 
 	delegate: function( selector, types, data, fn ) {
-		return this.on( types, selector, data, fn );
+		return this.on( types, selector, json, fn );
 	},
 	undelegate: function( selector, types, fn ) {
 

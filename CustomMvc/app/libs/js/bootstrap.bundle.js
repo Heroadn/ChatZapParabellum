@@ -138,7 +138,7 @@
       return prefix;
     },
     getSelectorFromElement: function getSelectorFromElement(element) {
-      var selector = element.getAttribute('data-target');
+      var selector = element.getAttribute('json-target');
 
       if (!selector || selector === '#') {
         var hrefAttr = element.getAttribute('href');
@@ -232,10 +232,10 @@
   var VERSION = '4.3.1';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
-  var DATA_API_KEY = '.data-api';
+  var DATA_API_KEY = '.json-api';
   var JQUERY_NO_CONFLICT = $.fn[NAME];
   var Selector = {
-    DISMISS: '[data-dismiss="alert"]'
+    DISMISS: '[json-dismiss="alert"]'
   };
   var Event = {
     CLOSE: "close" + EVENT_KEY,
@@ -333,15 +333,15 @@
     Alert._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var $element = $(this);
-        var data = $element.data(DATA_KEY);
+        var data = $element.json(DATA_KEY);
 
-        if (!data) {
+        if (!json) {
           data = new Alert(this);
-          $element.data(DATA_KEY, data);
+          $element.json(DATA_KEY, json);
         }
 
         if (config === 'close') {
-          data[config](this);
+          json[config](this);
         }
       });
     };
@@ -397,7 +397,7 @@
   var VERSION$1 = '4.3.1';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
-  var DATA_API_KEY$1 = '.data-api';
+  var DATA_API_KEY$1 = '.json-api';
   var JQUERY_NO_CONFLICT$1 = $.fn[NAME$1];
   var ClassName$1 = {
     ACTIVE: 'active',
@@ -405,8 +405,8 @@
     FOCUS: 'focus'
   };
   var Selector$1 = {
-    DATA_TOGGLE_CARROT: '[data-toggle^="button"]',
-    DATA_TOGGLE: '[data-toggle="buttons"]',
+    DATA_TOGGLE_CARROT: '[json-toggle^="button"]',
+    DATA_TOGGLE: '[json-toggle="buttons"]',
     INPUT: 'input:not([type="hidden"])',
     ACTIVE: '.active',
     BUTTON: '.btn'
@@ -485,15 +485,15 @@
 
     Button._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$1);
+        var data = $(this).json(DATA_KEY$1);
 
-        if (!data) {
+        if (!json) {
           data = new Button(this);
-          $(this).data(DATA_KEY$1, data);
+          $(this).json(DATA_KEY$1, json);
         }
 
         if (config === 'toggle') {
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -551,7 +551,7 @@
   var VERSION$2 = '4.3.1';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
-  var DATA_API_KEY$2 = '.data-api';
+  var DATA_API_KEY$2 = '.json-api';
   var JQUERY_NO_CONFLICT$2 = $.fn[NAME$2];
   var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
 
@@ -615,8 +615,8 @@
     ITEM_IMG: '.carousel-item img',
     NEXT_PREV: '.carousel-item-next, .carousel-item-prev',
     INDICATORS: '.carousel-indicators',
-    DATA_SLIDE: '[data-slide], [data-slide-to]',
-    DATA_RIDE: '[data-ride="carousel"]'
+    DATA_SLIDE: '[json-slide], [json-slide-to]',
+    DATA_RIDE: '[json-ride="carousel"]'
   };
   var PointerType = {
     TOUCH: 'touch',
@@ -1003,7 +1003,7 @@
         Util.reflow(nextElement);
         $(activeElement).addClass(directionalClassName);
         $(nextElement).addClass(directionalClassName);
-        var nextElementInterval = parseInt(nextElement.getAttribute('data-interval'), 10);
+        var nextElementInterval = parseInt(nextElement.getAttribute('json-interval'), 10);
 
         if (nextElementInterval) {
           this._config.defaultInterval = this._config.defaultInterval || this._config.interval;
@@ -1036,9 +1036,9 @@
 
     Carousel._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$2);
+        var data = $(this).json(DATA_KEY$2);
 
-        var _config = _objectSpread({}, Default, $(this).data());
+        var _config = _objectSpread({}, Default, $(this).json());
 
         if (typeof config === 'object') {
           _config = _objectSpread({}, _config, config);
@@ -1046,22 +1046,22 @@
 
         var action = typeof config === 'string' ? config : _config.slide;
 
-        if (!data) {
+        if (!json) {
           data = new Carousel(this, _config);
-          $(this).data(DATA_KEY$2, data);
+          $(this).json(DATA_KEY$2, json);
         }
 
         if (typeof config === 'number') {
-          data.to(config);
+          json.to(config);
         } else if (typeof action === 'string') {
-          if (typeof data[action] === 'undefined') {
+          if (typeof json[action] === 'undefined') {
             throw new TypeError("No method named \"" + action + "\"");
           }
 
-          data[action]();
+          json[action]();
         } else if (_config.interval && _config.ride) {
-          data.pause();
-          data.cycle();
+          json.pause();
+          json.cycle();
         }
       });
     };
@@ -1079,9 +1079,9 @@
         return;
       }
 
-      var config = _objectSpread({}, $(target).data(), $(this).data());
+      var config = _objectSpread({}, $(target).json(), $(this).json());
 
-      var slideIndex = this.getAttribute('data-slide-to');
+      var slideIndex = this.getAttribute('json-slide-to');
 
       if (slideIndex) {
         config.interval = false;
@@ -1090,7 +1090,7 @@
       Carousel._jQueryInterface.call($(target), config);
 
       if (slideIndex) {
-        $(target).data(DATA_KEY$2).to(slideIndex);
+        $(target).json(DATA_KEY$2).to(slideIndex);
       }
 
       event.preventDefault();
@@ -1124,7 +1124,7 @@
     for (var i = 0, len = carousels.length; i < len; i++) {
       var $carousel = $(carousels[i]);
 
-      Carousel._jQueryInterface.call($carousel, $carousel.data());
+      Carousel._jQueryInterface.call($carousel, $carousel.json());
     }
   });
   /**
@@ -1151,7 +1151,7 @@
   var VERSION$3 = '4.3.1';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
-  var DATA_API_KEY$3 = '.data-api';
+  var DATA_API_KEY$3 = '.json-api';
   var JQUERY_NO_CONFLICT$3 = $.fn[NAME$3];
   var Default$1 = {
     toggle: true,
@@ -1180,7 +1180,7 @@
   };
   var Selector$3 = {
     ACTIVES: '.show, .collapsing',
-    DATA_TOGGLE: '[data-toggle="collapse"]'
+    DATA_TOGGLE: '[json-toggle="collapse"]'
     /**
      * ------------------------------------------------------------------------
      * Class Definition
@@ -1196,7 +1196,7 @@
       this._isTransitioning = false;
       this._element = element;
       this._config = this._getConfig(config);
-      this._triggerArray = [].slice.call(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
+      this._triggerArray = [].slice.call(document.querySelectorAll("[json-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[json-toggle=\"collapse\"][json-target=\"#" + element.id + "\"]")));
       var toggleList = [].slice.call(document.querySelectorAll(Selector$3.DATA_TOGGLE));
 
       for (var i = 0, len = toggleList.length; i < len; i++) {
@@ -1249,7 +1249,7 @@
       if (this._parent) {
         actives = [].slice.call(this._parent.querySelectorAll(Selector$3.ACTIVES)).filter(function (elem) {
           if (typeof _this._config.parent === 'string') {
-            return elem.getAttribute('data-parent') === _this._config.parent;
+            return elem.getAttribute('json-parent') === _this._config.parent;
           }
 
           return elem.classList.contains(ClassName$3.COLLAPSE);
@@ -1261,7 +1261,7 @@
       }
 
       if (actives) {
-        activesData = $(actives).not(this._selector).data(DATA_KEY$3);
+        activesData = $(actives).not(this._selector).json(DATA_KEY$3);
 
         if (activesData && activesData._isTransitioning) {
           return;
@@ -1279,7 +1279,7 @@
         Collapse._jQueryInterface.call($(actives).not(this._selector), 'hide');
 
         if (!activesData) {
-          $(actives).data(DATA_KEY$3, null);
+          $(actives).json(DATA_KEY$3, null);
         }
       }
 
@@ -1401,7 +1401,7 @@
         parent = document.querySelector(this._config.parent);
       }
 
-      var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
+      var selector = "[json-toggle=\"collapse\"][json-parent=\"" + this._config.parent + "\"]";
       var children = [].slice.call(parent.querySelectorAll(selector));
       $(children).each(function (i, element) {
         _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
@@ -1426,25 +1426,25 @@
     Collapse._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var $this = $(this);
-        var data = $this.data(DATA_KEY$3);
+        var data = $this.json(DATA_KEY$3);
 
-        var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread({}, Default$1, $this.json(), typeof config === 'object' && config ? config : {});
 
-        if (!data && _config.toggle && /show|hide/.test(config)) {
+        if (!json && _config.toggle && /show|hide/.test(config)) {
           _config.toggle = false;
         }
 
-        if (!data) {
+        if (!json) {
           data = new Collapse(this, _config);
-          $this.data(DATA_KEY$3, data);
+          $this.json(DATA_KEY$3, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -1481,8 +1481,8 @@
     var selectors = [].slice.call(document.querySelectorAll(selector));
     $(selectors).each(function () {
       var $target = $(this);
-      var data = $target.data(DATA_KEY$3);
-      var config = data ? 'toggle' : $trigger.data();
+      var data = $target.json(DATA_KEY$3);
+      var config = json ? 'toggle' : $trigger.json();
 
       Collapse._jQueryInterface.call($target, config);
     });
@@ -2175,9 +2175,9 @@
    * available space.
    * @method
    * @memberof Popper.Utils
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
     var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
@@ -2364,7 +2364,7 @@
 
   /**
    * Loop trough the list of modifiers and run them in order,
-   * each of them will then edit the data object.
+   * each of them will then edit the json object.
    * @method
    * @memberof Popper.Utils
    * @param {dataObject} data
@@ -2385,14 +2385,14 @@
         // Add properties to offsets to make them a complete clientRect object
         // we do this before each modifier to make sure the previous one doesn't
         // mess with these values
-        data.offsets.popper = getClientRect(data.offsets.popper);
-        data.offsets.reference = getClientRect(data.offsets.reference);
+        json.offsets.popper = getClientRect(json.offsets.popper);
+        json.offsets.reference = getClientRect(json.offsets.reference);
 
-        data = fn(data, modifier);
+        data = fn(json, modifier);
       }
     });
 
-    return data;
+    return json;
   }
 
   /**
@@ -2418,33 +2418,33 @@
     };
 
     // compute reference element offsets
-    data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);
+    json.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);
 
-    // compute auto placement, store placement inside the data object,
+    // compute auto placement, store placement inside the json object,
     // modifiers will be able to edit `placement` if needed
     // and refer to originalPlacement to know the original value
-    data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
+    json.placement = computeAutoPlacement(this.options.placement, json.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
 
     // store the computed placement inside `originalPlacement`
-    data.originalPlacement = data.placement;
+    json.originalPlacement = json.placement;
 
-    data.positionFixed = this.options.positionFixed;
+    json.positionFixed = this.options.positionFixed;
 
     // compute the popper offsets
-    data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
+    json.offsets.popper = getPopperOffsets(this.popper, json.offsets.reference, json.placement);
 
-    data.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';
+    json.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';
 
     // run the modifiers
-    data = runModifiers(this.modifiers, data);
+    data = runModifiers(this.modifiers, json);
 
     // the first `update` will call `onCreate` callback
     // the other ones will call `onUpdate` callback
     if (!this.state.isCreated) {
       this.state.isCreated = true;
-      this.options.onCreate(data);
+      this.options.onCreate(json);
     } else {
-      this.options.onUpdate(data);
+      this.options.onUpdate(json);
     }
   }
 
@@ -2655,29 +2655,29 @@
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} data.styles - List of style properties - values to apply to popper element
-   * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
+   * @argument {Object} json - The json object generated by `update` method
+   * @argument {Object} json.styles - List of style properties - values to apply to popper element
+   * @argument {Object} json.attributes - List of attribute properties - values to apply to popper element
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The same data object
+   * @returns {Object} The same json object
    */
   function applyStyle(data) {
-    // any property present in `data.styles` will be applied to the popper,
+    // any property present in `json.styles` will be applied to the popper,
     // in this way we can make the 3rd party modifiers add custom styles to it
     // Be aware, modifiers could override the properties defined in the previous
     // lines of this modifier!
-    setStyles(data.instance.popper, data.styles);
+    setStyles(json.instance.popper, json.styles);
 
-    // any property present in `data.attributes` will be applied to the popper,
+    // any property present in `json.attributes` will be applied to the popper,
     // they will be set as HTML attributes of the element
-    setAttributes(data.instance.popper, data.attributes);
+    setAttributes(json.instance.popper, json.attributes);
 
     // if arrowElement is defined and arrowStyles has some properties
-    if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-      setStyles(data.arrowElement, data.arrowStyles);
+    if (json.arrowElement && Object.keys(json.arrowStyles).length) {
+      setStyles(json.arrowElement, json.arrowStyles);
     }
 
-    return data;
+    return json;
   }
 
   /**
@@ -2694,7 +2694,7 @@
     // compute reference element offsets
     var referenceOffsets = getReferenceOffsets(state, popper, reference, options.positionFixed);
 
-    // compute auto placement, store placement inside the data object,
+    // compute auto placement, store placement inside the json object,
     // modifiers will be able to edit `placement` if needed
     // and refer to originalPlacement to know the original value
     var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
@@ -2711,7 +2711,7 @@
   /**
    * @function
    * @memberof Popper.Utils
-   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Object} json - The json object generated by `update` method
    * @argument {Boolean} shouldRound - If the offsets should be rounded at all
    * @returns {Object} The popper's position offsets rounded
    *
@@ -2728,7 +2728,7 @@
    * Only horizontal placement and left/right values need to be considered.
    */
   function getRoundedOffsets(data, shouldRound) {
-    var _data$offsets = data.offsets,
+    var _data$offsets = json.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
     var round = Math.round,
@@ -2741,8 +2741,8 @@
     var referenceWidth = round(reference.width);
     var popperWidth = round(popper.width);
 
-    var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
-    var isVariation = data.placement.indexOf('-') !== -1;
+    var isVertical = ['left', 'right'].indexOf(json.placement) !== -1;
+    var isVariation = json.placement.indexOf('-') !== -1;
     var sameWidthParity = referenceWidth % 2 === popperWidth % 2;
     var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;
 
@@ -2762,18 +2762,18 @@
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Object} json - The json object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function computeStyle(data, options) {
     var x = options.x,
         y = options.y;
-    var popper = data.offsets.popper;
+    var popper = json.offsets.popper;
 
     // Remove this legacy support in Popper.js v2
 
-    var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
+    var legacyGpuAccelerationOption = find(json.instance.modifiers, function (modifier) {
       return modifier.name === 'applyStyle';
     }).gpuAcceleration;
     if (legacyGpuAccelerationOption !== undefined) {
@@ -2781,7 +2781,7 @@
     }
     var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
 
-    var offsetParent = getOffsetParent(data.instance.popper);
+    var offsetParent = getOffsetParent(json.instance.popper);
     var offsetParentRect = getBoundingClientRect(offsetParent);
 
     // Styles
@@ -2789,7 +2789,7 @@
       position: popper.position
     };
 
-    var offsets = getRoundedOffsets(data, window.devicePixelRatio < 2 || !isFirefox);
+    var offsets = getRoundedOffsets(json, window.devicePixelRatio < 2 || !isFirefox);
 
     var sideA = x === 'bottom' ? 'top' : 'bottom';
     var sideB = y === 'right' ? 'left' : 'right';
@@ -2846,15 +2846,15 @@
 
     // Attributes
     var attributes = {
-      'x-placement': data.placement
+      'x-placement': json.placement
     };
 
-    // Update `data` attributes, styles and arrowStyles
-    data.attributes = _extends({}, attributes, data.attributes);
-    data.styles = _extends({}, styles, data.styles);
-    data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
+    // Update `json` attributes, styles and arrowStyles
+    json.attributes = _extends({}, attributes, json.attributes);
+    json.styles = _extends({}, styles, json.styles);
+    json.arrowStyles = _extends({}, json.offsets.arrow, json.arrowStyles);
 
-    return data;
+    return json;
   }
 
   /**
@@ -2888,39 +2888,39 @@
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function arrow(data, options) {
     var _data$offsets$arrow;
 
     // arrow depends on keepTogether in order to work
-    if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-      return data;
+    if (!isModifierRequired(json.instance.modifiers, 'arrow', 'keepTogether')) {
+      return json;
     }
 
     var arrowElement = options.element;
 
     // if arrowElement is a string, suppose it's a CSS selector
     if (typeof arrowElement === 'string') {
-      arrowElement = data.instance.popper.querySelector(arrowElement);
+      arrowElement = json.instance.popper.querySelector(arrowElement);
 
       // if arrowElement is not found, don't run the modifier
       if (!arrowElement) {
-        return data;
+        return json;
       }
     } else {
       // if the arrowElement isn't a query selector we must check that the
       // provided DOM node is child of its popper node
-      if (!data.instance.popper.contains(arrowElement)) {
+      if (!json.instance.popper.contains(arrowElement)) {
         console.warn('WARNING: `arrow.element` must be child of its popper element!');
-        return data;
+        return json;
       }
     }
 
-    var placement = data.placement.split('-')[0];
-    var _data$offsets = data.offsets,
+    var placement = json.placement.split('-')[0];
+    var _data$offsets = json.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
@@ -2940,31 +2940,31 @@
 
     // top/left side
     if (reference[opSide] - arrowElementSize < popper[side]) {
-      data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
+      json.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
     }
     // bottom/right side
     if (reference[side] + arrowElementSize > popper[opSide]) {
-      data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
+      json.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
     }
-    data.offsets.popper = getClientRect(data.offsets.popper);
+    json.offsets.popper = getClientRect(json.offsets.popper);
 
     // compute center of the popper
     var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
 
     // Compute the sideValue using the updated popper offsets
     // take popper margin in account because we don't have this info available
-    var css = getStyleComputedProperty(data.instance.popper);
+    var css = getStyleComputedProperty(json.instance.popper);
     var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
     var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
-    var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
+    var sideValue = center - json.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
     // prevent arrowElement from being placed not contiguously to its popper
     sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
 
-    data.arrowElement = arrowElement;
-    data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
+    json.arrowElement = arrowElement;
+    json.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
 
-    return data;
+    return json;
   }
 
   /**
@@ -3046,26 +3046,26 @@
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function flip(data, options) {
     // if `inner` modifier is enabled, we can't use the `flip` modifier
-    if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-      return data;
+    if (isModifierEnabled(json.instance.modifiers, 'inner')) {
+      return json;
     }
 
-    if (data.flipped && data.placement === data.originalPlacement) {
+    if (json.flipped && json.placement === json.originalPlacement) {
       // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-      return data;
+      return json;
     }
 
-    var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
+    var boundaries = getBoundaries(json.instance.popper, json.instance.reference, options.padding, options.boundariesElement, json.positionFixed);
 
-    var placement = data.placement.split('-')[0];
+    var placement = json.placement.split('-')[0];
     var placementOpposite = getOppositePlacement(placement);
-    var variation = data.placement.split('-')[1] || '';
+    var variation = json.placement.split('-')[1] || '';
 
     var flipOrder = [];
 
@@ -3085,14 +3085,14 @@
 
     flipOrder.forEach(function (step, index) {
       if (placement !== step || flipOrder.length === index + 1) {
-        return data;
+        return json;
       }
 
-      placement = data.placement.split('-')[0];
+      placement = json.placement.split('-')[0];
       placementOpposite = getOppositePlacement(placement);
 
-      var popperOffsets = data.offsets.popper;
-      var refOffsets = data.offsets.reference;
+      var popperOffsets = json.offsets.popper;
+      var refOffsets = json.offsets.reference;
 
       // using floor because the reference offsets may contain decimals we are not going to consider here
       var floor = Math.floor;
@@ -3111,7 +3111,7 @@
 
       if (overlapsRef || overflowsBoundaries || flippedVariation) {
         // this boolean to detect any flip loop
-        data.flipped = true;
+        json.flipped = true;
 
         if (overlapsRef || overflowsBoundaries) {
           placement = flipOrder[index + 1];
@@ -3121,31 +3121,31 @@
           variation = getOppositeVariation(variation);
         }
 
-        data.placement = placement + (variation ? '-' + variation : '');
+        json.placement = placement + (variation ? '-' + variation : '');
 
         // this object contains `position`, we want to preserve it along with
         // any additional property we may add in the future
-        data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
+        json.offsets.popper = _extends({}, json.offsets.popper, getPopperOffsets(json.instance.popper, json.offsets.reference, json.placement));
 
-        data = runModifiers(data.instance.modifiers, data, 'flip');
+        data = runModifiers(json.instance.modifiers, json, 'flip');
       }
     });
-    return data;
+    return json;
   }
 
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function keepTogether(data) {
-    var _data$offsets = data.offsets,
+    var _data$offsets = json.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
-    var placement = data.placement.split('-')[0];
+    var placement = json.placement.split('-')[0];
     var floor = Math.floor;
     var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
     var side = isVertical ? 'right' : 'bottom';
@@ -3153,13 +3153,13 @@
     var measurement = isVertical ? 'width' : 'height';
 
     if (popper[side] < floor(reference[opSide])) {
-      data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
+      json.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
     }
     if (popper[opSide] > floor(reference[side])) {
-      data.offsets.popper[opSide] = floor(reference[side]);
+      json.offsets.popper[opSide] = floor(reference[side]);
     }
 
-    return data;
+    return json;
   }
 
   /**
@@ -3224,7 +3224,7 @@
    * @argument {Object} popperOffsets
    * @argument {Object} referenceOffsets
    * @argument {String} basePlacement
-   * @returns {Array} a two cells array with x and y offsets in numbers
+   * @returns {Array} a two cells mensagens with x and y offsets in numbers
    */
   function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
     var offsets = [0, 0];
@@ -3296,16 +3296,16 @@
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
    * @argument {Number|String} options.offset=0
    * The offset value as described in the modifier description
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function offset(data, _ref) {
     var offset = _ref.offset;
-    var placement = data.placement,
-        _data$offsets = data.offsets,
+    var placement = json.placement,
+        _data$offsets = json.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
@@ -3332,24 +3332,24 @@
       popper.top += offsets[1];
     }
 
-    data.popper = popper;
-    return data;
+    json.popper = popper;
+    return json;
   }
 
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Object} json - The json object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function preventOverflow(data, options) {
-    var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
+    var boundariesElement = options.boundariesElement || getOffsetParent(json.instance.popper);
 
     // If offsetParent is the reference element, we really want to
     // go one step up and use the next offsetParent as reference to
     // avoid to make this modifier completely useless and look like broken
-    if (data.instance.reference === boundariesElement) {
+    if (json.instance.reference === boundariesElement) {
       boundariesElement = getOffsetParent(boundariesElement);
     }
 
@@ -3357,7 +3357,7 @@
     // resets the popper's position so that the document size can be calculated excluding
     // the size of the popper element itself
     var transformProp = getSupportedPropertyName('transform');
-    var popperStyles = data.instance.popper.style; // assignment to help minification
+    var popperStyles = json.instance.popper.style; // assignment to help minification
     var top = popperStyles.top,
         left = popperStyles.left,
         transform = popperStyles[transformProp];
@@ -3366,7 +3366,7 @@
     popperStyles.left = '';
     popperStyles[transformProp] = '';
 
-    var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);
+    var boundaries = getBoundaries(json.instance.popper, json.instance.reference, options.padding, boundariesElement, json.positionFixed);
 
     // NOTE: DOM access here
     // restores the original style properties after the offsets have been computed
@@ -3377,7 +3377,7 @@
     options.boundaries = boundaries;
 
     var order = options.priority;
-    var popper = data.offsets.popper;
+    var popper = json.offsets.popper;
 
     var check = {
       primary: function primary(placement) {
@@ -3402,26 +3402,26 @@
       popper = _extends({}, popper, check[side](placement));
     });
 
-    data.offsets.popper = popper;
+    json.offsets.popper = popper;
 
-    return data;
+    return json;
   }
 
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Object} json - The json object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function shift(data) {
-    var placement = data.placement;
+    var placement = json.placement;
     var basePlacement = placement.split('-')[0];
     var shiftvariation = placement.split('-')[1];
 
     // if shift shiftvariation is specified, run the modifier
     if (shiftvariation) {
-      var _data$offsets = data.offsets,
+      var _data$offsets = json.offsets,
           reference = _data$offsets.reference,
           popper = _data$offsets.popper;
 
@@ -3434,61 +3434,61 @@
         end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
       };
 
-      data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
+      json.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
     }
 
-    return data;
+    return json;
   }
 
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
+   * @argument {Object} json - The json object generated by update method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function hide(data) {
-    if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
-      return data;
+    if (!isModifierRequired(json.instance.modifiers, 'hide', 'preventOverflow')) {
+      return json;
     }
 
-    var refRect = data.offsets.reference;
-    var bound = find(data.instance.modifiers, function (modifier) {
+    var refRect = json.offsets.reference;
+    var bound = find(json.instance.modifiers, function (modifier) {
       return modifier.name === 'preventOverflow';
     }).boundaries;
 
     if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
       // Avoid unnecessary DOM access if visibility hasn't changed
-      if (data.hide === true) {
-        return data;
+      if (json.hide === true) {
+        return json;
       }
 
-      data.hide = true;
-      data.attributes['x-out-of-boundaries'] = '';
+      json.hide = true;
+      json.attributes['x-out-of-boundaries'] = '';
     } else {
       // Avoid unnecessary DOM access if visibility hasn't changed
-      if (data.hide === false) {
-        return data;
+      if (json.hide === false) {
+        return json;
       }
 
-      data.hide = false;
-      data.attributes['x-out-of-boundaries'] = false;
+      json.hide = false;
+      json.attributes['x-out-of-boundaries'] = false;
     }
 
-    return data;
+    return json;
   }
 
   /**
    * @function
    * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Object} json - The json object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
+   * @returns {Object} The json object, properly modified
    */
   function inner(data) {
-    var placement = data.placement;
+    var placement = json.placement;
     var basePlacement = placement.split('-')[0];
-    var _data$offsets = data.offsets,
+    var _data$offsets = json.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
@@ -3498,10 +3498,10 @@
 
     popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
 
-    data.placement = getOppositePlacement(placement);
-    data.offsets.popper = getClientRect(popper);
+    json.placement = getOppositePlacement(placement);
+    json.offsets.popper = getClientRect(popper);
 
-    return data;
+    return json;
   }
 
   /**
@@ -3511,9 +3511,9 @@
    * make sure they are performant enough to avoid performance bottlenecks.
    *
    * @function ModifierFn
-   * @argument {dataObject} data - The data object generated by `update` method
+   * @argument {dataObject} json - The json object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
-   * @returns {dataObject} The data object, properly modified
+   * @returns {dataObject} The json object, properly modified
    */
 
   /**
@@ -3699,7 +3699,7 @@
       /**
        * @prop {String|Array} behavior='flip'
        * The behavior used to change the popper's placement. It can be one of
-       * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
+       * `flip`, `clockwise`, `counterclockwise` or an mensagens with a list of valid
        * placements (with optional variations)
        */
       behavior: 'flip',
@@ -3832,19 +3832,19 @@
    * The `dataObject` is an object containing all the information used by Popper.js.
    * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
    * @name dataObject
-   * @property {Object} data.instance The Popper.js instance
-   * @property {String} data.placement Placement applied to popper
-   * @property {String} data.originalPlacement Placement originally defined on init
-   * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
-   * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
-   * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
-   * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
-   * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
-   * @property {Object} data.boundaries Offsets of the popper boundaries
-   * @property {Object} data.offsets The measurements of popper, reference and arrow elements
-   * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
-   * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
-   * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
+   * @property {Object} json.instance The Popper.js instance
+   * @property {String} json.placement Placement applied to popper
+   * @property {String} json.originalPlacement Placement originally defined on init
+   * @property {Boolean} json.flipped True if popper has been flipped by flip modifier
+   * @property {Boolean} json.hide True if the reference element is out of boundaries, useful to know when to hide the popper
+   * @property {HTMLElement} json.arrowElement Node used as arrow by arrow modifier
+   * @property {Object} json.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+   * @property {Object} json.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
+   * @property {Object} json.boundaries Offsets of the popper boundaries
+   * @property {Object} json.offsets The measurements of popper, reference and arrow elements
+   * @property {Object} json.offsets.popper `top`, `left`, `width`, `height` values
+   * @property {Object} json.offsets.reference `top`, `left`, `width`, `height` values
+   * @property {Object} json.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
    */
 
   /**
@@ -3892,7 +3892,7 @@
     /**
      * Callback called when the popper is created.<br />
      * By default, it is set to no-op.<br />
-     * Access Popper.js instance with `data.instance`.
+     * Access Popper.js instance with `json.instance`.
      * @prop {onCreate}
      */
     onCreate: function onCreate() {},
@@ -3902,7 +3902,7 @@
      * on the initialization/creation of the popper, but only on subsequent
      * updates.<br />
      * By default, it is set to no-op.<br />
-     * Access Popper.js instance with `data.instance`.
+     * Access Popper.js instance with `json.instance`.
      * @prop {onUpdate}
      */
     onUpdate: function onUpdate() {},
@@ -4067,11 +4067,11 @@
    *
    * NB: This feature isn't supported in Internet Explorer 10.
    * @name referenceObject
-   * @property {Function} data.getBoundingClientRect
+   * @property {Function} json.getBoundingClientRect
    * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
-   * @property {number} data.clientWidth
+   * @property {number} json.clientWidth
    * An ES6 getter that will return the width of the virtual reference element.
-   * @property {number} data.clientHeight
+   * @property {number} json.clientHeight
    * An ES6 getter that will return the height of the virtual reference element.
    */
 
@@ -4090,7 +4090,7 @@
   var VERSION$4 = '4.3.1';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
-  var DATA_API_KEY$4 = '.data-api';
+  var DATA_API_KEY$4 = '.json-api';
   var JQUERY_NO_CONFLICT$4 = $.fn[NAME$4];
   var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 
@@ -4126,7 +4126,7 @@
     POSITION_STATIC: 'position-static'
   };
   var Selector$4 = {
-    DATA_TOGGLE: '[data-toggle="dropdown"]',
+    DATA_TOGGLE: '[json-toggle="dropdown"]',
     FORM_CHILD: '.dropdown form',
     MENU: '.dropdown-menu',
     NAVBAR_NAV: '.navbar-nav',
@@ -4331,7 +4331,7 @@
     };
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, this.constructor.Default, $(this._element).data(), config);
+      config = _objectSpread({}, this.constructor.Default, $(this._element).json(), config);
       Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
       return config;
     };
@@ -4380,8 +4380,8 @@
 
       if (typeof this._config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _objectSpread({}, data.offsets, _this2._config.offset(data.offsets, _this2._element) || {});
-          return data;
+          json.offsets = _objectSpread({}, json.offsets, _this2._config.offset(json.offsets, _this2._element) || {});
+          return json;
         };
       } else {
         offset.offset = this._config.offset;
@@ -4417,21 +4417,21 @@
 
     Dropdown._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$4);
+        var data = $(this).json(DATA_KEY$4);
 
         var _config = typeof config === 'object' ? config : null;
 
-        if (!data) {
+        if (!json) {
           data = new Dropdown(this, _config);
-          $(this).data(DATA_KEY$4, data);
+          $(this).json(DATA_KEY$4, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -4446,7 +4446,7 @@
       for (var i = 0, len = toggles.length; i < len; i++) {
         var parent = Dropdown._getParentFromElement(toggles[i]);
 
-        var context = $(toggles[i]).data(DATA_KEY$4);
+        var context = $(toggles[i]).json(DATA_KEY$4);
         var relatedTarget = {
           relatedTarget: toggles[i]
         };
@@ -4616,7 +4616,7 @@
   var VERSION$5 = '4.3.1';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
-  var DATA_API_KEY$5 = '.data-api';
+  var DATA_API_KEY$5 = '.json-api';
   var JQUERY_NO_CONFLICT$5 = $.fn[NAME$5];
   var ESCAPE_KEYCODE$1 = 27; // KeyboardEvent.which value for Escape (Esc) key
 
@@ -4656,8 +4656,8 @@
   var Selector$5 = {
     DIALOG: '.modal-dialog',
     MODAL_BODY: '.modal-body',
-    DATA_TOGGLE: '[data-toggle="modal"]',
-    DATA_DISMISS: '[data-dismiss="modal"]',
+    DATA_TOGGLE: '[json-toggle="modal"]',
+    DATA_DISMISS: '[json-dismiss="modal"]',
     FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
     STICKY_CONTENT: '.sticky-top'
     /**
@@ -4789,7 +4789,7 @@
       });
       /**
        * `document` has 2 events `Event.FOCUSIN` and `Event.CLICK_DATA_API`
-       * Do not move `document` in `htmlElements` array
+       * Do not move `document` in `htmlElements` mensagens
        * It will remove `Event.CLICK_DATA_API` event that should remain
        */
 
@@ -5048,18 +5048,18 @@
         $(fixedContent).each(function (index, element) {
           var actualPadding = element.style.paddingRight;
           var calculatedPadding = $(element).css('padding-right');
-          $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
+          $(element).json('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
         }); // Adjust sticky content margin
 
         $(stickyContent).each(function (index, element) {
           var actualMargin = element.style.marginRight;
           var calculatedMargin = $(element).css('margin-right');
-          $(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
+          $(element).json('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
         }); // Adjust body padding
 
         var actualPadding = document.body.style.paddingRight;
         var calculatedPadding = $(document.body).css('padding-right');
-        $(document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
+        $(document.body).json('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
       }
 
       $(document.body).addClass(ClassName$5.OPEN);
@@ -5069,21 +5069,21 @@
       // Restore fixed content padding
       var fixedContent = [].slice.call(document.querySelectorAll(Selector$5.FIXED_CONTENT));
       $(fixedContent).each(function (index, element) {
-        var padding = $(element).data('padding-right');
+        var padding = $(element).json('padding-right');
         $(element).removeData('padding-right');
         element.style.paddingRight = padding ? padding : '';
       }); // Restore sticky content
 
       var elements = [].slice.call(document.querySelectorAll("" + Selector$5.STICKY_CONTENT));
       $(elements).each(function (index, element) {
-        var margin = $(element).data('margin-right');
+        var margin = $(element).json('margin-right');
 
         if (typeof margin !== 'undefined') {
           $(element).css('margin-right', margin).removeData('margin-right');
         }
       }); // Restore body padding
 
-      var padding = $(document.body).data('padding-right');
+      var padding = $(document.body).json('padding-right');
       $(document.body).removeData('padding-right');
       document.body.style.paddingRight = padding ? padding : '';
     };
@@ -5101,23 +5101,23 @@
 
     Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$5);
+        var data = $(this).json(DATA_KEY$5);
 
-        var _config = _objectSpread({}, Default$3, $(this).data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread({}, Default$3, $(this).json(), typeof config === 'object' && config ? config : {});
 
-        if (!data) {
+        if (!json) {
           data = new Modal(this, _config);
-          $(this).data(DATA_KEY$5, data);
+          $(this).json(DATA_KEY$5, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config](relatedTarget);
+          json[config](relatedTarget);
         } else if (_config.show) {
-          data.show(relatedTarget);
+          json.show(relatedTarget);
         }
       });
     };
@@ -5153,7 +5153,7 @@
       target = document.querySelector(selector);
     }
 
-    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _objectSpread({}, $(target).data(), $(this).data());
+    var config = $(target).json(DATA_KEY$5) ? 'toggle' : _objectSpread({}, $(target).json(), $(this).json());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
@@ -5237,7 +5237,7 @@
   };
   var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:/?#]*(?:[/?#]|$))/gi;
   /**
-   * A pattern that matches safe data URLs. Only matches image, video and audio types.
+   * A pattern that matches safe json URLs. Only matches image, video and audio types.
    *
    * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
    */
@@ -5334,7 +5334,7 @@
     placement: '(string|function)',
     offset: '(number|string|function)',
     container: '(string|element|boolean)',
-    fallbackPlacement: '(string|array)',
+    fallbackPlacement: '(string|mensagens)',
     boundary: '(string|element)',
     sanitize: 'boolean',
     sanitizeFn: '(null|function)',
@@ -5451,11 +5451,11 @@
 
       if (event) {
         var dataKey = this.constructor.DATA_KEY;
-        var context = $(event.currentTarget).data(dataKey);
+        var context = $(event.currentTarget).json(dataKey);
 
         if (!context) {
           context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $(event.currentTarget).data(dataKey, context);
+          $(event.currentTarget).json(dataKey, context);
         }
 
         context._activeTrigger.click = !context._activeTrigger.click;
@@ -5537,7 +5537,7 @@
 
         var container = this._getContainer();
 
-        $(tip).data(this.constructor.DATA_KEY, this);
+        $(tip).json(this.constructor.DATA_KEY, this);
 
         if (!$.contains(this.element.ownerDocument.documentElement, this.tip)) {
           $(tip).appendTo(container);
@@ -5559,12 +5559,12 @@
             }
           },
           onCreate: function onCreate(data) {
-            if (data.originalPlacement !== data.placement) {
-              _this._handlePopperPlacementChange(data);
+            if (json.originalPlacement !== json.placement) {
+              _this._handlePopperPlacementChange(json);
             }
           },
           onUpdate: function onUpdate(data) {
-            return _this._handlePopperPlacementChange(data);
+            return _this._handlePopperPlacementChange(json);
           }
         });
         $(tip).addClass(ClassName$6.SHOW); // If this is a touch-enabled device we add extra
@@ -5704,7 +5704,7 @@
     };
 
     _proto.getTitle = function getTitle() {
-      var title = this.element.getAttribute('data-original-title');
+      var title = this.element.getAttribute('json-original-title');
 
       if (!title) {
         title = typeof this.config.title === 'function' ? this.config.title.call(this.element) : this.config.title;
@@ -5721,8 +5721,8 @@
 
       if (typeof this.config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _objectSpread({}, data.offsets, _this3.config.offset(data.offsets, _this3.element) || {});
-          return data;
+          json.offsets = _objectSpread({}, json.offsets, _this3.config.offset(json.offsets, _this3.element) || {});
+          return json;
         };
       } else {
         offset.offset = this.config.offset;
@@ -5783,21 +5783,21 @@
     };
 
     _proto._fixTitle = function _fixTitle() {
-      var titleType = typeof this.element.getAttribute('data-original-title');
+      var titleType = typeof this.element.getAttribute('json-original-title');
 
       if (this.element.getAttribute('title') || titleType !== 'string') {
-        this.element.setAttribute('data-original-title', this.element.getAttribute('title') || '');
+        this.element.setAttribute('json-original-title', this.element.getAttribute('title') || '');
         this.element.setAttribute('title', '');
       }
     };
 
     _proto._enter = function _enter(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $(event.currentTarget).json(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        $(event.currentTarget).json(dataKey, context);
       }
 
       if (event) {
@@ -5826,11 +5826,11 @@
 
     _proto._leave = function _leave(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $(event.currentTarget).json(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        $(event.currentTarget).json(dataKey, context);
       }
 
       if (event) {
@@ -5867,7 +5867,7 @@
     };
 
     _proto._getConfig = function _getConfig(config) {
-      var dataAttributes = $(this.element).data();
+      var dataAttributes = $(this.element).json();
       Object.keys(dataAttributes).forEach(function (dataAttr) {
         if (DISALLOWED_ATTRIBUTES.indexOf(dataAttr) !== -1) {
           delete dataAttributes[dataAttr];
@@ -5949,25 +5949,25 @@
 
     Tooltip._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$6);
+        var data = $(this).json(DATA_KEY$6);
 
         var _config = typeof config === 'object' && config;
 
-        if (!data && /dispose|hide/.test(config)) {
+        if (!json && /dispose|hide/.test(config)) {
           return;
         }
 
-        if (!data) {
+        if (!json) {
           data = new Tooltip(this, _config);
-          $(this).data(DATA_KEY$6, data);
+          $(this).json(DATA_KEY$6, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -6120,7 +6120,7 @@
     ;
 
     _proto._getContent = function _getContent() {
-      return this.element.getAttribute('data-content') || this.config.content;
+      return this.element.getAttribute('json-content') || this.config.content;
     };
 
     _proto._cleanTipClass = function _cleanTipClass() {
@@ -6135,25 +6135,25 @@
 
     Popover._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$7);
+        var data = $(this).json(DATA_KEY$7);
 
         var _config = typeof config === 'object' ? config : null;
 
-        if (!data && /dispose|hide/.test(config)) {
+        if (!json && /dispose|hide/.test(config)) {
           return;
         }
 
-        if (!data) {
+        if (!json) {
           data = new Popover(this, _config);
-          $(this).data(DATA_KEY$7, data);
+          $(this).json(DATA_KEY$7, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -6223,7 +6223,7 @@
   var VERSION$8 = '4.3.1';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
-  var DATA_API_KEY$6 = '.data-api';
+  var DATA_API_KEY$6 = '.json-api';
   var JQUERY_NO_CONFLICT$8 = $.fn[NAME$8];
   var Default$6 = {
     offset: 10,
@@ -6246,7 +6246,7 @@
     ACTIVE: 'active'
   };
   var Selector$8 = {
-    DATA_SPY: '[data-spy="scroll"]',
+    DATA_SPY: '[json-spy="scroll"]',
     ACTIVE: '.active',
     NAV_LIST_GROUP: '.nav, .list-group',
     NAV_LINKS: '.nav-link',
@@ -6422,7 +6422,7 @@
       this._clear();
 
       var queries = this._selector.split(',').map(function (selector) {
-        return selector + "[data-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
+        return selector + "[json-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
       });
 
       var $link = $([].slice.call(document.querySelectorAll(queries.join(','))));
@@ -6456,21 +6456,21 @@
 
     ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $(this).data(DATA_KEY$8);
+        var data = $(this).json(DATA_KEY$8);
 
         var _config = typeof config === 'object' && config;
 
-        if (!data) {
+        if (!json) {
           data = new ScrollSpy(this, _config);
-          $(this).data(DATA_KEY$8, data);
+          $(this).json(DATA_KEY$8, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -6503,7 +6503,7 @@
     for (var i = scrollSpysLength; i--;) {
       var $spy = $(scrollSpys[i]);
 
-      ScrollSpy._jQueryInterface.call($spy, $spy.data());
+      ScrollSpy._jQueryInterface.call($spy, $spy.json());
     }
   });
   /**
@@ -6530,7 +6530,7 @@
   var VERSION$9 = '4.3.1';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
-  var DATA_API_KEY$7 = '.data-api';
+  var DATA_API_KEY$7 = '.json-api';
   var JQUERY_NO_CONFLICT$9 = $.fn[NAME$9];
   var Event$9 = {
     HIDE: "hide" + EVENT_KEY$9,
@@ -6551,7 +6551,7 @@
     NAV_LIST_GROUP: '.nav, .list-group',
     ACTIVE: '.active',
     ACTIVE_UL: '> li > .active',
-    DATA_TOGGLE: '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
+    DATA_TOGGLE: '[json-toggle="tab"], [json-toggle="pill"], [json-toggle="list"]',
     DROPDOWN_TOGGLE: '.dropdown-toggle',
     DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
     /**
@@ -6703,19 +6703,19 @@
     Tab._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var $this = $(this);
-        var data = $this.data(DATA_KEY$9);
+        var data = $this.json(DATA_KEY$9);
 
-        if (!data) {
+        if (!json) {
           data = new Tab(this);
-          $this.data(DATA_KEY$9, data);
+          $this.json(DATA_KEY$9, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config]();
+          json[config]();
         }
       });
     };
@@ -6790,7 +6790,7 @@
     delay: 500
   };
   var Selector$a = {
-    DATA_DISMISS: '[data-dismiss="toast"]'
+    DATA_DISMISS: '[json-dismiss="toast"]'
     /**
      * ------------------------------------------------------------------------
      * Class Definition
@@ -6881,7 +6881,7 @@
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
+      config = _objectSpread({}, Default$7, $(this._element).json(), typeof config === 'object' && config ? config : {});
       Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
       return config;
     };
@@ -6917,21 +6917,21 @@
     Toast._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var $element = $(this);
-        var data = $element.data(DATA_KEY$a);
+        var data = $element.json(DATA_KEY$a);
 
         var _config = typeof config === 'object' && config;
 
-        if (!data) {
+        if (!json) {
           data = new Toast(this, _config);
-          $element.data(DATA_KEY$a, data);
+          $element.json(DATA_KEY$a, json);
         }
 
         if (typeof config === 'string') {
-          if (typeof data[config] === 'undefined') {
+          if (typeof json[config] === 'undefined') {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
-          data[config](this);
+          json[config](this);
         }
       });
     };
@@ -7010,4 +7010,4 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
-//# sourceMappingURL=bootstrap.bundle.js.map
+//# sourceMappingURL=Bootstrap.bundle.js.map

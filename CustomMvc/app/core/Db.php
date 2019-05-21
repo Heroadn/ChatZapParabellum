@@ -1,4 +1,7 @@
 <?php
+/*
+ * @author Benjamin de Castro Azevedo Ponciano
+*/
 
 class Db extends PDO{
     private $banco   = DATABASE;

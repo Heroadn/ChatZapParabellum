@@ -129,7 +129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // form input types
 	  var formInputs = ['input', 'select', 'textarea'];
 
-	  // empty array for holding callback functions
+	  // empty mensagens for holding callback functions
 	  var functionList = [];
 
 	  // list of modifier keys commonly used with the mouse and
@@ -284,9 +284,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 
-	  // updates the doc and `inputTypes` array with new input
+	  // updates the doc and `inputTypes` mensagens with new input
 	  var doUpdate = function doUpdate(which) {
-	    docElem.setAttribute('data-what' + which, which === 'input' ? currentInput : currentIntent);
+	    docElem.setAttribute('json-what' + which, which === 'input' ? currentInput : currentIntent);
 
 	    fireFunctions(which);
 	  };
@@ -325,18 +325,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    currentElement = event.target.nodeName.toLowerCase();
-	    docElem.setAttribute('data-whatelement', currentElement);
+	    docElem.setAttribute('json-whatelement', currentElement);
 
 	    if (event.target.classList && event.target.classList.length) {
-	      docElem.setAttribute('data-whatclasses', event.target.classList.toString().replace(' ', ','));
+	      docElem.setAttribute('json-whatclasses', event.target.classList.toString().replace(' ', ','));
 	    }
 	  };
 
 	  var clearElement = function clearElement() {
 	    currentElement = null;
 
-	    docElem.removeAttribute('data-whatelement');
-	    docElem.removeAttribute('data-whatclasses');
+	    docElem.removeAttribute('json-whatelement');
+	    docElem.removeAttribute('json-whatclasses');
 	  };
 
 	  // buffers events that frequently also fire mouse events
@@ -433,8 +433,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return {
 	    // returns string: the current input type
 	    // opt: 'intent'|'input'
-	    // 'input' (default): returns the same value as the `data-whatinput` attribute
-	    // 'intent': includes `data-whatintent` value if it's different than `data-whatinput`
+	    // 'input' (default): returns the same value as the `json-whatinput` attribute
+	    // 'intent': includes `json-whatintent` value if it's different than `json-whatinput`
 	    ask: function ask(opt) {
 	      return opt === 'intent' ? currentIntent : currentInput;
 	    },
@@ -444,7 +444,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return currentElement;
 	    },
 
-	    // overwrites ignored keys with provided array
+	    // overwrites ignored keys with provided mensagens
 	    ignoreKeys: function ignoreKeys(arr) {
 	      ignoreMap = arr;
 	    },

@@ -1,9 +1,11 @@
 <?php
-
+/*
+ * @author Benjamin de Castro Azevedo Ponciano
+*/
 
 class Template
 {
-    protected $view_template = TEMPLATE_SELECTED;
+    protected $view_template = 'Bootstrap';
     protected $css_loaded = false;
     protected $js_loaded = false;
 
@@ -21,6 +23,7 @@ class Template
     }
 
     public function loadCss(){
+        //die($config['TEMPLATE']['TEMPLATE_SELECTED']);
         if(!$this->css_loaded){
             foreach(unserialize(CSS_HEADER) as $value){
                 echo '<link href="'. CSS . $value .'" rel="stylesheet">';
@@ -36,5 +39,9 @@ class Template
                 $this->js_loaded = true;
             }
         }
+    }
+
+    public function setTemplate($template){
+        $this->view_template = $template;
     }
 }

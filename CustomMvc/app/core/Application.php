@@ -16,8 +16,7 @@ class Application{
                 //$this->prams -> parametros a serem passados a função class->função($this->prams[0],$this->prams[1],...)
                 call_user_func_array([$this->controller,$this->action],$this->prams);
             }else{
-                //Adicionar Exception Handler global, tipo um controllerAdvice SpringBoot
-                die('Pagina nao encontrada, verifique se a pasta esta com o nome certo e o arquivo requisitado');
+                throw new Exception('Pagina nao encontrada, verifique se a pasta esta com o nome certo e a url foi digitada corretamente');
             }
         }
     }
@@ -27,7 +26,7 @@ class Application{
         if(!empty($request)){
             $url = explode('/',$request);
             $this->controller = isset($url[0]) ? $url[0] . 'Controller' : 'indexController';
-            $this->action = isset($url[1]) ? $url[1] : 'Index';
+            $this->action = isset($url[1]) ? $url[1] : 'Cadastrar';
 
             //Removendo o controller e action do url, e adicionando parametros adicionais na url no prams
             unset($url[0],$url[1]);
