@@ -32,6 +32,7 @@ class Db extends PDO{
             file_put_contents("erros.txt",
                 $e->getMessage()."\r\n",
                 FILE_APPEND);
+            die("Verifique as configurações do Banco de Dados");
         }
     }
 }
