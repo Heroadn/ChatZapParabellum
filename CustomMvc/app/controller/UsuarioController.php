@@ -33,7 +33,7 @@ class UsuarioController extends Controller
      * @param string $id
      */
     public function Listar(){
-        $token  = Auth::getTokenFromHeaders("Authorization");
+        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
         $Usuarios = Assert::equalsOrError(Usuarios::findById($token->id)->admin,true) ? Usuarios::findAll() : ['erro'=>'Autenticação é requerida'];
         header("Content-type:application/json");
         echo json_encode($Usuarios);

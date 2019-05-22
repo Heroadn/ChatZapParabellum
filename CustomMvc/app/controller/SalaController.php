@@ -20,7 +20,7 @@ class SalaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
-        $token  = Auth::getTokenFromHeaders("Authorization");
+        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
         if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
             $Salas = ($id != '') ? Salas::findAll(['moderador_id'=>$id]) : Salas::findAll();
         }else{

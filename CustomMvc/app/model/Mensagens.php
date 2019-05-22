@@ -12,6 +12,7 @@ class Mensagens extends Dao
 
     public $usuarios_id;
     public $salas_id;
+    public $para_id;
 
     function getMensagensFromSala(){
         $mensagem = Mensagens::findAll();

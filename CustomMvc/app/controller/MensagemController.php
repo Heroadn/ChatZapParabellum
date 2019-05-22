@@ -6,11 +6,9 @@ class MensagemController extends Controller
      * @param int $limit
      */
     public function Listar($salas_id = '',$id_mensagem = '', $limit = 10){
-        $token  = Auth::getTokenFromHeaders("Authorization");
+        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
 
-        //Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)
-        // TODO:Usuario so pode visualizar imagens de salas que pertence
-        if(true){
+        if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
             if($salas_id != ''){
                 $Mensagens = ($id_mensagem != '')?
                 array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem],['DESC'=>'id','>'=>'id','limit'=>$limit]))
@@ -30,7 +28,7 @@ class MensagemController extends Controller
      * Metodo Cadastra a Sala no banco de dados via Formulario "POST"
      */
     public function cadastrar_post(){
-        $token  = Auth::getTokenFromHeaders("Authorization");
+        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
         $json = json_decode(file_get_contents('php://input'), true);
 
         //Cadastrar a mensagem

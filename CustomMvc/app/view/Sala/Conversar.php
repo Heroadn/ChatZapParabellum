@@ -37,7 +37,7 @@
             headers: {'Authorization':'<?php echo $_SESSION['token']?>'},
             json: $("#mensagem").serialize(),
             success:function (response){
-                //alert(response);
+                alert(response);
             },
             error:function (jqXHR, textStatus, errorThrown){
                 // Log the error to the console

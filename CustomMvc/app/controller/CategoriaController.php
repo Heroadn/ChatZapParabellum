@@ -16,7 +16,7 @@ class CategoriaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
-        $token  = Auth::getTokenFromHeaders("Authorization");
+        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
         if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
             $Categorias = ($id != '') ? Categorias::findById($id) : Categorias::findAll() ;
         }else{
