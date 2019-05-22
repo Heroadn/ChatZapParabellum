@@ -6,15 +6,10 @@ class UsuarioController extends Controller
      * @param string $name
      */
     public function Cadastrar($id='', $name=''){
-        //Manda as variaveis para a view [Cadastrar/id/nome]
         $this->view(['id' =>$id, 'name' =>$name]);
-
-        //Muda o titulo da view <title>Titulo</title>
         $this->view->page_title = 'Cadastrar';
-
         //Muda o Template do Sistema
         //$this->view->setTemplate('Foundation');
-        //Mostra a view, o uso do template pode ser desativado usando render(false,".php,.js,etc..")
         $this->view->render();
     }
 
@@ -37,10 +32,11 @@ class UsuarioController extends Controller
      * Ele retorna um json com o usuario requisitado ou todos, sendo necessario Autenticação
      * @param string $id
      */
-    public function Listar($id=''){
-        $Usuarios = Usuarios::findAll();
-        $this->view(['Usuarios'=>$Usuarios]);
-        $this->view->render(false);
+    public function Listar(){
+        $token  = Auth::getTokenFromHeaders("Authorization");
+        $Usuarios = Assert::equalsOrError(Usuarios::findById($token->id)->admin,true) ? Usuarios::findAll() : ['erro'=>'Autenticação é requerida'];
+        header("Content-type:application/json");
+        echo json_encode($Usuarios);
     }
 
     /**
@@ -90,11 +86,13 @@ class UsuarioController extends Controller
             }
 
             if($erro == ""){
-                $_SESSION['usuario_id']    = $Usuario['id'];
-                $_SESSION['usuario_nome']  = $Usuario['nome'];
-                $_SESSION['usuario_email'] = $Usuario['email'];
-                $_SESSION['usuario_admin'] = $Usuario['admin'];
-                header('Location:' . '/Index/');
+                $payload = [
+                    'id'   =>$Usuario['id'],
+                    'email'=>$Usuario['email']
+                ];
+
+                $_SESSION['token'] = JWT::encode($payload);
+                header('Location:' . '/Index/Index');
             }else{
                 header('Location:' . '/Usuario/Login/1');
             }

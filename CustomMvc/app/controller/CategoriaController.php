@@ -7,11 +7,8 @@ class CategoriaController extends Controller
      * @param string $name
      */
     public function Cadastrar($id='', $name=''){
-        //view(nomeView,paramentros /id/name);
         $this->view(['id' =>$id, 'name' =>$name]);
-        //Titulo da Pagina
         $this->view->page_title = 'Cadastrar Categoria';
-        //Carrega a View
         $this->view->render();
     }
 
@@ -19,7 +16,14 @@ class CategoriaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
-        $Categorias = ($id != '') ? Categorias::findById($id) : Categorias::findAll() ;
+        $token  = Auth::getTokenFromHeaders("Authorization");
+        if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
+            $Categorias = ($id != '') ? Categorias::findById($id) : Categorias::findAll() ;
+        }else{
+            $Categorias = ['erro'=>'Autenticação é requerida'];
+        }
+
+        header("Content-type:application/json");
         echo json_encode($Categorias);
     }
 

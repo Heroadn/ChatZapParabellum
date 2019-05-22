@@ -1,10 +1,10 @@
+<!--
 <canvas id = "canvas" width = "640" height = "480"
         style= "border:1px solid gray; width: 640px; height: 480px;">
-</canvas>
+</canvas>-->
 
 <script>
     $(document).ready(function(){
-        //Initialize
         Context.create("canvas");
 
         var WALL  = "http://www.tigrisgames.com/wall.png";

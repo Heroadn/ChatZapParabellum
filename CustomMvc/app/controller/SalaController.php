@@ -20,7 +20,13 @@ class SalaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
-        $Salas = ($id != '') ? Salas::findAll(['moderador_id'=>$id]) : Salas::findAll();
+        $token  = Auth::getTokenFromHeaders("Authorization");
+        if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
+            $Salas = ($id != '') ? Salas::findAll(['moderador_id'=>$id]) : Salas::findAll();
+        }else{
+            $Salas = ['erro'=>'Autenticação é requerida'];
+        }
+        header("Content-type:application/json");
         echo json_encode($Salas);
     }
 
@@ -28,6 +34,15 @@ class SalaController extends Controller
      * @param string $id_sala
      */
     public function Conversar($id_sala=''){
+        $this->view(['id_sala'=>$id_sala]);
+        $this->view->page_title = 'Conversar';
+        $this->view->render();
+    }
+
+    /**
+     * @param string $id_sala
+     */
+    public function Selecionar($id_sala=''){
         $this->view(['id_sala'=>$id_sala]);
         $this->view->page_title = 'Conversar';
         $this->view->render();

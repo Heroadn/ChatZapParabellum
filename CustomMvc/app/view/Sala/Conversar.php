@@ -1,5 +1,5 @@
 <?php
-    if(!isset($_SESSION['usuario_id'])) {
+    if(!isset($_SESSION['token'])) {
         header("Location:/Usuario/Login");
     }
 
@@ -34,6 +34,7 @@
         $.ajax({
             type: "POST",
             url: "/Mensagem/cadastrar_post",
+            headers: {'Authorization':'<?php echo $_SESSION['token']?>'},
             json: $("#mensagem").serialize(),
             success:function (response){
                 //alert(response);
@@ -52,9 +53,12 @@
         $.ajax({
             type: "GET",
             url: "/Mensagem/Listar/"+ sala +"/"+lastTimeID,
+            headers: {'Authorization':'<?php echo $_SESSION['token']?>'},
             contentType: 'application/json;charset=UTF-8',
+
             success:function (response){
-                json = JSON.parse(response);
+                json = response;
+
                 //Adiciona as mensagens dentro do array
                 for(m in json){
                     var status = false;
