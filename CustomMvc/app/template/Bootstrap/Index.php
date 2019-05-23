@@ -24,37 +24,23 @@
         </style>
 
         <!-- Navegação -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/Index/">Parabellum</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <?php $this->getNav();?>
-                </ul>
-            </div>
-        </nav>
-
-        <!--
-        <nav class="navbar navbar-dark purple">
-            <div class="container">
-                <a class="navbar-brand h1 mb-0 mr-5" href="index.php" style="color:white">
-                    <img alt="asdasd" src="<?php //echo IMG. 'logowhite_zapchat.png'?>" width="40px">
-                    &nbsp;&nbsp; ZapChat
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite" style="color: white">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="container"></div>
-                <div class="collapse navbar-collapse l-10" id="navbarSite">
-                    <ul class="navbar-nav">
-                        <?php //$this->getNav();?>
-                    </ul>
-                </div>
-            </div>
-        </nav>-->
+      <nav class="navbar navbar-expand-sm navbar-dark purple">
+				<div class="container">
+					<a class="navbar-brand h1 mb-0 mr-5" href="/">
+            <img alt="Logo do ZapChat" src="app/libs/img/logowhite_zapchat.png" width="40px">
+						&nbsp;&nbsp; ZapChat
+					</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+					<div class="container"></div>
+					<div class="collapse navbar-collapse" id="navbarSite">
+						<ul class="navbar-nav">
+							<?php $this->getNav();?>
+						</ul>
+					</div>
+				</div>
+			</nav>
 
         <!-- Container -->
         <div class="container"  style="margin-top: 3%;margin-bottom: 3%">
@@ -96,6 +82,3 @@
         </div>
     </body>
 </html>
-
-
-
