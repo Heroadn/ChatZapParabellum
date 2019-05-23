@@ -4,14 +4,13 @@
 define('CSS_HEADER',serialize([
     'bootstrap.min.css',
     'bootstrap-grid.min.css',
-    'fw.css',
-    'core.css',
-    'color.css'
+    'core.css'
+    'color.css',
+    'fw.css'
 ]));
 
 define('JS_HEADER',serialize([
     'jquery.js',
-    'bootstrap.min.js',
-    'serializejson.js',
-    'engine.js'
+    'bootstrap.bundle.min.js',
+    'serializejson.js'
 ]));
