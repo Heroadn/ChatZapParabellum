@@ -4,7 +4,7 @@
 define('CSS_HEADER',serialize([
     'bootstrap.min.css',
     'bootstrap-grid.min.css',
-    'core.css'
+    'core.css',
     'color.css',
     'fw.css'
 ]));
