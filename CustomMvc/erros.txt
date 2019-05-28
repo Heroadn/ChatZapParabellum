@@ -1,1 +1,0 @@
-SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'salas_id' at row 1\r\n
