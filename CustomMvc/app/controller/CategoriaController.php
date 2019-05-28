@@ -16,7 +16,8 @@ class CategoriaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
-        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+
         if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
             $Categorias = ($id != '') ? Categorias::findById($id) : Categorias::findAll() ;
         }else{
@@ -43,4 +44,14 @@ class CategoriaController extends Controller
         $Categorias->save($Categorias);
         header('Location:' . '/Categoria/Cadastrar');
     }
+
+    public function ListCategoriasWithSalas(){
+        $Categorias = Categorias::getCategoriasWithSalas();
+        echo json_encode($Categorias);
+    }
+	
+	public function listar_por_relevancia(){
+		$Categorias = Categorias::getRelevantes();
+		echo json_encode($Categorias);
+	}
 }

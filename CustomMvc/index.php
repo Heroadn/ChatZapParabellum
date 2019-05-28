@@ -15,12 +15,13 @@ define('LIBS',DIRECTORY_SEPARATOR .  'app' . DIRECTORY_SEPARATOR .  'libs' . DIR
 $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
 
 #Carregando Configuraçôes de Banco de dados, template e ExceptionHandler
-$config = include('Config.php');
+include('Config.php');
 include_once("AutoLoader.php");
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
 
 #Mensagem de erro quanto estiver em ambiente de desenvolvimento
 if(DEBUG){ini_set('display_errors',1);error_reporting(-1);}
+date_default_timezone_set('America/Sao_Paulo');
 
 ##Init
 new Application;

@@ -1,5 +1,5 @@
 <?php
-    if(!isset($_SESSION['token'])) {
+    if(!isset($_SESSION['Token'])) {
         header("Location:/Usuario/Login");
     }
 
@@ -9,7 +9,7 @@
         echo '<p>' .'Post de messangem ficara indisponivel.'. '</p>';
     }
 ?>
-
+<div id="time"></div>
 <div id="chat"></div>
 
 <form id="mensagem" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
@@ -24,6 +24,12 @@
 <div class="text-right">
     <input type="submit" onclick="postMensagem();" class="btn btn-primary" value="Salvar">
 </div>
+<div>
+	<div id="usuarios" style="width:100%">
+	</div>
+	<button id="getUsers">Atualizar usuários</button>
+	<a href="/Sala/sair/<?php echo $id_sala;?>"><button>Sair da sala</button></a>
+</div>
 
 <script>
     var mensagens = [];
@@ -34,10 +40,9 @@
         $.ajax({
             type: "POST",
             url: "/Mensagem/cadastrar_post",
-            headers: {'Authorization':'<?php echo $_SESSION['token']?>'},
             json: $("#mensagem").serialize(),
             success:function (response){
-                alert(response);
+                //alert(response);
             },
             error:function (jqXHR, textStatus, errorThrown){
                 // Log the error to the console
@@ -50,10 +55,10 @@
     };
 
     var load = () => {
+        document.getElementById("time").innerHTML = <?php echo "'".$time_ativo."'"?>;
         $.ajax({
             type: "GET",
             url: "/Mensagem/Listar/"+ sala +"/"+lastTimeID,
-            headers: {'Authorization':'<?php echo $_SESSION['token']?>'},
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
@@ -73,11 +78,24 @@
                         lastTimeID = mensagem['id'];
                         document.getElementById("chat").innerHTML += "<br>" +  mensagem['mensagem'];
                     }
+
                 }
             }
         });
     };
 
+	$('#getUsers').click(function(){
+		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
+		function(data){
+				var Usuarios = JSON.parse(data);
+				$('#usuarios').html('');
+				for (posicao in Usuarios){
+					$('#usuarios').append('<p>'+Usuarios[posicao].nome+'</p>');
+				}
+			})
+	});
     load();
     setInterval(load,2000);
+	
+	
 </script>

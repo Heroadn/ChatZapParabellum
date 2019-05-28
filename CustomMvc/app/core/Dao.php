@@ -80,8 +80,8 @@ class Dao{
     }
 
     /**
-     * @param $field
-     * @param $string
+     * @param $field campo do banco de dados que se deseja procurar
+     * @param $string valor do campo
      * @return mixed
      */
     public static function findBy($field, $string){
@@ -101,11 +101,41 @@ class Dao{
         }
     }
 
+
     /**
-     * @param string $fk
-     * @return array
+     * Metodo retorna mais de uma incidencia de busca do banco de dados
+     * pode ser passado as chaves de busca assim como criterios que limitam os resultados
+     *
+     * Exemplo:
+     * $var = [];
+     * $var = Model::findAll(); O modelo obrigatoriamente deve extender Dao,
+     * já que ele busca o nome da tabela pelo modelo
+     * $Usuarios = Usuarios::findAll();
+     *
+     * Procurar varios clientes pertencentes a usuarios
+     * //Tabela usuarios;
+     * $Usuarios = [];
+     *
+     * //Foreign Key clientes_id
+     * $fk = [clientes_id=>1];
+     * $Usuarios = Usuarios::findAll($fk);
+     *
+     * Limitando os resultados de busca usando limit
+     * //Tabela usuarios;
+     * $Usuarios = [];
+     *
+     * //Foreign Key clientes_id
+     * $fk = [clientes_id=>1];
+     *
+     * //Criterios de pesquisa
+     * $criterios = [limit=>10];
+     * $Usuarios = Usuarios::findAll($fk,$criterios);
+     *
+     * @param  array $fk chaves estrangeiras para se procurar como [usuarios_id=>1,clientes_id=>2]
+     * @param  array $criterios criterios de pesquisa como ['limit'=>10]
+     * @return array retorna os objetos de pesquisa do banco de dados
      */
-    public static function findAll($fk = [],$criterios = []){
+    public static function findAll($fk = [], $criterios = []){
         try{
             $predicates = self::criterios($criterios,self::where($fk));
             $sql = 'SELECT * FROM '.static::TABLE. $predicates;
@@ -139,6 +169,31 @@ class Dao{
         }
     }
 
+    public static function showTables(){
+        $sql = 'show Tables from ' . DATABASE;
+        $p_sql = Db::getInstance()->query($sql);
+        $p_sql->execute();
+
+        $tables = [];
+        foreach ($p_sql->fetchAll() as $key => $table){
+            array_push($tables,$table['Tables_in_' . DATABASE]);
+        }
+
+        return $tables;
+    }
+
+    /**
+     * @param null $table
+     * @return array
+     */
+    public static function describeTable($table = null){
+        $table  = (isset($table))? $table : static::TABLE;
+        $sql = 'DESCRIBE ' . $table;
+        $p_sql = Db::getInstance()->query($sql);
+        $p_sql->execute();
+        return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     //SQL HELPERS //
     /**
      * @param $fk
@@ -155,8 +210,15 @@ class Dao{
 
             //Retorna o join com as foreign keys em SQL
             foreach ($fk as $key => $value) {
+                if(!$value){
+                    unset($fk[$key]);
+                    $size--;
+                }
+            }
+
+            foreach ($fk as $key => $value) {
                 //Se tiver mais de uma FK e não for a ultima posição
-                $binder = ($size != 1 && $counter != $size - 1) ? ' and ' : '';
+                $binder = (($size !== 1) && $counter !== ($size - 1)) ? ' and ' : '';
 
                 //fk_id1 = 1 and fk_id2 = 2
                 $fields[$key] = $key . ' = ' . $value . $binder;

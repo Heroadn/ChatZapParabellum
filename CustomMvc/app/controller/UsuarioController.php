@@ -8,8 +8,6 @@ class UsuarioController extends Controller
     public function Cadastrar($id='', $name=''){
         $this->view(['id' =>$id, 'name' =>$name]);
         $this->view->page_title = 'Cadastrar';
-        //Muda o Template do Sistema
-        //$this->view->setTemplate('Foundation');
         $this->view->render();
     }
 
@@ -33,7 +31,7 @@ class UsuarioController extends Controller
      * @param string $id
      */
     public function Listar(){
-        $token  = Auth::getTokenFromHeaders("AUTHORIZATION");
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $Usuarios = Assert::equalsOrError(Usuarios::findById($token->id)->admin,true) ? Usuarios::findAll() : ['erro'=>'Autenticação é requerida'];
         header("Content-type:application/json");
         echo json_encode($Usuarios);
@@ -44,25 +42,15 @@ class UsuarioController extends Controller
      */
     public function cadastrar_post(){
         $json = json_decode(file_get_contents('php://input'), true);
+
         $Usuario = new Usuarios();
-
-        if($json){
-            $Usuario->nome  = filter_var($json['nome'], FILTER_SANITIZE_STRING);
-            $Usuario->senha = filter_var($json['senha'], FILTER_SANITIZE_STRING);
-            $Usuario->email = filter_var($json['email'], FILTER_SANITIZE_STRING);
-            $Usuario->foto_perfil = filter_var($json['foto_perfil'], FILTER_SANITIZE_STRING);
-            $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
-            $Usuario->admin = "0";
-        }else{
-            $Usuario->nome  = filter_input(INPUT_POST, 'nome');
-            $Usuario->senha = filter_input(INPUT_POST, 'senha');
-            $Usuario->email = filter_input(INPUT_POST, 'email');
-            $Usuario->foto_perfil = filter_input(INPUT_POST, 'foto_perfil');
-            $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
-            $Usuario->admin = "0";
-        }
-
-        $Usuario->save($Usuario);
+        $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
+        $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
+        $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
+        $Usuario->foto_perfil = ($json) ? filter_var($json['foto_perfil'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'foto_perfil');
+        $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
+        $Usuario->admin = "0";
+        $Usuario->save();
         header('Location:' . '/Usuario/Cadastrar');
     }
 
@@ -88,10 +76,13 @@ class UsuarioController extends Controller
             if($erro == ""){
                 $payload = [
                     'id'   =>$Usuario['id'],
-                    'email'=>$Usuario['email']
+                    'email'=>$Usuario['email'],
+                    'sala'=>null,
+                    'time_sala'=> null,
+                    'time_ativo'=> null
                 ];
 
-                $_SESSION['token'] = JWT::encode($payload);
+                $_SESSION['Token'] = Token::encode($payload);
                 header('Location:' . '/Index/Index');
             }else{
                 header('Location:' . '/Usuario/Login/1');

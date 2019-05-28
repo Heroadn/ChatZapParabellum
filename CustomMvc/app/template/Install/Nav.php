@@ -16,15 +16,9 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="/Usuario/Perfil">Usuario Perfil</a>
-</li>
-
-<li class="nav-item">
     <a class="nav-link" href="/Categoria/Listar">Categoria Listar</a>
 </li>
-<li class="nav-item">
-    <a class="nav-link" href="/Categoria/listar_por_relevancia">Categoria Relevantes</a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link" href="/Categoria/Cadastrar">Categoria Cadastrar</a>
 </li>
@@ -35,10 +29,6 @@
 
 <li class="nav-item">
     <a class="nav-link" href="/Sala/Listar">Sala Listar</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Sala/listar_por_relevancia">Sala Listar Por Usuários</a>
 </li>
 
 <li class="nav-item">

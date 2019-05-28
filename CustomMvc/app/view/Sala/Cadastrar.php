@@ -38,7 +38,7 @@
             <select name="categorias_id" id="categorias">
                 <?php
                 foreach ($Categorias as $Categoria){
-                        echo '<option>'.$Categoria->nome.'</option>';
+                        echo '<option value='.$Categoria->id.'>'.$Categoria->nome.'</option>';
                     }
                 ?>
             </select>
