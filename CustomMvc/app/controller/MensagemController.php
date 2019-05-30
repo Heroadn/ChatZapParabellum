@@ -10,16 +10,13 @@ class MensagemController extends Controller
 
         //Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)
         // TODO:Só administradores podem visualizar as mensagen de usuarios
-        if(true){
-            if($salas_id != ''){
-                $Mensagens = ($id_mensagem != '')?
-                array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem],['DESC'=>'id','>'=>'id','limit'=>$limit]))
-                    : array_reverse(Mensagens::findAll(['salas_id'=>$salas_id],['DESC'=>'id','limit'=>$limit]));
-            }else{
-                $Mensagens = Mensagens::findAll();
-            }
+
+        if($salas_id != ''){
+            $Mensagens = (intval($id_mensagem) != null)?
+            array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','>'=>'id','limit'=>$limit]))
+                : array_reverse(Mensagens::findAll(['salas_id'=>$salas_id, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','limit'=>$limit]));
         }else{
-            $Mensagens = ['erro'=>'Autenticação é requerida'];
+            $Mensagens = Mensagens::findAll();
         }
 
         header("Content-type:application/json");
@@ -30,7 +27,7 @@ class MensagemController extends Controller
      * Metodo Cadastra a Sala no banco de dados via Formulario "POST"
      */
     public function cadastrar_post(){
-        $token  = isset($_SESSION['Token']) ? Token::decode($_SESSION['Token']) : Token::getTokenFromHeaders("Authorization");
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $json = json_decode(file_get_contents('php://input'), true);
 
         //Cadastrar a mensagem
@@ -53,6 +50,6 @@ class MensagemController extends Controller
             $Mensagens->data        = date("Y-m-d H:i:s");
         }
 
-        $Mensagens->save($Mensagens);
+        $Mensagens->save();
     }
 }

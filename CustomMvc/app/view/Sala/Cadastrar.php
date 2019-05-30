@@ -15,7 +15,8 @@
     </div>
 </form>-->
 <?php /** @var TYPE_NAME $Categorias */
-    if(!isset($_SESSION['usuario_id'])) {
+	$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+    if(!isset($token->id)) {
         header("Location:/Usuario/Login");
     }
 ?>

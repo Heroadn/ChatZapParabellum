@@ -2,7 +2,7 @@
 
 ##Inicialização de CSS e JS
 define('CSS_HEADER',[
-    'foundation.css',
+    'Foundation.css',
     'app.css'
 ]);
 

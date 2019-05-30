@@ -41,17 +41,22 @@ class UsuarioController extends Controller
      * Metodo Cadastra o Usuario no banco de dados via Formulario "POST"
      */
     public function cadastrar_post(){
+        //foto_perfil
         $json = json_decode(file_get_contents('php://input'), true);
-
-        $Usuario = new Usuarios();
+        $Usuario = new Usuarios();//Heroadn10XD@email.com
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
         $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
-        $Usuario->foto_perfil = ($json) ? filter_var($json['foto_perfil'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'foto_perfil');
+        $Usuario->foto_perfil = ($json) ? Upload::save('foto_perfil','perfil_'.$Usuario->email.'_') : Upload::save('foto_perfil','perfil_'.$Usuario->email.'_');
         $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
         $Usuario->admin = "0";
-        $Usuario->save();
-        header('Location:' . '/Usuario/Cadastrar');
+
+        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->senha) || !isset($Usuario->email)){
+            header('Location:' . '/Usuario/Cadastrar/Erro=1');
+        }else{
+            $Usuario->save();
+            header('Location:' . '/Usuario/Cadastrar');
+        }
     }
 
     /**

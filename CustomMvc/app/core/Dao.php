@@ -66,7 +66,6 @@ class Dao{
         try{
             $sql = 'SELECT * FROM '.static::TABLE.'
 							WHERE '.static::PK.' = :'.static::PK;
-
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->bindParam(':'.static::PK,$id);
             $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
@@ -100,7 +99,6 @@ class Dao{
                 FILE_APPEND);
         }
     }
-
 
     /**
      * Metodo retorna mais de uma incidencia de busca do banco de dados
@@ -136,10 +134,15 @@ class Dao{
      * @return array retorna os objetos de pesquisa do banco de dados
      */
     public static function findAll($fk = [], $criterios = []){
+        //Todo: Mutiplas Tabelas
+        //select * from salas where para_id = 1 or
+
         try{
             $predicates = self::criterios($criterios,self::where($fk));
             $sql = 'SELECT * FROM '.static::TABLE. $predicates;
+			
             $p_sql = Db::getInstance()->query($sql);
+
             $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
             $objects = $p_sql->fetchAll();
 
@@ -237,13 +240,18 @@ class Dao{
      */
     public static function criterios($criterios,$sql = ''){
         $predicates ='';
-
         if(count($criterios) != 0){
             $criterio = '';
             //Criterios
             foreach($criterios as $key => $value){
                 if($key == 'limit'){
                     $predicates .= $key . ' ' . $value;
+                }
+
+                if($key == 'or'){
+					foreach($value as $or){
+							$predicates .= $key . ' ' . $or. ' ';
+					}
                 }
 
                 if($key == '>'){

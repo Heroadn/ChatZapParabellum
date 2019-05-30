@@ -7,11 +7,8 @@ class SalaController extends Controller
      */
     public function Cadastrar(){
         $Categorias = Categorias::findAll();
-        //view(nomeView,paramentros /id/name);
         $this->view(['Categorias' =>$Categorias]);
-        //Titulo da Pagina
         $this->view->page_title = 'Cadastrar Sala';
-        //Carrega a View
         $this->view->render();
     }
 	
@@ -20,6 +17,12 @@ class SalaController extends Controller
      * @param string $id
      */
     public function Listar($id=''){
+        
+        /*Salas::findAll(
+            ['moderador_id'=>1],
+            ['or'=>'moderador_id=null']);
+		*/
+
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
             $Salas = ($id != '') ? Salas::findAll(['moderador_id'=>$id]) : Salas::findAll();
@@ -88,11 +91,12 @@ class SalaController extends Controller
      *  moderador_id é pego pela sessão
      */
     public function cadastrar_post(){
+		$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $json = json_decode(file_get_contents('php://input'), true);
         $Salas = new Salas();
         $Salas->nome          = ($json)? filter_var($json['nome'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Salas->senha         = ($json)? md5(filter_var($json['senha'], FILTER_SANITIZE_STRING). SALT) : md5(filter_input(INPUT_POST, 'senha'). SALT);
-        $Salas->moderador_id  = ($json)? $_SESSION['usuario_id'] : $_SESSION['usuario_id'];
+        $Salas->moderador_id  = $token->id;
         $Salas->categorias_id = ($json)? filter_var($json['categorias_id'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'categorias_id');
         $Salas->save();
     }
@@ -119,11 +123,19 @@ class SalaController extends Controller
      */
 	public function sair($id_sala=null){
 		if ($id_sala){
-			if (isset($_SESSION['usuario_id'])){
+			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+			$usuario_id = $token->id;
+			if ($usuario_id){
 				$Sala = new Salas($id_sala);
-				$Sala->deleteUsuario($_SESSION['usuario_id']);
+				$Sala->deleteUsuario($usuario_id);
 				echo "Você saiu da sala!";
 			}
+			else {
+				echo "Usuário não logado";
+			}
+		}
+		else {
+			echo 'sem ID da sala!';
 		}
 	}
 }

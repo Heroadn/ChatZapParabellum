@@ -33,7 +33,7 @@
 
 <script>
     var mensagens = [];
-    var lastTimeID = 0;
+    var lastTimeID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
     var postMensagem = () => {

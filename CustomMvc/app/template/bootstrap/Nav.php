@@ -3,35 +3,44 @@
     $action = $this->getAction();
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/Index/">Parabellum</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<li class="nav-item">
+    <a class="nav-link" href="/Usuario/Cadastrar">Usuario Cadastrar</a>
+</li>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link <?php echo ($action == 'cadastrar')? 'active' : ''; ?>" href="/Usuario/cadastrar">Cadastrar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo ($action == 'listar')? 'active' : ''; ?>" href="/Usuario/listar">Listar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php echo ($action == 'login')? 'active' : ''; ?>" href="/Usuario/login">Login</a>
-            </li>
-            <li class="nav-item dropdown">
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+<li class="nav-item">
+    <a class="nav-link <?php echo ($action == 'Login')? 'active' : ''; ?>" href="/Usuario/Login">Usuario Login</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Usuario/Listar">Usuario Listar</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Usuario/Perfil">Usuario Perfil</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Categoria/Listar">Categoria Listar</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/Categoria/listar_por_relevancia">Categoria Relevantes</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/Categoria/Cadastrar">Categoria Cadastrar</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Sala/Cadastrar">Sala Cadastrar</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Sala/Listar">Sala Listar</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Sala/listar_por_relevancia">Sala Listar Por Usuários</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/Sala/Conversar">Sala Conversa</a>
+</li>
