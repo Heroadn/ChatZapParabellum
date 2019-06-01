@@ -11,6 +11,13 @@ class UsuarioController extends Controller
         $this->view->render();
     }
 
+    public function Perfil($id=''){
+        $Usuario = Usuarios::findById($id);
+        $this->view(['Usuario' =>$Usuario]);
+        $this->view->page_title = 'Perfil';
+        $this->view->render();
+    }
+
     /**
      * @param string $id
      * @param string $name
@@ -30,9 +37,17 @@ class UsuarioController extends Controller
      * Ele retorna um json com o usuario requisitado ou todos, sendo necessario Autenticação
      * @param string $id
      */
-    public function Listar(){
+    public function Listar($id){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-        $Usuarios = Assert::equalsOrError(Usuarios::findById($token->id)->admin,true) ? Usuarios::findAll() : ['erro'=>'Autenticação é requerida'];
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+        $Usuarios = Usuarios::findAll(['id'=>$id]);
+
+        if(!$isAdmin) {
+            foreach ($Usuarios as $usuario) {
+                unset($usuario->senha);
+                unset($usuario->admin);
+            }
+        }
         header("Content-type:application/json");
         echo json_encode($Usuarios);
     }
@@ -88,9 +103,9 @@ class UsuarioController extends Controller
                 ];
 
                 $_SESSION['Token'] = Token::encode($payload);
-                header('Location:' . '/Index/Index');
+                header('Location:' . '/Usuario/Perfil/'.$Usuario['id']);
             }else{
-                header('Location:' . '/Usuario/Login/1');
+                header('Location:' . '/Usuario/Login/Erro');
             }
         }
     }

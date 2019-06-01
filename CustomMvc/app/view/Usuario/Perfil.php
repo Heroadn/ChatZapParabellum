@@ -1,16 +1,33 @@
+<?php
+    /** @var Usuarios $Usuario */
+?>
 
 <div class="row">
-    <div class="col-12">
+    <?php
+        if($Usuario != false){
+            usuarioEncontrado($Usuario);
+        }else{
+            echo 'não encontrado';
+        }
+    ?>
+</div>
 
+<?php function usuarioEncontrado($Usuario){?>
+    <div class="col-sm-12 col-md-12">
         <br>
         <h4>Nome:</h4>
 
-        <p><?php echo $result->nome ?></p>
+        <p><?php echo $Usuario->nome ?></p>
         <br>
 
         <h4>Email:</h4>
 
-        <p><?php echo $result->email ?></p>
+        <p><?php echo $Usuario->email ?></p>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <p><?php echo '<img src="'.$Usuario->foto_perfil.'">' ?></p>
         <br>
         <br>
         <hr>
@@ -18,4 +35,4 @@
         <a href="">Alterar Informações</a>
         <hr>
     </div>
-</div>
+<?php return;}?>

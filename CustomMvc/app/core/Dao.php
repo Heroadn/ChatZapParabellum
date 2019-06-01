@@ -1,7 +1,9 @@
 <?php
 /*
- * @author Benjamin de Castro Azevedo Ponciano
+ * @author Benjamin de Castro Azevedo Ponciano [benbenjamin554@gmail.com]
+ * @author Thiago Venancio
 */
+
 class Dao{
     /**
      * Dao constructor.
@@ -140,8 +142,8 @@ class Dao{
         try{
             $predicates = self::criterios($criterios,self::where($fk));
             $sql = 'SELECT * FROM '.static::TABLE. $predicates;
-			
             $p_sql = Db::getInstance()->query($sql);
+
 
             $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
             $objects = $p_sql->fetchAll();
@@ -172,7 +174,7 @@ class Dao{
         }
     }
 
-    public static function showTables(){
+    public static function tableShow(){
         $sql = 'show Tables from ' . DATABASE;
         $p_sql = Db::getInstance()->query($sql);
         $p_sql->execute();
@@ -189,7 +191,7 @@ class Dao{
      * @param null $table
      * @return array
      */
-    public static function describeTable($table = null){
+    public static function tableDescribe($table = null){
         $table  = (isset($table))? $table : static::TABLE;
         $sql = 'DESCRIBE ' . $table;
         $p_sql = Db::getInstance()->query($sql);
@@ -199,6 +201,11 @@ class Dao{
 
     //SQL HELPERS //
     /**
+     * Metodo faz a adição de elementos de procurar como por exemplo
+     *
+     * É informado as foreign keys usuarios_id e clientes_id
+     * O que ele faz é retorna isso como usuarios_id=1 and clientes_id=1
+     *
      * @param $fk
      * @return array
      */
@@ -211,7 +218,9 @@ class Dao{
             $size = count($fk);
             $counter = 0;
 
-            //Retorna o join com as foreign keys em SQL
+            /*Verifica se o valor da chave informada não esta vazio
+            * neste caso é removida do array
+            */
             foreach ($fk as $key => $value) {
                 if(!$value){
                     unset($fk[$key]);
@@ -219,16 +228,17 @@ class Dao{
                 }
             }
 
+            //Retorna o join com as foreign keys em SQL
             foreach ($fk as $key => $value) {
                 //Se tiver mais de uma FK e não for a ultima posição
                 $binder = (($size !== 1) && $counter !== ($size - 1)) ? ' and ' : '';
 
                 //fk_id1 = 1 and fk_id2 = 2
-                $fields[$key] = $key . ' = ' . $value . $binder;
+                $fields[$key] = $key . ' = ' . "'".$value."'" . $binder;
                 $counter++;
             }
 
-            //Predicatos
+            //Retorna os termos exemplo: usuarios_id=1 and clientes_id=1
             $join = ($fields)?' WHERE ' . implode($fields) . ' ' : ' ';
         }
         return $join;
@@ -240,18 +250,29 @@ class Dao{
      */
     public static function criterios($criterios,$sql = ''){
         $predicates ='';
+
+        foreach ($criterios as $key => $value) {
+            if(!$value){
+                unset($criterios[$key]);
+            }
+        }
+
         if(count($criterios) != 0){
-            $criterio = '';
-            //Criterios
             foreach($criterios as $key => $value){
                 if($key == 'limit'){
                     $predicates .= $key . ' ' . $value;
                 }
 
+                if($key == 'like'){
+                    foreach($value as $where => $like) {
+                        $predicates .= ' WHERE ' . $where . ' ' .$key. ' '. "'%" . $like . "%'";
+                    }
+                }
+
                 if($key == 'or'){
-					foreach($value as $or){
-							$predicates .= $key . ' ' . $or. ' ';
-					}
+                    foreach($value as $or){
+                        $predicates .= $key . ' ' . $or. ' ';
+                    }
                 }
 
                 if($key == '>'){

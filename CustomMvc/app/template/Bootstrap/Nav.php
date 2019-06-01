@@ -38,7 +38,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="/Sala/listar_por_relevancia">Sala Listar Por Usuários</a>
+    <a class="nav-link" href="/Sala/Listar/Relevantes">Sala Listar Por Usuários</a>
 </li>
 
 <li class="nav-item">

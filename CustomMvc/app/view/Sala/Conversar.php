@@ -82,8 +82,15 @@
                 }
             }
         });
+		update();
     };
 
+	function update(){
+		$.get('/Sala/update_usuario/<?php echo $id_sala;?>', {},
+		function(data){
+			})		
+	}
+	
 	$('#getUsers').click(function(){
 		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
 		function(data){

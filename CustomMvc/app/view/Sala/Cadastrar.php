@@ -14,12 +14,6 @@
         <input type="submit" class="btn btn-primary" value="Salvar">
     </div>
 </form>-->
-<?php /** @var TYPE_NAME $Categorias */
-	$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-    if(!isset($token->id)) {
-        header("Location:/Usuario/Login");
-    }
-?>
 <div class="row">
     <div class="col s12 m6 l6">
         <form method="post" role="form" action="/Sala/cadastrar_post">
@@ -33,8 +27,9 @@
             <br>
             <input type="password" name="senha" id="senha" placeholder="Senha da Sala">
             <br>
-            <br>
-
+            <label for="tags">Tags:</label>
+            <input type="text" name="tags" id="tags" placeholder="Adicione aqui as tags">
+			<br>
             <label for="categoria">Selecione Categoria:</label>
             <select name="categorias_id" id="categorias">
                 <?php
@@ -43,16 +38,8 @@
                     }
                 ?>
             </select>
-
             <input type="submit" id="criar" value="Criar">
             <input type="reset" value="Cancelar">
-        </form>
-    </div>
-
-    <div class="col s12 m6 l6">
-        <form>
-            <label for="tag">Adicione Tags:</label>
-            <input type="text" name="tag" id="tag" placeholder="Adicione Tags">
         </form>
     </div>
 </div>

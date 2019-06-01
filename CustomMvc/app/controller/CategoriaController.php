@@ -51,7 +51,9 @@ class CategoriaController extends Controller
     }
 	
 	public function listar_por_relevancia(){
+		SalaController::update_all_usuarios();
 		$Categorias = Categorias::getRelevantes();
 		echo json_encode($Categorias);
 	}
+	
 }
