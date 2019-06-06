@@ -59,6 +59,7 @@ class SalaController extends Controller
                 unset($sala->senha);
             }
         }
+        header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
         echo json_encode($Salas);
     }
