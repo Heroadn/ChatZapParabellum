@@ -37,10 +37,30 @@ class UsuarioController extends Controller
      * Ele retorna um json com o usuario requisitado ou todos, sendo necessario Autenticação
      * @param string $id
      */
-    public function Listar($id){
+    public function Listar($opcao='', $parametro=1,$limit = 10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
-        $Usuarios = Usuarios::findAll(['id'=>$id]);
+        $opcao = strtolower($opcao);
+
+        //Paginação
+        $start = intval($parametro);
+        $page = ($start * $limit) - $limit;
+        var_dump($start);
+        $size = 0;
+
+        switch($opcao){
+            case 'id':
+                $Usuarios = Usuarios::findAll(['id'=>$parametro],['limit'=>['start'=>$page,'limit'=>$limit]]);
+                $size = ceil(Usuarios::count() / $limit);
+                break;
+            case 'nome':
+                $Usuarios = Usuarios::findAll([],['like'=>['nome'=>$parametro],'limit'=>['start'=>$page,'limit'=>$limit]]);
+                $size = ceil(Usuarios::count() / $limit);
+                break;
+            default:
+                $Usuarios = Usuarios::findAll([],['limit'=>['start'=>$page,'limit'=>$limit]]);
+                $size = ceil(Usuarios::count() / $limit);
+        }
 
         if(!$isAdmin) {
             foreach ($Usuarios as $usuario) {
@@ -49,7 +69,7 @@ class UsuarioController extends Controller
             }
         }
         header("Content-type:application/json");
-        echo json_encode($Usuarios);
+        echo json_encode(array('Usuarios'=>$Usuarios,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }
 
     /**
@@ -58,7 +78,8 @@ class UsuarioController extends Controller
     public function cadastrar_post(){
         //foto_perfil
         $json = json_decode(file_get_contents('php://input'), true);
-        $Usuario = new Usuarios();//Heroadn10XD@email.com
+
+        $Usuario = new Usuarios();
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
         $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
@@ -66,7 +87,9 @@ class UsuarioController extends Controller
         $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
         $Usuario->admin = "0";
 
-        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->senha) || !isset($Usuario->email)){
+        $fromDb = Usuarios::findBy('email',$Usuario->email);
+
+        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->senha) || !isset($Usuario->email) || $fromDb !== false){
             header('Location:' . '/Usuario/Cadastrar/Erro=1');
         }else{
             $Usuario->save();
@@ -89,7 +112,7 @@ class UsuarioController extends Controller
                 $erro = "Por favor verifique as informações digitadas";
             }
 
-            if(password_verify($senha,$Usuario['senha'])){
+            if(!password_verify($senha,$Usuario['senha'])){
                 $erro = "Por favor verifique as informações digitadas";
             }
 

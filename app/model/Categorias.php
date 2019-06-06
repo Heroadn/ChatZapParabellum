@@ -8,6 +8,8 @@ class Categorias extends Dao
 
     public $id;
     public $nome;
+	public $foto_categoria;
+	public $descricao;
 	
 	public static function getRelevantes(){
 		try{

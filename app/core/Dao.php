@@ -135,13 +135,27 @@ class Dao{
      * @param  array $criterios criterios de pesquisa como ['limit'=>10]
      * @return array retorna os objetos de pesquisa do banco de dados
      */
+
+    public static function count(){
+        $criterios = ['count'=>'*'];
+
+        try{
+            $sql = self::sqlBuilder($criterios,'');
+            $count = Db::getInstance()->query($sql)->fetchColumn();
+            return $count;
+        }catch(PDOException $e){
+            file_put_contents("erros.txt",
+                $e->getMessage()."\r\n",
+                FILE_APPEND);
+        }
+    }
+
     public static function findAll($fk = [], $criterios = []){
         //Todo: Mutiplas Tabelas
         //select * from salas where para_id = 1 or
 
         try{
-            $predicates = self::criterios($criterios,self::where($fk));
-            $sql = 'SELECT * FROM '.static::TABLE. $predicates;
+            $sql = self::sqlBuilder($criterios,self::where($fk));
             $p_sql = Db::getInstance()->query($sql);
 
 
@@ -207,7 +221,7 @@ class Dao{
      * O que ele faz é retorna isso como usuarios_id=1 and clientes_id=1
      *
      * @param $fk
-     * @return array
+     * @return string
      */
     public static function where($fk)
     {
@@ -230,10 +244,8 @@ class Dao{
 
             //Retorna o join com as foreign keys em SQL
             foreach ($fk as $key => $value) {
-                //Se tiver mais de uma FK e não for a ultima posição
                 $binder = (($size !== 1) && $counter !== ($size - 1)) ? ' and ' : '';
 
-                //fk_id1 = 1 and fk_id2 = 2
                 $fields[$key] = $key . ' = ' . "'".$value."'" . $binder;
                 $counter++;
             }
@@ -245,48 +257,57 @@ class Dao{
     }
 
     /**
-     * @param $criterios
+     * @param $criteria
      * @return string
      */
-    public static function criterios($criterios,$sql = ''){
-        $predicates ='';
+    public static function sqlBuilder($criteria, $where = ''){
+        $select = 'SELECT ';//*
+        $from   = 'FROM '.static::TABLE;
+        $attributes = '*';
+        $conditions ='';
 
-        foreach ($criterios as $key => $value) {
+        foreach ($criteria as $key => $value) {
             if(!$value){
-                unset($criterios[$key]);
+                unset($criteria[$key]);
             }
         }
 
-        if(count($criterios) != 0){
-            foreach($criterios as $key => $value){
+        if(count($criteria) != 0){
+            foreach($criteria as $key => $value){
+
                 if($key == 'limit'){
-                    $predicates .= $key . ' ' . $value;
+                    $limit = is_array($value)? implode(',',$value) : $value;
+                    $conditions .= ' ' .$key . ' ' . $limit;
                 }
 
                 if($key == 'like'){
-                    foreach($value as $where => $like) {
-                        $predicates .= ' WHERE ' . $where . ' ' .$key. ' '. "'%" . $like . "%'";
+                    foreach($value as $pred => $like) {
+                        $conditions .= ' WHERE ' . $pred . ' ' .$key. ' '. "'%" . $like . "%'";
                     }
                 }
 
                 if($key == 'or'){
                     foreach($value as $or){
-                        $predicates .= $key . ' ' . $or. ' ';
+                        $conditions .= $key . ' ' . $or. ' ';
                     }
                 }
 
+                if($key == 'count'){
+                    $attributes = 'Count(' . $value. ') ';
+                }
+
                 if($key == '>'){
-                    $sql = preg_replace('/^(.+?\=.+?)\=/', '$1>', $sql);//str_replace('=','>',$sql);
+                    $where = preg_replace('/^(.+?\=.+?)\=/', '$1>', $where);//str_replace('=','>',$sql);
                 }
 
                 //Arrumar pragma e automatizar
                 if($key == 'DESC'){
-                    $predicates .= ' ORDER BY ' . $value . ' ' .$key . ' ';
+                    $conditions .= ' ORDER BY ' . $value . ' ' .$key . ' ';
                 }
             }
         }
 
-        return ($sql == '')? $predicates : $sql . $predicates;
+        return $select . $attributes . $from . $where . $conditions;
     }
 
 }

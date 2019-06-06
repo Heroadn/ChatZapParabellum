@@ -10,17 +10,21 @@ class MensagemController extends Controller
 
         //Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)
         // TODO:Só administradores podem visualizar as mensagen de usuarios
-
         if($salas_id != ''){
-            $Mensagens = (intval($id_mensagem) != null)?
-            array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','>'=>'id','limit'=>$limit]))
-                : array_reverse(Mensagens::findAll(['salas_id'=>$salas_id, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','limit'=>$limit]));
+			$Sala = new Salas($salas_id);
+				if (!$Sala->isBanido($token->id)){
+					$Mensagens = (intval($id_mensagem) != null)?
+					array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','>'=>'id','limit'=>$limit]))
+						: array_reverse(Mensagens::findAll(['salas_id'=>$salas_id, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','limit'=>$limit]));	
+			}
         }else{
             $Mensagens = Mensagens::findAll();
         }
 
         header("Content-type:application/json");
-         echo json_encode($Mensagens);
+		if (isset($Mensagens)){
+			echo json_encode($Mensagens);
+		}
     }
 
     /**

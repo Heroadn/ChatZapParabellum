@@ -3,6 +3,8 @@
     <br>
     <div class="form-group">
         <label for="nome"><span style="color: dodgerblue">*</span>Nome:</label>  <input class="form-control" name="nome" type="text">
+		<label for="descricao"><span style="color: dodgerblue">*</span>Descrição:</label><textarea class="form-control" name="descricao"></textarea>
+		<label for="foto_categoria"><span style="color: dodgerblue">*</span>Foto:</label><input class="form-control" name="foto_categoria" type="file">
     </div>
 
     <div class="clearfix"></div>

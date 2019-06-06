@@ -2,7 +2,7 @@
 
 
 class Upload{
-    
+
     public static function save($fieldName,$prefix=''){
         $target_dir = UPLOADS . $prefix;
         $target_file = $target_dir . 'resource_'.mt_rand(0, 10000);
@@ -10,37 +10,41 @@ class Upload{
 
 
         $check = Upload::checkFile($fieldName);
-        $err = ($check !== false)? false : true;
-        $dir = (!$err)? DIRECTORY_SEPARATOR . $target_file : false;
-        if(!$err) { move_uploaded_file($_FILES[$fieldName]["tmp_name"],$target_file); };
+		if ($check === 2){
+			$dir = '';
+		}
+		else {
+			$err = ($check !== false)? false : true;
+			$dir = (!$err)? DIRECTORY_SEPARATOR . $target_file : false;
+			if(!$err) { move_uploaded_file($_FILES[$fieldName]["tmp_name"],$target_file); };			
+		}
 
         return $dir;
     }
+
     public static function checkFile($fieldName){
-        $file = $_FILES([$fieldName]);
-        if(isset($file)) {
+        $file = $_FILES[$fieldName];
+        if($file['name']) {
             $errors = array();
-            /*
-            $maxsize = '';
-            */
-            $acceptable = array($fieldname.'/pdf', $fieldname.'/jpeg', $fieldname.'/jpg', $fieldname.'/gif', $fieldname.'/png');
-            /*
-            if(($_FILES([$fieldName]['size']) >= $maxsize) || ($_FILES([$fieldName]['size']) == 0)) {
-                $errors[] = 'File doesnt have the allowed size.';
-            }
-            */
-            if((!in_array($_FILES([$fieldName]['type']), $acceptable)) && (!empty($_FILES([$fieldName]['type'])))) {
+
+            $fileExtenion = pathinfo($_FILES[$fieldName]['name'], PATHINFO_EXTENSION);
+            $acceptable = array('pdf', 'jpeg', 'jpg', 'gif', 'png');
+
+            if((!in_array($fileExtenion, $acceptable)) && (!empty($_FILES[$fieldName]['type']))) {
                 $errors[] = 'Invalid file type. Only PDF, JPG, GIF and PNG types are accepted.';
             }
-        
+
             if(count($errors) === 0) {
-               return true;
+                return true;
             } else {
                 foreach($errors as $error) {
                     echo '<script>alert("'.$error.'");</script>';
                 }
-            die();
+                die();
             }
         }
-    }  
+		else {
+			return 2;
+		}
+    }
 }

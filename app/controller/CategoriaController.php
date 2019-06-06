@@ -7,53 +7,69 @@ class CategoriaController extends Controller
      * @param string $name
      */
     public function Cadastrar($id='', $name=''){
-        $this->view(['id' =>$id, 'name' =>$name]);
-        $this->view->page_title = 'Cadastrar Categoria';
-        $this->view->render();
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+		
+		if ($isAdmin){
+			$this->view(['id' =>$id, 'name' =>$name]);
+			$this->view->page_title = 'Cadastrar Categoria';
+			$this->view->render();	
+		}
+		else{
+			echo 'VOCÊ NÃO TEM PERMISSÃO DE ADMINISTRADOR!!!!!!';
+		}
     }
 
-    /**
-     * @param string $id
-     */
-    public function Listar($id=''){
+	public function Listar($opcao='', $parametro=''){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+        $opcao = strtolower($opcao);
 
-        if(Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)){
-            $Categorias = ($id != '') ? Categorias::findById($id) : Categorias::findAll() ;
-        }else{
-            $Categorias = ['erro'=>'Autenticação é requerida'];
+        switch($opcao){
+            case 'relevantes':
+				SalaController::update_all_usuarios();
+                $Categorias = Categorias::getRelevantes();
+                break;
+            case 'todos':
+                $Categorias = Categorias::findAll();
+                break;
+            default:
+                $Categorias = Categorias::findAll();
+
         }
 
         header("Content-type:application/json");
         echo json_encode($Categorias);
     }
-
     /**
      *  Metodo Cadastra a Sala no banco de dados via Formulario "POST"
      */
     public function cadastrar_post(){
-        $json = json_decode(file_get_contents('php://input'), true);
-        $Categorias = new Categorias();
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+		
+		if ($isAdmin){
+			$json = json_decode(file_get_contents('php://input'), true);
+			$Categorias = new Categorias();
 
-        if($json){
-            $Categorias->nome = filter_var($json['nome'], FILTER_SANITIZE_STRING);
-        }else{
-            $Categorias->nome = filter_input(INPUT_POST, 'nome');
-        }
+			if($json){
+				$Categorias->nome = filter_var($json['nome'], FILTER_SANITIZE_STRING);
+				$Categorias->descricao = filter_var($json['descricao'], FILTER_SANITIZE_STRING);
+				$Categorias->foto_categoria = Upload::save('foto_categoria','categoria_'.$Categorias->nome.'_');
+			}else{
+				$Categorias->nome = filter_input(INPUT_POST, 'nome');
+				$Categorias->descricao = filter_input(INPUT_POST, 'descricao');
+				$Categorias->foto_categoria = Upload::save('foto_categoria','categoria_'.$Categorias->nome.'_');
+				
+			}
 
-        $Categorias->save($Categorias);
-        header('Location:' . '/Categoria/Cadastrar');
+			$Categorias->save($Categorias);
+			header('Location:' . '/Categoria/Cadastrar');	
+		}
     }
 
     public function ListCategoriasWithSalas(){
         $Categorias = Categorias::getCategoriasWithSalas();
         echo json_encode($Categorias);
     }
-	
-	public function listar_por_relevancia(){
-		SalaController::update_all_usuarios();
-		$Categorias = Categorias::getRelevantes();
-		echo json_encode($Categorias);
-	}
-	
 }

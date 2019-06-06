@@ -16,7 +16,7 @@
 </form>-->
 <div class="row">
     <div class="col s12 m6 l6">
-        <form method="post" role="form" action="/Sala/cadastrar_post">
+        <form method="post" role="form" action="/Sala/cadastrar_post" enctype="multipart/form-data">
             <label for"nome">Nome da Sala:</label>
             <br>
             <input type="text" name="nome" id="nome" required placeholder="Nome da Sala">
@@ -27,8 +27,12 @@
             <br>
             <input type="password" name="senha" id="senha" placeholder="Senha da Sala">
             <br>
+			<label for="descricao"><span style="color: dodgerblue">*</span>Descrição:</label><textarea class="form-control" name="descricao"></textarea>
+			<br>
             <label for="tags">Tags:</label>
             <input type="text" name="tags" id="tags" placeholder="Adicione aqui as tags">
+			<br>
+			<label for="foto_sala"><span style="color: dodgerblue">*</span>Foto:</label><input class="form-control" name="foto_sala" type="file">
 			<br>
             <label for="categoria">Selecione Categoria:</label>
             <select name="categorias_id" id="categorias">

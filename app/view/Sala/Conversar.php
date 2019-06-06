@@ -25,10 +25,10 @@
     <input type="submit" onclick="postMensagem();" class="btn btn-primary" value="Salvar">
 </div>
 <div>
-	<div id="usuarios" style="width:100%">
-	</div>
-	<button id="getUsers">Atualizar usuários</button>
 	<a href="/Sala/sair/<?php echo $id_sala;?>"><button>Sair da sala</button></a>
+	<h2>Usuários:</h2>
+	<div id="usuarios" style="width:40%">
+	</div>
 </div>
 
 <script>
@@ -83,6 +83,7 @@
             }
         });
 		update();
+		usuarios();
     };
 
 	function update(){
@@ -91,16 +92,40 @@
 			})		
 	}
 	
-	$('#getUsers').click(function(){
+	function usuarios(){
 		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
 		function(data){
-				var Usuarios = JSON.parse(data);
-				$('#usuarios').html('');
-				for (posicao in Usuarios){
-					$('#usuarios').append('<p>'+Usuarios[posicao].nome+'</p>');
+				if (data === 'b'){
+					alert('TÁ BANIDO, VACILÃO!');
+				}
+				else {
+					var Usuarios = JSON.parse(data);
+					
+					//$('#usuarios').html('');
+					html = '';
+					for (posicao in Usuarios){
+						mod = <?php echo $mod ?>;
+						if (mod){
+							html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p><button style="float:right; width:50%" onclick="banir('+Usuarios[posicao].id+')">BANIR</button></div>';
+						}
+						else {
+								html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p></div>';						
+						}
+					}
+					if ($('#usuarios').html() != html){
+						$('#usuarios').html('');
+						$('#usuarios').append(html);
+					}
 				}
 			})
-	});
+	}
+
+	function banir(id) {
+		var query = '/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
+		$.get(query, {},
+		function(data){
+			})	
+	};
     load();
     setInterval(load,2000);
 	

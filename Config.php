@@ -12,7 +12,7 @@ define('IMG' , LIBS .  'img' . DIRECTORY_SEPARATOR);
 define('DATABASE','zadmin_chat');
 define('HOST','localhost');
 define('USER','root');
-define('PASS','');
+define('PASS','root');
 
 #Segurança
 define('SALT',md5('1ff2Sh@aj33f2&#&3Ssf%goa$s1'));

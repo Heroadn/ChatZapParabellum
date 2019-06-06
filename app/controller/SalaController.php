@@ -46,6 +46,9 @@ class SalaController extends Controller
             case 'usuario':
                 $Salas = Salas::listar_por_usuario($parametro);
                 break;
+			case 'moderador':
+                $Salas = Salas::findAll(['moderador_id'=>$parametro]);
+                break;
             default:
                 $Salas = Salas::findAll();
 
@@ -57,40 +60,6 @@ class SalaController extends Controller
             }
         }
         header("Content-type:application/json");
-        echo json_encode($Salas);
-    }
-
-
-    /**
-     * @deprecated complementada com o Listar principal
-     */
-    public function ListarPor($opcao='', $parametro=''){
-        $opcao = strtolower($opcao);
-        switch($opcao){
-            case 'categoria':
-                $Salas = Salas::listar_por_categoria($parametro);
-                break;
-            case 'tag':
-                $Salas = Salas::findAll([],['like'=>['tags'=>$parametro]]);
-                break;
-            case 'relevantes':
-				$this->update_all_usuarios();
-                $Salas = Salas::getRelevantes();
-                break;
-            case 'todos':
-                $Salas = Salas::findAll();
-                break;
-            case 'usuario':
-                $Salas = Salas::listar_por_usuario($parametro);
-                break;
-            default:
-                $Salas = Salas::findAll();
-
-        }
-        foreach($Salas as $sala){
-            //remove a senha ao enviar por json
-            $sala->senha = '';
-        }
         echo json_encode($Salas);
     }
 
@@ -131,20 +100,31 @@ class SalaController extends Controller
 					$allowed = true;
 				}
 				if ($allowed){
-					//Verifica se o usuario esta na mesma sala
-					if($token->sala !== $id_sala){
-						$token->time_sala = date("H:i:s");
-						$token->sala = $id_sala;
+					if (!$Sala[0]->isBanido($token->id)){
+						if ($Sala[0]->moderador_id === $token->id){
+							$mod = 1;
+						}
+						else {
+							$mod = 0;
+						}
+						//Verifica se o usuario esta na mesma sala
+						if($token->sala !== $id_sala){
+							$token->time_sala = date("H:i:s");
+							$token->sala = $id_sala;
+						}
+
+						$token->time_ativo = gmdate("H:i:s", (strtotime(date("H:i:s")) - strtotime( $token->time_sala)));
+						$Sala = new Salas();
+						$Sala->addUsuario($usuario_id, $id_sala);
+						Token::saveTokenOnSession('Token',$token);
+
+						$this->view(['id_sala'=>$id_sala,'time_ativo'=>$token->time_ativo,'mod'=>$mod]);
+						$this->view->page_title = 'Conversar';
+						$this->view->render();		
 					}
-
-					$token->time_ativo = gmdate("H:i:s", (strtotime(date("H:i:s")) - strtotime( $token->time_sala)));
-					$Sala = new Salas();
-					$Sala->addUsuario($usuario_id, $id_sala);
-					Token::saveTokenOnSession('Token',$token);
-
-					$this->view(['id_sala'=>$id_sala,'time_ativo'=>$token->time_ativo]);
-					$this->view->page_title = 'Conversar';
-					$this->view->render();				
+					else{
+						echo 'TÁ BANIDO, VACILÃO!!!!!';
+					}
 				}
 				else {
 					header('Location: /Sala/Senha/'.$id_sala);
@@ -190,6 +170,9 @@ class SalaController extends Controller
 		if ($Salas->senha){
 			$Salas->senha = md5($Salas->senha.SALT);
 		}
+		$Salas->tags = ($json)? filter_var($json['tags'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'tags');
+		$Salas->descricao = ($json)? filter_var($json['descricao'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'descricao');
+		$Salas->foto_sala = ($json) ? Upload::save('foto_sala','sala_'.$Salas->nome.'_') : Upload::save('foto_sala','sala_'.$Salas->nome.'_');
         $Salas->moderador_id  = $token->id;
         $Salas->categorias_id = ($json)? filter_var($json['categorias_id'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'categorias_id');
         $Salas->save();
@@ -203,9 +186,15 @@ class SalaController extends Controller
      */
     public function getUsuarios($id_sala=null, $count=null){
 		if ($id_sala){
+			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
 			$Sala = new Salas($id_sala);
-			$Usuarios = $Sala->getUsuarios();
-			echo json_encode($Usuarios);
+			if (!$Sala->isBanido($token->id)){
+				$Usuarios = $Sala->getUsuarios();
+				echo json_encode($Usuarios);
+			}
+			else {
+				echo 'b';
+			}
 		}
 	}
 
@@ -264,4 +253,25 @@ class SalaController extends Controller
             echo 'sem ID da sala!';
         }
     }
+	
+	public function banirUsuario($id_sala=null, $id_usuario=null){
+		if ($id_sala != null && $id_usuario != null){
+			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+			$Sala = new Salas($id_sala);
+			if ($Sala->moderador_id===$token->id){
+				$Sala->banirUsuario(intval($id_usuario));
+				$Sala->deleteUsuario(intval($id_usuario));
+			}
+		}
+	}
+	
+	public function desbanirUsuario($id_sala=null, $id_usuario=null){
+		if ($id_sala != null && $id_usuario != null){
+			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+			$Sala = new Salas($id_sala);
+			if ($Sala->moderador_id===$token->id){
+				$Sala->desbanirUsuario(intval($id_usuario));
+			}
+		}
+	}
 }

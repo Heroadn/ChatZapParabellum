@@ -11,6 +11,8 @@ class Salas extends Dao
     public $nome;
     public $senha;
 	public $tags;
+	public $foto_sala;
+	public $descricao;
     public $moderador_id;
     public $categorias_id;
 	
@@ -135,6 +137,52 @@ class Salas extends Dao
                 $e->getMessage()."\r\n",
                 FILE_APPEND);
 		}		
+	}
+	
+	public function banirUsuario($usuario_id=''){
+		try{
+			if (!$this->isBanido($usuario_id)){
+				$sala_id = $this->id;
+				$sql = "INSERT INTO salas_banidos(usuarios_id, salas_id) VALUES($usuario_id, $sala_id)";
+				$p_sql = Db::getInstance()->prepare($sql);
+				$p_sql->execute();
+			}
+		}
+		catch(PDOException $e){
+            file_put_contents("erros.txt",
+                $e->getMessage()."\r\n",
+                FILE_APPEND);
+		}		
+	}
+	
+	public function desbanirUsuario($usuario_id=''){
+		try{
+			$sala_id = $this->id;
+			$sql = "DELETE FROM salas_banidos WHERE usuarios_id=$usuario_id AND salas_id=$sala_id";
+            $p_sql = Db::getInstance()->prepare($sql);
+            $p_sql->execute();
+		}
+		catch(PDOException $e){
+            file_put_contents("erros.txt",
+                $e->getMessage()."\r\n",
+                FILE_APPEND);
+		}		
+	}
+	
+	public function isBanido($usuario_id=''){
+		try{
+			$sala_id = $this->id;
+			$sql = "SELECT id FROM salas_banidos WHERE usuarios_id=$usuario_id AND salas_id=$sala_id";
+            $p_sql = Db::getInstance()->prepare($sql);
+            $p_sql->execute();
+			return $p_sql->fetch();
+		}
+		catch(PDOException $e){
+            file_put_contents("erros.txt",
+                $e->getMessage()."\r\n",
+                FILE_APPEND);
+			return 1;
+		}
 	}
 	
 }

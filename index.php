@@ -10,6 +10,7 @@ define('CORE',  APP . 'core'  . DIRECTORY_SEPARATOR);
 define('TEMPLATE',    APP . 'template'   . DIRECTORY_SEPARATOR);
 define('CONTROLLER',  APP . 'controller' . DIRECTORY_SEPARATOR);
 define('LIBS',DIRECTORY_SEPARATOR .  'app' . DIRECTORY_SEPARATOR .  'libs' . DIRECTORY_SEPARATOR);
+define('UPLOADS','app'.DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'uploads' . DIRECTORY_SEPARATOR);
 
 #Modulos do Sistema a serem carregados
 $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
