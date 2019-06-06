@@ -28,7 +28,7 @@ class Upload{
             $errors = array();
 
             $fileExtenion = pathinfo($_FILES[$fieldName]['name'], PATHINFO_EXTENSION);
-            $acceptable = array('pdf', 'jpeg', 'jpg', 'gif', 'png');
+            $acceptable = array('jpeg', 'jpg', 'gif', 'png');
 
             if((!in_array($fileExtenion, $acceptable)) && (!empty($_FILES[$fieldName]['type']))) {
                 $errors[] = 'Invalid file type. Only PDF, JPG, GIF and PNG types are accepted.';
