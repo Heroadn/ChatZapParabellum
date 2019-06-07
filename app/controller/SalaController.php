@@ -19,8 +19,6 @@ class SalaController extends Controller
     }
 
     public function Listar($opcao='', $parametro=''){
-        echo 'XD';
-        die();
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
         $opcao = strtolower($opcao);
