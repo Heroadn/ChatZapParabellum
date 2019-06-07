@@ -52,8 +52,7 @@ class SalaController extends Controller
             default:
                 $Salas = Salas::findAll();
         }
-
-        //Removendo senha de listagem
+        
         if(!$isAdmin) {
             foreach ($Salas as $sala) {
                 unset($sala->senha);
