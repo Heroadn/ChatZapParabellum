@@ -52,7 +52,7 @@ class SalaController extends Controller
             default:
                 $Salas = Salas::findAll();
         }
-        
+
         if(!$isAdmin) {
             foreach ($Salas as $sala) {
                 unset($sala->senha);
