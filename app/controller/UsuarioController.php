@@ -68,6 +68,7 @@ class UsuarioController extends Controller
                 unset($usuario->admin);
             }
         }
+        header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
         echo json_encode(array('Usuarios'=>$Usuarios,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }

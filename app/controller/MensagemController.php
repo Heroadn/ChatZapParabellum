@@ -8,8 +8,6 @@ class MensagemController extends Controller
     public function Listar($salas_id = '',$id_mensagem = '', $limit = 10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
 
-        //Assert::equalsOrError(Usuarios::findById($token->id)->admin,true)
-        // TODO:Só administradores podem visualizar as mensagen de usuarios
         if($salas_id != ''){
 			$Sala = new Salas($salas_id);
 				if (!$Sala->isBanido($token->id)){
@@ -17,14 +15,11 @@ class MensagemController extends Controller
 					array_reverse(Mensagens::findAll(['salas_id'=>$salas_id,'id'=>$id_mensagem, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','>'=>'id','limit'=>$limit]))
 						: array_reverse(Mensagens::findAll(['salas_id'=>$salas_id, '(para_id'=>$token->id], ['or'=>['para_id IS NULL', 'usuarios_id='.$token->id.')'], 'DESC'=>'id','limit'=>$limit]));	
 			}
-        }else{
-            $Mensagens = Mensagens::findAll();
-        }
+        }else{$Mensagens = Mensagens::findAll();}
 
+        header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
-		if (isset($Mensagens)){
-			echo json_encode($Mensagens);
-		}
+		if (isset($Mensagens)){echo json_encode($Mensagens);}
     }
 
     /**
