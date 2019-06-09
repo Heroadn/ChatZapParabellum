@@ -156,6 +156,7 @@ class Dao{
 
         try{
             $sql = self::sqlBuilder($criterios,self::where($fk));
+			
             $p_sql = Db::getInstance()->query($sql);
 
 
@@ -284,8 +285,17 @@ class Dao{
                     foreach($value as $pred => $like) {
                         $conditions .= ' WHERE ' . $pred . ' ' .$key. ' '. "'%" . $like . "%'";
                     }
+		
                 }
 
+				if($key == 'arraylike'){
+					$coluna = $value[0];
+					$conditions = ' WHERE ';
+					foreach($value[1] as $termo){
+						$conditions .= $coluna . ' LIKE ' . "'%" . $termo . "%'" . ' OR ';
+					}
+					$conditions = substr($conditions, 0, -3);
+				}
                 if($key == 'or'){
                     foreach($value as $or){
                         $conditions .= $key . ' ' . $or. ' ';
