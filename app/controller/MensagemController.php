@@ -50,8 +50,8 @@ class MensagemController extends Controller
             if (filter_var(filter_input(INPUT_POST, 'mensagem'), FILTER_VALIDATE_URL)) {
                 $image = '<img src="'.filter_input(INPUT_POST, 'mensagem').'">';
             }
-
-            $Mensagens->mensagem = ($image) ? $image : filter_input(INPUT_POST, 'mensagem');
+			
+            $Mensagens->mensagem = ($image) ? $image : strip_tags(filter_input(INPUT_POST, 'mensagem'));
             $Mensagens->salas_id    = filter_input(INPUT_POST, 'salas_id');
             $Mensagens->usuarios_id = $token->id;
             $Mensagens->data        = date("Y-m-d H:i:s");
