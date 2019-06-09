@@ -27,7 +27,10 @@
 <div>
 	<a href="/Sala/sair/<?php echo $id_sala;?>"><button>Sair da sala</button></a>
 	<h2>Usuários:</h2>
-	<div id="usuarios" style="width:40%">
+	<div id="usuarios" style="width:50%; float:left">
+	</div>
+	<h2>Enviar para:</h2>
+	<div id="enviarpara" style="width:50%; float:right">
 	</div>
 </div>
 
@@ -37,10 +40,14 @@
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
     var postMensagem = () => {
+		console.log($('#mensagem').serialize());
+		var campos = $('#mensagem').serialize();
+		campos += '&para_id='+$("input[name=msg_secreta]:checked").val();
+		console.log(campos);
         $.ajax({
             type: "POST",
             url: "/Mensagem/cadastrar_post",
-            json: $("#mensagem").serialize(),
+            json: campos,
             success:function (response){
                 //alert(response);
             },
@@ -62,6 +69,7 @@
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
+				//alert(response);
                 json = response;
 
                 //Adiciona as mensagens dentro do array
@@ -74,10 +82,16 @@
                     mensagem['usuario'] = json[m]['usuarios_id'];
                     mensagem['sala'] = json[m]['salas_id'];
 					mensagem['remetente'] = json[m]['remetente'];
+					mensagem['para_id'] = json[m]['para_id'];
 
                     if(mensagem['id'] !== lastTimeID){
                         lastTimeID = mensagem['id'];
-                        document.getElementById("chat").innerHTML += "<br>" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
+						if (mensagem['para_id']){
+							document.getElementById("chat").innerHTML += "<br>(Reservadamente)" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
+						}
+						else{
+							document.getElementById("chat").innerHTML += "<br>" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
+						}
                     }
 
                 }
@@ -104,6 +118,7 @@
 					
 					//$('#usuarios').html('');
 					html = '';
+					html2 = '<input type="radio" name="msg_secreta" id="0" value=""><label for="0">todos</label>';
 					for (posicao in Usuarios){
 						mod = <?php echo $mod ?>;
 						if (mod){
@@ -112,10 +127,15 @@
 						else {
 								html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p></div>';						
 						}
+						html2 += '<input type="radio" name="msg_secreta" value="'+Usuarios[posicao].id+'"><label for="0">'+Usuarios[posicao].nome+'</label>';
 					}
 					if ($('#usuarios').html() != html){
 						$('#usuarios').html('');
 						$('#usuarios').append(html);
+					}
+					if ($('#enviarpara').html() != html2){
+						$('#enviarpara').html('');
+						$('#enviarpara').append(html2);
 					}
 				}
 			})
