@@ -73,10 +73,11 @@
                     mensagem['json'] = json[m]['json'];
                     mensagem['usuario'] = json[m]['usuarios_id'];
                     mensagem['sala'] = json[m]['salas_id'];
+					mensagem['remetente'] = json[m]['remetente'];
 
                     if(mensagem['id'] !== lastTimeID){
                         lastTimeID = mensagem['id'];
-                        document.getElementById("chat").innerHTML += "<br>" +  mensagem['mensagem'];
+                        document.getElementById("chat").innerHTML += "<br>" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
                     }
 
                 }
