@@ -55,6 +55,9 @@ class MensagemController extends Controller
             $Mensagens->salas_id    = filter_input(INPUT_POST, 'salas_id');
             $Mensagens->usuarios_id = $token->id;
             $Mensagens->data        = date("Y-m-d H:i:s");
+			if (filter_input(INPUT_POST, 'para_id') !== null && intval(filter_input(INPUT_POST, 'para_id'))!==0){
+				$Mensagens->para_id = filter_input(INPUT_POST, 'para_id');
+			}
         }
 
         $Mensagens->save();
