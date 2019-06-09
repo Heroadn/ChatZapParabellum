@@ -19,7 +19,15 @@ class MensagemController extends Controller
 
         header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
-		if (isset($Mensagens)){echo json_encode($Mensagens);}
+		
+		if (isset($Mensagens)){
+			foreach ($Mensagens as $m){
+				$remetente = Usuarios::findBy('id', $m->usuarios_id)['nome'];
+				$m->remetente = $remetente;
+			}
+			echo json_encode($Mensagens);
+			
+		}
     }
 
     /**

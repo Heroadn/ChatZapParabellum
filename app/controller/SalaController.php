@@ -25,6 +25,7 @@ class SalaController extends Controller
         /*Caso o usuario seja um administrador
         * sera mostrado todas as informações sobre sala assim como informações sensiveis
         * senha, tempo etc.. */
+		
 
         switch($opcao){
             case 'nome':
@@ -34,7 +35,8 @@ class SalaController extends Controller
                 $Salas = Salas::listar_por_categoria($parametro);
                 break;
             case 'tag':
-                $Salas = Salas::findAll([],['like'=>['tags'=>$parametro]]);
+				$tags = explode('+', $parametro);
+                $Salas = Salas::findAll([],['arraylike'=>['tags', $tags]]);
                 break;
             case 'relevantes':
 				$this->update_all_usuarios();
