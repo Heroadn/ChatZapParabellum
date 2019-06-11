@@ -1,10 +1,10 @@
 # ChatZapParabellum
 
-─app
-│   ├───controller
-│   ├───core
-│   ├───libs
-│   │   ├───css
+─app<br>
+│   ├───controller<br>
+│   ├───core<br>
+│   ├───libs<br>
+│   │   ├───css<br>
 │   │   ├───img
 │   │   ├───js
 │   │   │   └───vendor
