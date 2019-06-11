@@ -3,7 +3,7 @@
 <br>
 <div class="row text-center">        
 		<div class="col-6">
-			<form>
+			<form method="post" role="form" action="/Sala/cadastrar_post"  enctype="multipart/form-data">
 				<label for="nome">Nome da Sala:</label>
 				<input class="form-control form-purple" type="text" name="nome_sala" id="nome_sala" required placeholder="Nome da Sala">
 			</form>
