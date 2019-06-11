@@ -206,7 +206,7 @@ class SalaController extends Controller
 			//começa a atualizar o last_time do usuário
             $usuario_id = $token->id;
 			$Sala = new Salas($id_sala);
-			$Sala->updateUsuario($usuario_id);
+			$Sala->updateTimeUsuario($usuario_id);
 			
 			//verifica se os outros usuários da sala expiraram
 			$usuarios = $Sala->getUsuarios();

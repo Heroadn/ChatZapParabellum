@@ -50,7 +50,7 @@ class Salas extends Dao
 		}
 	}
 	
-	public function updateUsuario($usuario_id){
+	public function updateTimeUsuario($usuario_id){
 		try{
 			$sala_id = $this->id;
 			$last_time = date('Y/m/d H:i:s');
