@@ -1,0 +1,20 @@
+.navbar.fixed-left {
+    bottom: 0;
+    width: 30%;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+}
+.navbar.fixed-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+}
+.modal-backdrop{
+    display: none;
+    }
+
+.modal{
+    bottom: inherit;
+    }

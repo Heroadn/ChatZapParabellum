@@ -1,17 +1,87 @@
+/*Purple
+--------in
+----------the
+-------------Dark
+
+		  version-7a	
+	Spinach-Lasagna Edition */
+
 :root{
 	--purple: #4527a0;
+	--purple-hover: #6341cc;
+	--purple-trans: rgb(162, 147, 207, 0.4);
 	--purple-light: #a293cf;
+	--purple-light-mais-light-ainda: #d0c9e7;
 	--purple-darken: #221350;
 	--light: #f2f2f2;
 	--darken: #212121;
 	--font-darken: black;
 	--font-light: white;
+	--purple-ballon: #7e57c2;
+	--purple-ballon-you: #9f82d2;
 }
 
-.purple{
-	color: var(--font-light);
-	background-color: var(--purple);
+a:link {
+	color: var(--purple);
 }
+a:visited {
+	color: var(--purple);
+}
+a:hover {
+	color: var(--purple-darken);
+	text-decoration: none;
+}
+a:active {
+	color: var(--purple);
+}
+
+hr{
+  clear:both;
+  border-color: var(--purple-light);
+}
+
+hr .light{
+  border-color: var(--light);
+}
+
+/* INICIO DO CODIGO DO BUTTON */
+.btn-purple {
+  color: var(--purple);
+  border-color: var(--purple-light);
+}
+
+
+.btn-purple:hover {
+  color: var(--font-light);
+  background-color: var(--purple-hover);
+  border-color: var(--purple-light);
+}
+
+.btn-purple:focus, .btn-purple.focus {
+  box-shadow: 0 0 0 0.2rem var(--purple-trans);
+}
+
+.btn-purple.disabled, .btn-purple:disabled {
+  background-color: var(--purple-light);
+  border-color: var(--purple-light);
+}
+
+.btn-purple:not(:disabled):not(.disabled):active, .btn-purple:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: var(--purple-light);
+  border-color: var(--purple-light);
+}
+
+.btn-purple:not(:disabled):not(.disabled):active:focus, .btn-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem var(--purple-trans);
+}
+/* FIM DO CODIGO DO BUTTON */
+
+.p-text{
+	color: var(--purple);
+}
+
 
 .purple-light{
 	color: var(--font-light);
@@ -35,4 +105,162 @@
 .light{
 	color: var(--font-darken);
 	background-color: var(--light);
+}
+.one-more-light{
+	background-color: var(--purple-light-mais-light-ainda);
+}
+
+
+
+/*Gambiarra*/
+.purple{
+	
+	background-color: var(--purple);
+	color: var(--font-light);
+}
+
+
+/* CODIGO DO FORM */
+.form-darken-purple {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--light);
+  background-color: var(--darken);
+  background-clip: padding-box;
+  border: 1px solid var(--purple-light);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-darken-purple {
+    transition: none;
+  }
+}
+
+.form-darken-purple::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-darken-purple:focus {
+  color: var(--light);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--purple-trans);
+}
+
+.form-darken-purple::-webkit-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::-moz-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple:-ms-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::-ms-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple:disabled, .form-darken-purple[readonly] {
+  opacity: 1;
+  color: var(--purple-light);
+}
+
+
+
+.form-purple {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--purple);
+  background-color: var(--white);
+  background-clip: padding-box;
+  border: 1px solid var(--purple-light);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-darken-purple {
+    transition: none;
+  }
+}
+
+.form-darken-purple::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-darken-purple:focus {
+  color: var(--purple-light);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--purple-trans);
+}
+
+.form-darken-purple::-webkit-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::-moz-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple:-ms-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::-ms-input-placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple::placeholder {
+  color: var(--font-light);
+  opacity: 1;
+}
+
+.form-darken-purple:disabled, .form-darken-purple[readonly] {
+  opacity: 1;
+}
+/* FIM DO CODIGO DO FORM */
+
+
+
+/* REFERENTE AO MODAL */
+.modal-dialog {
+    max-width: 90%;
+}
+/* FIM DO CODIGO REFERENTE AO MODAL */
+
+
+/* CODIGO DA LISTA */
+
+.list-group-item.purple{
+	z-index: 2;
+	color: var(--font-light);
+	background-color: var(--purple);
+	border-color: var(--purple);
 }

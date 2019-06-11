@@ -1,0 +1,54 @@
+.ballon{
+    margin: 3% 2%;
+    background: var(--purple-ballon);
+    font-family: 'open sans';
+    font-size: 0.85em;
+    line-height: 1.6em;
+    border-radius: 6px;
+    width: 88%;
+    height: auto;
+    color: #fff;
+    padding: 2px;
+    position: relative;
+    margin-top: 30px;
+}
+.ballon:after{ /*Triangulo*/
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    /*Faz seta "apontar para baixo. Definir o valor como 'top' fará ela "apontar para cima" */
+    /*Aqui entra a cor da "aba" do balão */
+    border-bottom: 20px solid var(--purple-ballon);
+    top: -20px; /*localização. Experimente alterar para 'bottom'*/
+}
+.other{float: left;}
+.other-1:after{left: 10%;}
+.other-2:after{left: 15%;}
+.other-3:after{left: 20%;}
+.me{
+    float: right;
+    background: var(--purple-ballon-you);
+    clear: both;
+}
+.me:after{
+    content: "";
+    border-bottom: 20px solid var(--purple-ballon-you);
+}
+.me-1:after{left: 80%;}
+.me-2:after{left: 85%;}
+.me-3:after{left: 90%;}
+.menssages{overflow: auto;}
+.nome{
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-left: 16px;
+}
+.text{
+    font-size: 22px;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}

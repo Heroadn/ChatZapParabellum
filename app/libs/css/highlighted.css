@@ -1,0 +1,81 @@
+/* em destaque*/
+.top{
+    background-size: cover;
+    height: 300px;
+    position: relative;
+}
+.titleDesq{
+    padding: 10px 0px 10px 0px;
+}
+.titleDesq_m-0{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.line{
+    border: 1px solid #4527a0;
+    border-width: 1px 0px 0px 0px;
+}
+.boxCenter{
+    width: 80%;
+    padding: 20px;
+    padding-left: 30px;
+    padding-top: 15px;
+    padding-bottom: 15x;
+    margin-left: 10%
+}
+
+@media (max-width: 950px){
+    .boxCenter{
+        padding: 30px;
+        padding-top: 15px;
+        padding-bottom: 15x;
+    }
+}
+
+@media (max-width: 500px){
+    .boxCenter{
+        width: 90%;
+        margin-left: 5%
+    }
+    .col-sm-4{
+        margin-top: 5px;
+    }
+}
+#inputSearch, #select_search, #preLoad{
+    display: none;
+}
+
+
+
+.msn{
+  display: none;
+}
+
+.msnError{
+    display: none;
+    background-color: #420c0c;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    color: #9f2e2e;
+    border: solid 2px #9f2e2e;
+    border-radius: 5px
+}
+
+.msnError .msn{
+    float: left;
+    width: 80%
+}
+
+.msnError .exitMsn{
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.clear{
+    clear: both;
+}
