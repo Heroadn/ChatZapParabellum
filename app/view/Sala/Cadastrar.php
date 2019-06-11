@@ -5,12 +5,12 @@
 		<div class="col-6">
 			<form method="post" role="form" action="/Sala/cadastrar_post"  enctype="multipart/form-data">
 				<label for="nome">Nome da Sala:</label>
-				<input class="form-control form-purple" type="text" name="nome_sala" id="nome_sala" required placeholder="Nome da Sala">
+				<input class="form-control form-purple" type="text" name="nome" id="nome_sala" required placeholder="Nome da Sala">
 			</form>
 			<br>
 			<form>
 				<label for="senha">Senha da Sala:</label>
-				<input class="form-control form-purple" type="password" name="senha_sala" id="senha_sala" placeholder="Senha da Sala">
+				<input class="form-control form-purple" type="password" name="senha" id="senha_sala" placeholder="Senha da Sala">
 			</form>
 		</div>
 		<div class="col-6 mt-3">
@@ -31,7 +31,7 @@
 				<label for="tag">Adicione Tags:</label>
 				
 				<div class="input-group mb-3">
-				  <input type="text" class="form-control tag_new" placeholder="Adicione Tags" aria-label="Adicione Tags" aria-describedby="tag_add">
+				  <input type="text" class="form-control tag_new" name="tags" placeholder="Adicione Tags" aria-label="Adicione Tags" aria-describedby="tag_add">
 				  <div class="input-group-append">
 					<button class="btn btn-purple purple" type="button" onClick="add_new_tag()" id="tag_add">Adicionar</button>
 				  </div>
@@ -51,12 +51,12 @@
         <form>
             <label for="categoria">Selecionar Categoria:</label>
             <br>
-            <select name="categoria" id="categoria_sala">
-                <option>Selecione sua Categoria</option>
-                <option>op ii</option>
-                <option>op iii</option>
-                <option>op iv</option>
-                <option>op v</option>
+            <select name="categorias_id" id="categorias">
+                <?php
+                foreach ($Categorias as $Categoria){
+                    echo '<option value='.$Categoria->id.'>'.$Categoria->nome.'</option>';
+                }
+                ?>
             </select>
         <form>
     </div>
