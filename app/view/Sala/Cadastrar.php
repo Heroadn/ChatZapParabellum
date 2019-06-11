@@ -61,10 +61,9 @@
 
             <br>
 
-            <button  class="btn btn-purple purple" type="button" onClick="sendNewSala()">Criar Sala</button>
-            <button  class="btn btn-purple purple" type="reset">Cancelar</button>
-
-            <form>
+                <button  class="btn btn-purple purple" type="button" onClick="sendNewSala()">Criar Sala</button>
+                <button  class="btn btn-purple purple" type="reset">Cancelar</button>
+        </form>
     </div>
 </div>
 <script src="<?php echo JS . 'tags_criar.js'?>"></script>
