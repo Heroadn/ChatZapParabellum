@@ -58,14 +58,14 @@
                 }
                 ?>
             </select>
-        <form>
+
+            <br>
+
+            <button  class="btn btn-purple purple" type="button" onClick="sendNewSala()">Criar Sala</button>
+            <button  class="btn btn-purple purple" type="reset">Cancelar</button>
+
+            <form>
     </div>
 </div>
-
-<br>
-
-<button  class="btn btn-purple purple" type="button" onClick="sendNewSala()">Criar Sala</button>
-<button  class="btn btn-purple purple" type="reset">Cancelar</button>
-
 <script src="<?php echo JS . 'tags_criar.js'?>"></script>
 <script src="<?php echo JS . 'integridade_criar.js'?>"></script>
