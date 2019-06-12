@@ -1,6 +1,7 @@
 <h1 class="p-text"> Crie seu ZChat</h1> 
 <h4 class="p-text">	Não esqueça de convidar com seu amigos! </h4>
 <br>
+
 <div class="row text-center">        
 		<div class="col-6">
 			<form method="post" role="form" action="/Sala/cadastrar_post"  enctype="multipart/form-data">
