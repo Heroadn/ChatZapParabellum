@@ -28,9 +28,3 @@ function contarpalavra(valor){
 	
 	return cont
 }
-//#nome_sala
-//#desc_new
-//#categoria_sala
-//#senha_sala
-//.img_sala
-//.new_tag_area

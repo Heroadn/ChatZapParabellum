@@ -51,7 +51,7 @@
         <form>
             <label for="categoria">Selecionar Categoria:</label>
             <br>
-            <select name="categorias_id" id="categorias">
+            <select name="categorias_id" id="categoria_sala">
                 <?php
                 foreach ($Categorias as $Categoria){
                     echo '<option value='.$Categoria->id.'>'.$Categoria->nome.'</option>';
