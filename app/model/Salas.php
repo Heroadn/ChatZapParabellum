@@ -94,9 +94,9 @@ class Salas extends Dao
 		}
 	}
 	
-	public static function getRelevantes(){
+	public static function getRelevantes($start=0, $limit=9999999999){
 		try{
-			$sql = "SELECT salas.*, COUNT(salas_id) AS qtd_usuarios FROM salas LEFT JOIN usuarios_salas ON usuarios_salas.salas_id=salas.id GROUP BY usuarios_salas.salas_id, salas.id ORDER BY (qtd_usuarios) DESC";
+			$sql = "SELECT salas.*, COUNT(salas_id) AS qtd_usuarios FROM salas LEFT JOIN usuarios_salas ON usuarios_salas.salas_id=salas.id GROUP BY usuarios_salas.salas_id, salas.id ORDER BY (qtd_usuarios) DESC LIMIT $start,$limit";
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->execute();
 			return $p_sql->fetchAll(PDO::FETCH_OBJ);
@@ -109,9 +109,10 @@ class Salas extends Dao
 		}		
 	}
 	
-	public static function listar_por_categoria($parametro){
+	public static function listar_por_categoria($parametro, $start=0, $limit=9999999999){
 		try{
-			$sql = "SELECT s.* FROM salas s, categorias c WHERE s.categorias_id=c.id AND (c.id='$parametro' OR c.nome='$parametro')";
+			$sql = "SELECT s.* FROM salas s, categorias c WHERE s.categorias_id=c.id AND (c.id='$parametro' OR c.nome='$parametro') LIMIT $start,$limit";
+			
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->execute();
 			return $p_sql->fetchAll(PDO::FETCH_OBJ);
@@ -124,9 +125,9 @@ class Salas extends Dao
 		}		
 	}
 
-	public static function listar_por_usuario($parametro){
+	public static function listar_por_usuario($parametro, $start=0, $limit=9999999999){
 		try{
-			$sql = "SELECT s.* FROM salas s, usuarios_salas us, usuarios u WHERE s.id=us.salas_id AND us.usuarios_id=u.id AND (u.id='$parametro' OR u.nome='$parametro')";
+			$sql = "SELECT s.* FROM salas s, usuarios_salas us, usuarios u WHERE s.id=us.salas_id AND us.usuarios_id=u.id AND (u.id='$parametro' OR u.nome='$parametro') LIMIT $start,$limit";
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->execute();
 			return $p_sql->fetchAll(PDO::FETCH_OBJ);

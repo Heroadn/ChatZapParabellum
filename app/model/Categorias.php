@@ -11,9 +11,9 @@ class Categorias extends Dao
 	public $foto_categoria;
 	public $descricao;
 	
-	public static function getRelevantes(){
+	public static function getRelevantes($page=1, $limit=10){
 		try{
-			$sql = "SELECT c.id, c.nome, COUNT(DISTINCT usuarios_id) AS qtd_usuarios  FROM categorias c LEFT JOIN salas s ON c.id=s.categorias_id LEFT JOIN usuarios_salas u ON u.salas_id=s.id GROUP BY c.id, s.categorias_id ORDER BY (qtd_usuarios) DESC";
+			$sql = "SELECT c.id, c.nome, COUNT(DISTINCT usuarios_id) AS qtd_usuarios  FROM categorias c LEFT JOIN salas s ON c.id=s.categorias_id LEFT JOIN usuarios_salas u ON u.salas_id=s.id GROUP BY c.id, s.categorias_id ORDER BY (qtd_usuarios) DESC LIMIT $page, $limit";
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->execute();
 			return $p_sql->fetchAll(PDO::FETCH_OBJ);
