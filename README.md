@@ -26,3 +26,5 @@
 │         ├───Sala<br>
 │         └───Usuario<br>
 └───UML<br>
+
+renomeie a config.sample.php para config.php
