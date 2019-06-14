@@ -20,27 +20,33 @@ class CategoriaController extends Controller
 		}
     }
 
-	public function Listar($opcao='', $parametro=''){
+	public function Listar($opcao='', $parametro=1, $limit=10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
         $opcao = strtolower($opcao);
 
+        $start = intval($parametro);
+        $page = ($start * $limit) - $limit;
+        $size = 0;
+		
         switch($opcao){
             case 'relevantes':
 				SalaController::update_all_usuarios();
-                $Categorias = Categorias::getRelevantes();
+                $Categorias = Categorias::getRelevantes($page, $limit);
+				$size = ceil(Categorias::count() / $limit);
                 break;
             case 'todos':
-                $Categorias = Categorias::findAll();
+                $Categorias = Categorias::findAll([],['limit'=>['start'=>$page,'limit'=>$limit]]);
+				$size = ceil(Categorias::count() / $limit);
                 break;
             default:
-                $Categorias = Categorias::findAll();
-
+                $Categorias = Categorias::findAll([],['limit'=>['start'=>$page,'limit'=>$limit]]);
+				$size = ceil(Categorias::count() / $limit);
         }
 
         header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
-        echo json_encode($Categorias);
+		echo json_encode(array('Categorias'=>$Categorias,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }
     /**
      *  Metodo Cadastra a Sala no banco de dados via Formulario "POST"

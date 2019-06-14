@@ -45,16 +45,15 @@ class UsuarioController extends Controller
         //Paginação
         $start = intval($parametro);
         $page = ($start * $limit) - $limit;
-        var_dump($start);
         $size = 0;
 
         switch($opcao){
             case 'id':
-                $Usuarios = Usuarios::findAll(['id'=>$parametro],['limit'=>['start'=>$page,'limit'=>$limit]]);
+                $Usuarios = Usuarios::findAll(['id'=>$parametro]);
                 $size = ceil(Usuarios::count() / $limit);
                 break;
             case 'nome':
-                $Usuarios = Usuarios::findAll([],['like'=>['nome'=>$parametro],'limit'=>['start'=>$page,'limit'=>$limit]]);
+                $Usuarios = Usuarios::findAll([],['like'=>['nome'=>$parametro]]);
                 $size = ceil(Usuarios::count() / $limit);
                 break;
             default:

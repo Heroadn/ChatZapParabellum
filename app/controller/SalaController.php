@@ -9,7 +9,7 @@ class SalaController extends Controller
 		$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
 		if (isset($token->id)){
 			$Categorias = Categorias::findAll();
-			$this->view(['Categorias'=>$Categorias]);
+			$this->view(['Categorias' =>$Categorias]);
 			$this->view->page_title = 'Cadastrar Sala';
 			$this->view->render();
 		}
@@ -18,7 +18,7 @@ class SalaController extends Controller
 		}
     }
 
-    public function Listar($opcao='', $parametro=''){
+    public function Listar($opcao='', $parametro=1, $inicio=1, $limit=10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
         $opcao = strtolower($opcao);
@@ -26,33 +26,51 @@ class SalaController extends Controller
         * sera mostrado todas as informações sobre sala assim como informações sensiveis
         * senha, tempo etc.. */
 		
-
+        $start = intval($inicio);
+        $page = ($start * $limit) - $limit;
+        $size = 0;
+		
         switch($opcao){
             case 'nome':
-                $Salas = Salas::findAll([],['like'=>['nome'=>$parametro]]);
+				$size = ceil(count(Salas::findAll([],['like'=>['nome'=>$parametro]])) / $limit);
+                $Salas = Salas::findAll([],['like'=>['nome'=>$parametro], 'limit'=>['start'=>$page,'limit'=>$limit]]);
                 break;
             case 'categoria':
-                $Salas = Salas::listar_por_categoria($parametro);
+				$size = ceil(count(Salas::listar_por_categoria($parametro)) / $limit);
+                $Salas = Salas::listar_por_categoria($parametro, $page, $limit);
                 break;
             case 'tag':
 				$tags = explode('+', $parametro);
-                $Salas = Salas::findAll([],['arraylike'=>['tags', $tags]]);
+				$size = ceil(count(Salas::findAll([],['arraylike'=>['tags', $tags]])) / $limit);
+                $Salas = Salas::findAll([],['arraylike'=>['tags', $tags], 'limit'=>['start'=>$page,'limit'=>$limit]]);
                 break;
             case 'relevantes':
+				$page = ($parametro * $inicio) - $inicio;
+				$limit = $inicio;
 				$this->update_all_usuarios();
-                $Salas = Salas::getRelevantes();
+				$size = ceil(Salas::count() / $limit);
+                $Salas = Salas::getRelevantes($page, $limit);
                 break;
             case 'todos':
-                $Salas = Salas::findAll();
+				$page = ($parametro * $inicio) - $inicio;
+				$limit = $inicio;
+				$size = ceil(Salas::count() / $limit);
+                $Salas = Salas::findAll([], ['limit'=>['start'=>$page,'limit'=>$limit]]);
                 break;
             case 'usuario':
-                $Salas = Salas::listar_por_usuario($parametro);
+				$this->update_all_usuarios();
+				$size = ceil(count(Salas::listar_por_usuario($parametro)) / $limit);
+                $Salas = Salas::listar_por_usuario($parametro, $page, $limit);
                 break;
 			case 'moderador':
-                $Salas = Salas::findAll(['moderador_id'=>$parametro]);
+				$size = ceil(count(Salas::findAll(['moderador_id'=>$parametro])) / $limit);
+                $Salas = Salas::findAll(['moderador_id'=>$parametro], ['limit'=>['start'=>$page,'limit'=>$limit]]);
                 break;
             default:
-                $Salas = Salas::findAll();
+				$page = ($parametro * $inicio) - $inicio;
+				$limit = $inicio;
+				$size = ceil(Salas::count() / $limit);
+                $Salas = Salas::findAll([], ['limit'=>['start'=>$page,'limit'=>$limit]]);
         }
 
         if(!$isAdmin) {
@@ -62,7 +80,8 @@ class SalaController extends Controller
         }
         header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
-        echo json_encode($Salas);
+		
+		echo json_encode(array('Salas'=>$Salas,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }
 
     public function Destaque($id=''){
