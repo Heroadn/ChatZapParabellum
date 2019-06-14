@@ -9,7 +9,7 @@ class SalaController extends Controller
 		$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
 		if (isset($token->id)){
 			$Categorias = Categorias::findAll();
-			$this->view(['Categorias' =>$Categorias]);
+			$this->view(['Categorias'=>$Categorias]);
 			$this->view->page_title = 'Cadastrar Sala';
 			$this->view->render();
 		}
