@@ -24,8 +24,7 @@ if(true){ini_set('display_errors',1);error_reporting(-1);}
 date_default_timezone_set('America/Sao_Paulo');
 
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
-var_dump(file_exists ('vendor/autoload.php'));
-
+include 'vendor/autoload.php';
 
 ##Init
 new Application;
