@@ -29,9 +29,8 @@ date_default_timezone_set('America/Sao_Paulo');
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
 include ROOT . 'vendor/autoload.php';
 
+
+var_dump(new controller\UsuarioController());
+die();
 ##Init
 new core\Application;
-
-/*
- * var_dump(new controller\UsuarioController);
-die('XD');*/
