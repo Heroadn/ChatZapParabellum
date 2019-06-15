@@ -10,7 +10,7 @@ define('CORE',  APP . 'core'  . DIRECTORY_SEPARATOR);
 define('TEMPLATE',    APP . 'template'   . DIRECTORY_SEPARATOR);
 define('CONTROLLER',  APP . 'controller' . DIRECTORY_SEPARATOR);
 define('LIBS',DIRECTORY_SEPARATOR .  'app' . DIRECTORY_SEPARATOR .  'libs' . DIRECTORY_SEPARATOR);
-define('UPLOADS','app'.DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'uploads' . DIRECTORY_SEPARATOR); 
+define('UPLOADS','app'.DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'uploads' . DIRECTORY_SEPARATOR);
 
 #Modulos do Sistema a serem carregados
 $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
@@ -20,10 +20,10 @@ include('Config.php');
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
 
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
-require 'vendor/autoload.php';
+require ROOT .'vendor/autoload.php';
 
 #Mensagem de erro quanto estiver em ambiente de desenvolvimento
-if(DEBUG){ini_set('display_errors',1);error_reporting(-1);}
+if(true){ini_set('display_errors',1);error_reporting(-1);}
 date_default_timezone_set('America/Sao_Paulo');
 
 ##Init

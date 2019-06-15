@@ -1,0 +1,27 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "apigen/apigen": "dev-master",
+    "roave/better-reflection": "dev-master#c87d856",
+    "facebook/graph-sdk": "5.5.0"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "classmap": [
+      "app/controller",
+      "app/core",
+      "app/model"
+    ]
+  }
+}
