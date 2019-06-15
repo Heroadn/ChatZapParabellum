@@ -1,11 +1,3 @@
-<?php
-$fb = new Facebook\Facebook([
-    'app_id' => '{app-id}', // Replace {app-id} with your app id
-    'app_secret' => '{app-secret}',
-    'default_graph_version' => 'v2.2',
-]);
-?>
-
 <form method="post" role="form" action="http://Chat.acid-software.net/Usuario/cadastrar_post"  enctype="multipart/form-data">
     <div class="form-group">
         <label for="nome_usuario">Nome do Usuario:</label>

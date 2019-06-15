@@ -17,11 +17,8 @@ $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
 
 #Carregando Configuraçôes de Banco de dados, template e ExceptionHandler
 include('Config.php');
+include_once("AutoLoader.php");
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
-
-//include_once("AutoLoader.php");
-set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
-require 'vendor/autoload.php';
 
 #Mensagem de erro quanto estiver em ambiente de desenvolvimento
 if(DEBUG){ini_set('display_errors',1);error_reporting(-1);}
