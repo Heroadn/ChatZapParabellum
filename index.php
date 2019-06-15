@@ -19,10 +19,11 @@ $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
 include('Config.php');
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
 
-var_dump('okXD');
-die();
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
 require 'vendor/autoload.php';
+
+var_dump('okXD');
+die();
 
 #Mensagem de erro quanto estiver em ambiente de desenvolvimento
 if(true){ini_set('display_errors',1);error_reporting(-1);}
