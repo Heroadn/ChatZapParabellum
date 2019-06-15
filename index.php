@@ -1,8 +1,4 @@
 <?php
-
-var_dump('okXD');
-die();
-
 ##Definindo caminho Root do Sistema
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('APP',   ROOT .  'app' . DIRECTORY_SEPARATOR);
@@ -23,6 +19,8 @@ $modules = [ROOT,APP,CORE,CONTROLLER,TEMPLATE,MODEL,LIBS];
 include('Config.php');
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
 
+var_dump('okXD');
+die();
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
 require 'vendor/autoload.php';
 
