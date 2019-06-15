@@ -18,9 +18,10 @@
     "optimize-autoloader": true
   },
   "autoload": {
-    "psr-0": {
-      "controller": "app/controller",
-      "core": "app/core",
-      "model": "app/model" }
+    "classmap": [
+      "app/controller",
+      "app/core",
+      "app/model"
+    ]
   }
 }
