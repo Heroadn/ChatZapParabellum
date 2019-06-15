@@ -26,11 +26,9 @@ class View extends Template
      * @param string $extension, define o tipo de arquivo da view como [.js, .php , etc..]
      */
     public function render($template = true, $extension = '.php'){
-        $path = VIEW . $this->view_file . $extension;
+        $path = VIEW . str_replace('\\','/',$this->view_file) . $extension;
         $include = TEMPLATE . $this->view_template . DIRECTORY_SEPARATOR . 'Index.php';
-        var_dump(str_replace('\\','/',$this->view_file));
-        die('XD');
-
+        
         //Caso template seja desativado
         if(!$template){ $include = $path; }
 
