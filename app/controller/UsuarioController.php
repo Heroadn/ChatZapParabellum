@@ -1,4 +1,11 @@
 <?php
+namespace controller;
+use core\Controller;
+use core\Token;
+use core\Assert;
+use core\Upload;
+use model\Usuarios;
+
 class UsuarioController extends Controller
 {
     /**
@@ -39,7 +46,7 @@ class UsuarioController extends Controller
      */
     public function Listar($opcao='', $parametro=1,$limit = 10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->id,true);
         $opcao = strtolower($opcao);
 
         //Paginação

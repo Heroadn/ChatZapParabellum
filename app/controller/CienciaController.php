@@ -1,5 +1,6 @@
 <?php
-
+namespace controller;
+use core\Controller;
 class CienciaController extends Controller{
 
     public function index($id='',$name=''){

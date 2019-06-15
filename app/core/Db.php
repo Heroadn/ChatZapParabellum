@@ -1,7 +1,10 @@
 <?php
+namespace core;
+use PDO;
 /*
  * @author Benjamin de Castro Azevedo Ponciano
 */
+
 
 class Db extends PDO{
     private $banco   = DATABASE;

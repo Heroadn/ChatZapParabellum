@@ -1,4 +1,5 @@
 <?php
+namespace core;
 /*
  * @author Benjamin de Castro Azevedo Ponciano
 */

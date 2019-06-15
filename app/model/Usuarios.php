@@ -1,5 +1,6 @@
 <?php
-
+namespace model;
+use core\Dao;
 
 class Usuarios extends Dao
 {

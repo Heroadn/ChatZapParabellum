@@ -1,5 +1,9 @@
 <?php
-
+namespace model;
+use PDO;
+use PDOException;
+use core\Db;
+use core\Dao;
 
 class Categorias extends Dao
 {

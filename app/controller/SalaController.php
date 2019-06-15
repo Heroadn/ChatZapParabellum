@@ -1,4 +1,13 @@
 <?php
+namespace controller;
+use core\Assert;
+use core\Controller;
+use core\Token;
+use core\Upload;
+use model\Salas;
+use model\Categorias;
+use model\Usuarios;
+
 class SalaController extends Controller
 {
     /**
@@ -106,6 +115,7 @@ class SalaController extends Controller
 			$allowed = false;
 			$usuario_id = $token->id;
 			$Sala = Salas::findAll(['id'=>$id_sala]);
+
 			if (!empty($Sala)){
 				$senha_sala = $Sala[0]->senha;
 				if ($senha_sala){
@@ -120,6 +130,7 @@ class SalaController extends Controller
 				else {
 					$allowed = true;
 				}
+
 				if ($allowed){
 					if (!$Sala[0]->isBanido($token->id)){
 						if ($Sala[0]->moderador_id === $token->id){

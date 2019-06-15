@@ -1,10 +1,12 @@
 <?php
+namespace core;
+use controller;
+use Exception;
 
 class Application{
     protected $controller  = 'UsuarioController';
     protected $action = 'Cadastrar';
     protected $prams = [];
-
 
     /**
      * Carrega se existir o controller juntamento com seu metodo
@@ -15,7 +17,8 @@ class Application{
         session_start();
 
         if(file_exists(CONTROLLER . $this->controller . '.php')){
-            $this->controller = new $this->controller;
+            $namespaceWithController = 'controller\\'.$this->controller;
+            $this->controller = new $namespaceWithController;
 
             if(method_exists($this->controller,$this->action)){
                 /* @version
@@ -35,7 +38,7 @@ class Application{
         $request = trim($_SERVER['REQUEST_URI'],'/');
         if(!empty($request)){
             $url = explode('/',$request);
-            $this->controller = isset($url[0]) ? $url[0] . 'Controller' : 'indexController';
+            $this->controller = isset($url[0]) ?  $url[0] . 'Controller' : 'indexController';
             $this->action = isset($url[1]) ? $url[1] : 'Cadastrar';
 
             //Removendo o controller e action do url, e adicionando parametros adicionais na url no prams

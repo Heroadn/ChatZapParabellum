@@ -1,5 +1,6 @@
 <?php
-
+namespace model;
+use core\Dao;
 
 class Mensagens extends Dao
 {
@@ -18,8 +19,4 @@ class Mensagens extends Dao
         $mensagem = Mensagens::findAll();
     }
 
-    public function getFuncionarios(){
-        $departamento = Departamento::findById($this->cod);
-        return Funcionario::findAll($departamento->cod);
-    }
 }

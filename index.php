@@ -1,5 +1,8 @@
 <?php
 ##Definindo caminho Root do Sistema
+use controller\UsuarioController;
+use core\Application;
+
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('APP',   ROOT .  'app' . DIRECTORY_SEPARATOR);
 
@@ -24,7 +27,11 @@ if(true){ini_set('display_errors',1);error_reporting(-1);}
 date_default_timezone_set('America/Sao_Paulo');
 
 set_include_path(get_include_path() .  PATH_SEPARATOR . implode(PATH_SEPARATOR,$modules));
-include 'vendor/autoload.php';
+include ROOT . 'vendor/autoload.php';
 
 ##Init
-new Application;
+new core\Application;
+
+/*
+ * var_dump(new controller\UsuarioController);
+die('XD');*/

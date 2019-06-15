@@ -1,4 +1,11 @@
 <?php
+namespace controller;
+use core\Controller;
+use core\Token;
+use core\Assert;
+use core\Upload;
+use model\Categorias;
+use model\Usuarios;
 
 class CategoriaController extends Controller
 {
@@ -8,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function Cadastrar($id='', $name=''){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)['admin'],true);
 		
 		if ($isAdmin){
 			$this->view(['id' =>$id, 'name' =>$name]);
@@ -70,7 +77,7 @@ class CategoriaController extends Controller
 				
 			}
 
-			$Categorias->save($Categorias);
+			$Categorias->save();
 			header('Location:' . '/Categoria/Cadastrar');	
 		}
     }

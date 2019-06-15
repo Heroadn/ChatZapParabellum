@@ -1,5 +1,5 @@
 <?php
-
+namespace core;
 
 class Controller
 {
@@ -12,7 +12,7 @@ class Controller
         }
 
         //Nome da pasta em view é igual ao nome de "url" do controller chamado
-        $view_folder = str_replace('Controller', '', get_class($this)) . DIRECTORY_SEPARATOR;
+        $view_folder = str_ireplace('controller', '', get_class($this)) . DIRECTORY_SEPARATOR;
         $this->view = new View($view_folder . $viewName,$data);
         return $this->view;
     }

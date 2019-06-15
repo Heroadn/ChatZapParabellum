@@ -1,5 +1,8 @@
 <?php
-
+namespace model;
+use PDOException;
+use core\Dao;
+use core\Db;
 
 class Salas extends Dao
 {

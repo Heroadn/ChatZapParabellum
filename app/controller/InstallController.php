@@ -1,5 +1,6 @@
 <?php
-
+namespace controller;
+use core\Controller;
 
 class InstallController extends Controller
 {

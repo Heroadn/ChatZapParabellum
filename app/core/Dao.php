@@ -1,4 +1,8 @@
 <?php
+namespace core;
+use \PDO;
+use PDOException;
+
 /*
  * @author Benjamin de Castro Azevedo Ponciano [benbenjamin554@gmail.com]
  * @author Thiago Venancio
@@ -70,7 +74,7 @@ class Dao{
 							WHERE '.static::PK.' = :'.static::PK;
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->bindParam(':'.static::PK,$id);
-            $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
+            $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst('\\model\\'. static::TABLE));
             $p_sql->execute();
             return $p_sql->fetch();
         }catch(PDOException $e){
@@ -92,7 +96,7 @@ class Dao{
 
             $p_sql = Db::getInstance()->prepare($sql);
             $p_sql->bindParam(':'.$field,$string);
-            $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
+            $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst('\\model\\'. static::TABLE));
             $p_sql->execute();
             return $p_sql->fetch(PDO::FETCH_ASSOC);
         }catch(PDOException $e){
@@ -156,12 +160,10 @@ class Dao{
 
         try{
             $sql = self::sqlBuilder($criterios,self::where($fk));
-			
             $p_sql = Db::getInstance()->query($sql);
 
-
             $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst(static::TABLE));
-            $objects = $p_sql->fetchAll();
+            $objects = $p_sql->fetchAll(PDO::FETCH_CLASS, ucfirst('\\model\\'. static::TABLE));
 
             return $objects;
         }catch(PDOException $e){

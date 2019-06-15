@@ -1,4 +1,11 @@
 <?php
+namespace controller;
+use core\Controller;
+use core\Token;
+use model\Salas;
+use model\Mensagens;
+use model\Usuarios;
+
 class MensagemController extends Controller
 {
     /**
