@@ -16,6 +16,7 @@ class View extends Template
      * @param $view_data
      */
     public function __construct($view_file, $view_data){
+        die('XD');
         $this->view_file = $view_file;//Arquivo a ser chamado
         $this->view_data = $view_data;//Variaveis para a view
         $this->page_title = (isset($this->page_title) ? $this->page_title : 'NONE');//<Title></title>
