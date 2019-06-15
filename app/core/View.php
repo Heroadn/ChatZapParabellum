@@ -28,7 +28,7 @@ class View extends Template
     public function render($template = true, $extension = '.php'){
         $path = VIEW . $this->view_file . $extension;
         $include = TEMPLATE . $this->view_template . DIRECTORY_SEPARATOR . 'Index.php';
-        var_dump($path);
+        var_dump($this->view_file);
         die('XD');
 
         //Caso template seja desativado
