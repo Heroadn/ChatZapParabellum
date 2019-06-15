@@ -21,7 +21,7 @@ include_once("AutoLoader.php");
 include_once(TEMPLATE . DIRECTORY_SEPARATOR . 'Config.php');
 
 #Mensagem de erro quanto estiver em ambiente de desenvolvimento
-if(DEBUG){ini_set('display_errors',1);error_reporting(-1);}
+if(true){ini_set('display_errors',1);error_reporting(-1);}
 date_default_timezone_set('America/Sao_Paulo');
 
 ##Init
