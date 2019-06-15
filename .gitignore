@@ -2,6 +2,7 @@
 /vendor
 /bower_components
 /node_modules
+/UML
 
 Thumbs.db
 Config.php
