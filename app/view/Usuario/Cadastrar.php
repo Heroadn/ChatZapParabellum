@@ -5,7 +5,7 @@
         <label for="nome"><span style="color: dodgerblue">*</span>Nome:</label>  <input class="form-control" name="nome" type="text">
         <label for="senha"><span style="color: dodgerblue">*</span>Senha:</label><input class="form-control" name="senha" type="password">
         <label for="email"><span style="color: dodgerblue">*</span>Email:</label><input class="form-control" name="email" type="email">
-        <label for="foto_perfil">Foto:</label><input class="form-control" name="foto_perfil" type="text">
+        <label for="foto_perfil"><span style="color: dodgerblue">*</span>Foto:</label><input class="form-control" name="foto_perfil" type="file">
         <label for="admin">Admin:</label><input class="form-control" name="admin" type="text">
     </div>
 
