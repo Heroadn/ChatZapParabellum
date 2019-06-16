@@ -14,63 +14,90 @@
         ?>
     </head>
 
-    <body>
-        <style>
-            body{
-                background-image: url("<?php echo str_replace('\\','/',IMG . 'car.jpg')?>");
-                background-repeat:no-repeat;
-                background-size: cover;
-            }
-        </style>
+    <body class="darken">
 
-        <!-- Navegação -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/Index/">Parabellum</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <?php $this->getNav();?>
-                </ul>
-            </div>
-        </nav>
-
-        <!--
-        <nav class="navbar navbar-dark purple">
+        <nav class="navbar navbar-expand-md navbar-dark purple">
             <div class="container">
-                <a class="navbar-brand h1 mb-0 mr-5" href="index.php" style="color:white">
-                    <img alt="asdasd" src="<?php //echo IMG. 'logowhite_zapchat.png'?>" width="40px">
+                <a class="navbar-brand h1 mb-0 mr-5" href="/zapzap" style="color: var(--font-light)">
+                    <img alt="asdasd" src="<?php echo IMG . 'logowhite_zapchat.png'?>" width="40px">
                     &nbsp;&nbsp; ZapChat
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite" style="color: white">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="container"></div>
-                <div class="collapse navbar-collapse l-10" id="navbarSite">
+                <div class="collapse navbar-collapse" id="navbarSite">
                     <ul class="navbar-nav">
-                        <?php //$this->getNav();?>
+                        <?php $this->getNav();?>
                     </ul>
                 </div>
             </div>
-        </nav>-->
+        </nav>
+
+
+        <!-- preload -->
+        <div id="preLoad">
+            <span id="primeiro"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span id="ultimoSpan"></span>
+        </div>
 
         <!-- Container -->
         <div class="container"  style="margin-top: 3%;margin-bottom: 3%">
-            <div class="card">
-                <div class="card-header">
-                    <?php echo $this->page_title;?>
+            <div class="row">
+                <div class="col-12 col-md-6 mb-4 msg_view">
+                    <div class="msnError">
+                        <div class='msn'></div>
+                        <div class='exitMsn'>x</div>
+                        <div class="clear"></div>
+                    </div>
                 </div>
-                <div class="card-body">
+                <div class="col-12 col-md-6 light rounded border border-white">
+                    <form>
+                        <div class="form-group">
+                            <div id="text" class="pt-1">Pesquisar Sala por Nome:</div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <select id="inputState" onChange="switchSearch()" class="form-control">
+                                        <option value="Nome" selected>NOME</option>
+                                        <option value="Categoria">CATEGORIA</option>
+                                        <option value="Tag">TAG</option>
+                                        <option value="Relevancia">RELEVANCIA</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 inputSearch" id="inputSearch">
+                                    <input type="text" class="form-control" id="pesq" placeholder="pesquisar...">
+                                </div>
+                                <div class="col-sm-4" id="select_search">
+                                    <select class="form-control">
+                                        <option value="Nome" selected>NOME</option>
+                                        <option value="Categoria">CATEGORIA</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-purple purple" id="btnSearch">Pesquisar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="boxPages">
+                <div class="mt-4 rounded border border-white text-center light boxCenter">
                     <?php $this->getContent();?>
+                    <script src="<?php JS . 'err.js'?>"></script>
+                    <script src="<?php JS . 'search_Sala.js'?>"></script>
+                    <script src="<?php JS . 'pesq.js'?>"></script>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer class="text-center">
-            <a href="#"><?php echo 'Page loaded in ' . number_format(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],3) . ' seconds!';?></a>
+            <a href="#"><?php $time ='Page loaded in ' . number_format(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],3) . ' seconds!';if(DEBUG){echo $time;}?></a>
         </footer>
 
         <!-- Modal -->
@@ -83,10 +110,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <!--
-                    <div class="modal-body text-center">
-                        <iframe width="100%" height="350" src="/Usuario/Cadastrar"></iframe>
-                    </div>-->
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

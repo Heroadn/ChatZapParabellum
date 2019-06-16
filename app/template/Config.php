@@ -6,7 +6,11 @@ define('CSS_HEADER',serialize([
     'bootstrap-grid.min.css',
     'fw.css',
     'core.css',
-    'color.css'
+    'color.css',
+    'balloon.css',
+    'preload.css',
+    'style.css',
+    'highlighted.css'
 ]));
 
 define('JS_HEADER',serialize([

@@ -4,6 +4,7 @@ use core\Assert;
 use core\Controller;
 use core\Token;
 use core\Upload;
+use http\Header;
 use model\Salas;
 use model\Categorias;
 use model\Usuarios;
@@ -208,6 +209,8 @@ class SalaController extends Controller
         $Salas->moderador_id  = $token->id;
         $Salas->categorias_id = ($json)? filter_var($json['categorias_id'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'categorias_id');
         $Salas->save();
+
+        header('location: '.'Sala/Conversar/');
     }
 
     /**

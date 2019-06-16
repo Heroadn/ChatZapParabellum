@@ -3,9 +3,11 @@
 /bower_components
 /node_modules
 /UML
-
+app/libs/uploads
 Thumbs.db
 Config.php
 erros.txt
 npm-debug.log
 .idea/php.xml
+composer.lock
+zapzap.rar
