@@ -57,9 +57,6 @@ class Dao{
             }
             $p_sql->execute();
 
-            var_dump();
-            die();
-
             return $p_sql->execute();
         }catch(PDOException $e){
             file_put_contents("erros.txt",
