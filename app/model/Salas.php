@@ -1,5 +1,6 @@
 <?php
 namespace model;
+use PDO;
 use PDOException;
 use core\Dao;
 use core\Db;
