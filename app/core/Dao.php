@@ -55,7 +55,6 @@ class Dao{
                     $p_sql->bindValue(':'.$value, $model->$value);
                 }
             }
-            $p_sql->execute();
 
             return $p_sql->execute();
         }catch(PDOException $e){
