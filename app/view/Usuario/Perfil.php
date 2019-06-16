@@ -32,7 +32,7 @@
         <br>
         <hr>
         <br>
-        <a href="">Alterar Informações</a>
+        <a href="../Alterar">Alterar Informações</a>
         <hr>
     </div>
 <?php return;}?>
