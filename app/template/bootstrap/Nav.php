@@ -31,7 +31,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
-          <?php require("/Usuario/Alterar") ?>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Sair</a>
