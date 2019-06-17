@@ -151,6 +151,7 @@ class UsuarioController extends Controller
         //foto_perfil
         $json = json_decode(file_get_contents('php://input'), true);
 
+
         $Usuario = Usuarios::findById($id);
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
@@ -161,9 +162,9 @@ class UsuarioController extends Controller
 
         $fromDb = Usuarios::findBy('email',$Usuario->email);
 
-        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
+        if( !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
         {
-            header('Location:' . '/Usuario/Alterar');
+            header('Location:' . '/Usuario/Alterar' . $Usuario['id']);
             echo 'erro!';
         }else
         {
