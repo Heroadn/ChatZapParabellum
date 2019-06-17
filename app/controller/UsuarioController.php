@@ -167,8 +167,8 @@ class UsuarioController extends Controller
 
         var_dump($Usuario);
         $Usuario->save();
-        
-        header('Location:' . '/Usuario/Perfil/'. $token->id);
+
+        // header('Location:' . '/Usuario/Perfil/'. $token->id);
 
     }
 
