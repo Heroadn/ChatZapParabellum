@@ -14,9 +14,6 @@
 
 <?php function usuarioEncontrado($Usuario){?>
 
-
-
-
 <div id="editarperfil" class="modal fade" role="dialog" >
 <div class="modal-dialog modal-md">
 
