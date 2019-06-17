@@ -153,7 +153,7 @@ class UsuarioController extends Controller
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->id,true);
 
-        echo $Usuario->id;
+        echo $token->id;
         $id = $Usuario->id;
         $Usuario = Usuarios::findById($id);
 
