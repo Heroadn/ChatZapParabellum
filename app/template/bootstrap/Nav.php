@@ -28,7 +28,7 @@
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
+          <a type="button" class="btn btn-primary" data-toggle="modal" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Sair</a>
