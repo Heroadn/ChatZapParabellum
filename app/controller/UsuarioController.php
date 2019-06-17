@@ -132,8 +132,8 @@ class UsuarioController extends Controller
 
     public function fb_callback(){
         $fb = new Facebook\Facebook([
-            'app_id' => '{app-id}', // Replace {app-id} with your app id
-            'app_secret' => '{app-secret}',
+            'app_id' => '750854629068948', // Replace {app-id} with your app id
+            'app_secret' => '9f633bf40ba5075f49f45b8e82420d6c',
             'default_graph_version' => 'v2.2',
         ]);
 
