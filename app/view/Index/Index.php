@@ -19,10 +19,10 @@ echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 <script>
     window.fbAsyncInit = function() {
         FB.init({
-            appId      : '{750854629068948}',
+            appId      : '750854629068948',
             cookie     : true,
             xfbml      : true,
-            version    : '{v3.3}'
+            version    : 'v3.3'
         });
 
         FB.AppEvents.logPageView();
