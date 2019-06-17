@@ -28,14 +28,13 @@ class SalaController extends Controller
 		}
     }
 
-    public function Listar($opcao='', $inicio=1, $limit=10){
+    public function Listar($opcao='', $parametro=1, $inicio=1, $limit=10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
         $opcao = strtolower($opcao);
         /*Caso o usuario seja um administrador
         * sera mostrado todas as informações sobre sala assim como informações sensiveis
-		* senha, tempo etc.. */
-		$parametro = filter_input(INPUT_POST, 'q');
+        * senha, tempo etc.. */
 		
         $start = intval($inicio);
         $page = ($start * $limit) - $limit;
