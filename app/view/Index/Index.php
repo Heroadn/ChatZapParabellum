@@ -35,13 +35,17 @@ $loginUrl = $helper->getLoginUrl('http://chat.acid-software.net/Usuario/fb-callb
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.3&appId=750854629068948&autoLogAppEvents=1"></script>
 
-<div class="form-inline">
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    </div>
 
-    <div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
+    <div class="col-md-12">
+        <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+        </div>
     </div>
 </div>
