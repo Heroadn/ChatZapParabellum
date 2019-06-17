@@ -40,6 +40,13 @@ class UsuarioController extends Controller
         $this->view->render();
     }
 
+    public function Alterar($id=''){
+        $Usuario = Usuarios::findById($id);
+        $this->view(['Usuario' =>$Usuario]);
+        $this->view->page_title = 'Perfil';
+        $this->view->render();
+    }
+
     /**
      * Ele retorna um json com o usuario requisitado ou todos, sendo necessario Autenticação
      * @param string $id
@@ -139,5 +146,32 @@ class UsuarioController extends Controller
             }
         }
     }
+
+    public function alterar_post(){
+        //foto_perfil
+        $json = json_decode(file_get_contents('php://input'), true);
+
+        $Usuario = Usuarios::findById($id);
+        $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
+        $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
+        $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
+        $Usuario->foto_perfil = ($json) ? Upload::save('foto_perfil','perfil_'.$Usuario->email.'_') : Upload::save('foto_perfil','perfil_'.$Usuario->email.'_');
+        $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
+        $Usuario->admin = "0";
+
+        $fromDb = Usuarios::findBy('email',$Usuario->email);
+
+        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
+        {
+            header('Location:' . '/Usuario/Alterar');
+            echo 'erro!';
+        }else
+        {
+            $Usuario->save();
+            header('Location:' . '/Usuario/Perfil/'.$Usuario['id']);
+        }
+    }
+
+
 
 }
