@@ -28,7 +28,7 @@
 
         </li>
         <li class="nav-item">
-          <a type="button" class="btn btn-primary" data-toggle="modal" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
+          <a type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Perfil">Editar Pefil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Sair</a>
@@ -38,7 +38,7 @@
   </div>
 </nav>
 
-<div id="editarperfil" class="modal fade" role="dialog" >
+<div id="Perfil" class="modal fade" role="dialog" >
 <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
@@ -82,7 +82,7 @@
 							<h5 class="p-text"> Email de Usuario: <i style="font-size:30px"> <?php echo $Usuario->email ?> .</i></h5>
 								<div class="row">
 									<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-										<input type="text" class="form-control" id="trocar_nome" placeholder="Coloque seu novo email aqui...">
+										<input type="text" class="form-control" id="" placeholder="Coloque seu novo email aqui...">
 									</div>
 								</div>
 								<br>
