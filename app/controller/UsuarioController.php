@@ -164,7 +164,7 @@ class UsuarioController extends Controller
 
         if( !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
         {
-            header('Location:' . '/Usuario/Alterar' . $Usuario['id']);
+            header('Location:' . '/Usuario/Alterar/' . $Usuario['id']);
             echo 'erro!';
         }else
         {
