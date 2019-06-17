@@ -18,7 +18,7 @@
 
         <nav class="navbar navbar-expand-md navbar-dark purple">
             <div class="container">
-                <a class="navbar-brand h1 mb-0 mr-5" href="/zapzap" style="color: var(--font-light)">
+                <a class="navbar-brand h1 mb-0 mr-5" href="" style="color: var(--font-light)">
                     <img alt="asdasd" src="<?php echo IMG . 'logowhite_zapchat.png'?>" width="40px">
                     &nbsp;&nbsp; ZapChat
                 </a>
@@ -120,6 +120,3 @@
         </div>
     </body>
 </html>
-
-
-
