@@ -10,7 +10,7 @@ $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email']; // Optional permissions
 $loginUrl = $helper->getLoginUrl('http://chat.acid-software.net/Usuario/fb-callback.php', $permissions);
 
-echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+//echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 ?>
 
 <script>
@@ -32,3 +32,9 @@ echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<div
+    class="fb-like"
+    data-share="true"
+    data-width="450"
+    data-show-faces="true">
+</div>
