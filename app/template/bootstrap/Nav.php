@@ -3,44 +3,41 @@
     $action = $this->getAction();
 ?>
 
-<li class="nav-item">
-    <a class="nav-link" href="/Usuario/Cadastrar">Usuario Cadastrar</a>
-</li>
+<nav class="navbar navbar-expand-md navbar-dark purple">
+  <div class="container">
+    <a class="navbar-brand h1 mb-0 mr-5 menutitle" href="#" style="color: var(--font-light)">
+      <img alt="asdasd" src="resouce/logowhite_zapchat.png" width="40px">
+      &nbsp;&nbsp; ZapChat
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite" style="color: white">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container"></div>
+    <div class="collapse navbar-collapse" id="navbarSite">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/zapzap">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/zapzap?escolha=2">Login</a>
 
-<li class="nav-item">
-    <a class="nav-link <?php echo ($action == 'Login')? 'active' : ''; ?>" href="/Usuario/Login">Usuario Login</a>
-</li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/zapzap?escolha=3">Salas</a>
 
-<li class="nav-item">
-    <a class="nav-link" href="/Usuario/Listar">Usuario Listar</a>
-</li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/zapzap?escolha=4">Paginas</a>
 
-<li class="nav-item">
-    <a class="nav-link" href="/Usuario/Perfil">Usuario Perfil</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Categoria/Listar">Categoria Listar</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/Categoria/listar_por_relevancia">Categoria Relevantes</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/Categoria/Cadastrar">Categoria Cadastrar</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Sala/Cadastrar">Sala Cadastrar</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Sala/Listar">Sala Listar</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Sala/Listar/Relevantes">Sala Listar Por Usuários</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="/Sala/Conversar">Sala Conversa</a>
-</li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
+          <?php require("modal_editar_perfil.php") ?>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
