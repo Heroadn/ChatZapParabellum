@@ -13,3 +13,22 @@ $loginUrl = $helper->getLoginUrl('http://chat.acid-software.net/Usuario/fb-callb
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 ?>
 
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '750854629068948',
+            xfbml      : true,
+            version    : 'v3.3'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
