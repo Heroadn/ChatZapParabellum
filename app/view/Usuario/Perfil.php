@@ -33,7 +33,7 @@
         <br>
         <hr>
         <br>
-        <a href="../Alterar/ <?php echo $Usuario->id ?>" > Alterar Informações </a>
+        <a href="../Alterar/<?php echo $Usuario->id ?>" > Alterar Informações </a>
         <hr>
     </div>
 <?php return;}?>
