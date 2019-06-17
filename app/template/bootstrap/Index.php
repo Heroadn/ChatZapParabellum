@@ -97,7 +97,7 @@
 
         <!-- Footer -->
         <footer class="text-center">
-            <a href="#"><?php $time ='Page loaded in ' . number_format(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],3) . ' seconds!';if(DEBUG){echo $time;}?></a>
+            <a href="#"><?php //$time ='Page loaded in ' . number_format(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'],3) . ' seconds!';if(DEBUG){echo $time;}?></a>
         </footer>
 
         <!-- Modal -->
