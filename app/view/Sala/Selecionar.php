@@ -6,7 +6,7 @@
     </div>
 
     <div class="col s12 m6 l6">
-            <input type="search" placeholder="Pesquise salas" name="q">
+            <input type="search" placeholder="Pesquise salas">
         </form>
     </div>
 </div>
