@@ -150,9 +150,11 @@ class UsuarioController extends Controller
     public function alterar_post(){
         //foto_perfil
         $json = json_decode(file_get_contents('php://input'), true);
-
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->id,true);
 
         $Usuario = Usuarios::findById($id);
+
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
         $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
