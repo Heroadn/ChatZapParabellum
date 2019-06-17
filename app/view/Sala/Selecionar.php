@@ -6,7 +6,7 @@
     </div>
 
     <div class="col s12 m6 l6">
-        <form action="http://Chat.acid-software.net/Sala/Listar/nome/">
+        <form method="post" action="http://Chat.acid-software.net/Sala/Listar/nome/">
             <input type="search" placeholder="Pesquise salas" name="q">
             <input type="submit">
         </form>
