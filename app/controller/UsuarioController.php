@@ -153,8 +153,7 @@ class UsuarioController extends Controller
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->id,true);
 
-        echo $token->id;
-        $id = $Usuario->id;
+        $id = $token->id;
         $Usuario = Usuarios::findById($id);
 
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
