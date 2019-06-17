@@ -1,28 +1,18 @@
 <?php
 $fb = new Facebook\Facebook([
-    'app_id' => '{app-id}', // Replace {app-id} with your app id
-    'app_secret' => '{app-secret}',
+    'app_id' => '750854629068948', // Replace {app-id} with your app id
+    'app_secret' => '{9f633bf40ba5075f49f45b8e82420d6c}',
     'default_graph_version' => 'v2.2',
 ]);
+
+$helper = $fb->getRedirectLoginHelper();
+
+$permissions = ['email']; // Optional permissions
+$loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permissions);
+
+echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 ?>
 
-<form method="post" role="form" action="http://Chat.acid-software.net/Usuario/cadastrar_post"  enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="nome_usuario">Nome do Usuario:</label>
-        <input type="text" class="form-purple" name="nome" id="nome_usuario" aria-describedby="emailHelp" placeholder="Coloque seu nome de usuario aqui...">
-        <small id="nameHelp" class="form-text text-muted">Coloque um nome maior que 5 digitos...</small>
-    </div>
-    <div class="form-group">
-        <label for="email_usuario">Email do Cadastro:</label>
-        <input type="email" class="form-purple" name="email" id="email_usuario" aria-describedby="emailHelp" placeholder="Coloque seu email aqui...">
-        <small id="emailHelp" class="form-text text-muted">Não compartilhamos essa informação com ninguem...</small>
-    </div>
-    <div class="form-group">
-        <label for="usuario_senha">Senha:</label>
-        <input type="password" class="form-purple" name="senha" id="usuario_senha" placeholder="Escreva sua senha aqui...">
-        <small id="nameHelp" class="form-text text-muted">Coloque uma senha maior que 5 digitos...</small>
-    </div>
-</form>
 
 <script src="<?php echo JS . 'integridade_cadastro.js'?>"></script>
 
