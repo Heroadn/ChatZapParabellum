@@ -23,7 +23,7 @@
 
         <h4>Email:</h4>
 
-        <p><?php echo $Usuario->id ?></p>
+        <p><?php echo $Usuario->email ?></p>
         <br>
         <br>
         <hr>
@@ -33,7 +33,7 @@
         <br>
         <hr>
         <br>
-        <a <?php echo 'href="../Alterar/'  ?> > Alterar Informações</a>
+        <a href="../Alterar/ <?php echo $Usuario->id ?>" > Alterar Informações </a>
         <hr>
     </div>
 <?php return;}?>
