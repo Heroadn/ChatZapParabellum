@@ -165,6 +165,8 @@ class UsuarioController extends Controller
 
         $fromDb = Usuarios::findBy('email',$Usuario->email);
 
+        var_dump($Usuario);
+
         if( !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
         {
             header('Location:' . '/Usuario/Alterar/' . $Usuario['id']);
