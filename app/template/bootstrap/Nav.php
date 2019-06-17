@@ -5,8 +5,6 @@
 <nav class="navbar navbar-expand-md navbar-dark purple">
   <div class="container">
     <a class="navbar-brand h1 mb-0 mr-5 menutitle" href="#" style="color: var(--font-light)">
-      <img alt="zapzap" src="../../libs/img/logo_zapchat.png" width="40px">
-      &nbsp;&nbsp; ZapChat
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite" style="color: white">
       <span class="navbar-toggler-icon"></span>
