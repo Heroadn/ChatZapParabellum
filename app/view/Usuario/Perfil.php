@@ -2,10 +2,6 @@
     /** @var Usuarios $Usuario */
 ?>
 
-<?php
-    session_start();
-
-?>
 
 <div class="row">
     <?php
@@ -27,7 +23,7 @@
 
         <h4>Email:</h4>
 
-        <p><?php echo $Usuario->email ?></p>
+        <p><?php echo $Usuario->id ?></p>
         <br>
         <br>
         <hr>
@@ -37,7 +33,7 @@
         <br>
         <hr>
         <br>
-        <a <?php echo 'href="../Alterar/' . $_SESSION['user_id'] . '" ' ?> > Alterar Informações</a>
+        <a <?php echo 'href="../Alterar/' .  . '" ' ?> > Alterar Informações</a>
         <hr>
     </div>
 <?php return;}?>
