@@ -6,7 +6,10 @@
     </div>
 
     <div class="col s12 m6 l6">
-        <input type="search" placeholder="Pesquise salas">
+        <form action="http://Chat.acid-software.net/Sala/Listar/nome/">
+            <input type="search" placeholder="Pesquise salas">
+            <input type="submit">
+        </form>
     </div>
 </div>
 
