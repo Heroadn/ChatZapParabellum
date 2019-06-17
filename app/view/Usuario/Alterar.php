@@ -50,7 +50,7 @@
                 <input type="submit" class="btn btn-primary" value="Salvar">
             </div>
         </form>
-        <a href="../Perfil/<?php $Usuario['id'] ?>">Voltar</a>
+        <a href="../Perfil/<?php $Usuario->id ?>">Voltar</a>
         <hr>
 
     </div>
