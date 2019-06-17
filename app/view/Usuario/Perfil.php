@@ -3,13 +3,8 @@
 ?>
 
 <?php
-    if(isset($_SESSION['user_id'])){
-        echo '<div class="card">';
-            echo '<h4>' . 'Login detectado' .'</h4>';
-            echo $_SESSION['user_nome'] . '<br>';
-            echo $_SESSION['user_email'] . '<br>';
-        echo '</div>';
-    }
+    session_start();
+
 ?>
 
 <div class="row">
@@ -42,7 +37,7 @@
         <br>
         <hr>
         <br>
-        <a <?php echo 'href="../Alterar/' . $_SESSION['user_id'] . '" ' ?>> Alterar Informações</a>
+        <a <?php echo 'href="../Alterar/' . $_SESSION['user_id'] . '" ' ?> > Alterar Informações</a>
         <hr>
     </div>
 <?php return;}?>
