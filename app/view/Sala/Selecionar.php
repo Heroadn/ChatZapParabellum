@@ -4,16 +4,8 @@
     <div class="col s12 m6 l6">
         <h5>Nome da Sala</h5>
     </div>
-
     <div class="col s12 m6 l6">
-<<<<<<< HEAD
-            <input type="search" placeholder="Pesquise salas">
-=======
-        <form action="http://Chat.acid-software.net/Sala/Listar/nome/">
-            <input type="search" placeholder="Pesquise salas" name="q">
-            <input type="submit">
->>>>>>> parent of 85ce54a... mudado parametro
-        </form>
+        <input type="search" placeholder="Pesquise salas">
     </div>
 </div>
 
