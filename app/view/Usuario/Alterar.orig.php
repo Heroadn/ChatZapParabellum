@@ -13,9 +13,54 @@
 </div>
 
 <?php function usuarioEncontrado($Usuario){?>
+    <div class="col-sm-12 col-md-12">
+        <br>
+        <form class="form-horizontal" method="post" role="form" action="/Usuario/alterar_post"  enctype="multipart/form-data">
+            <br>
+            <div class="form-group">
 
+                <br>
+                <hr>
+                <br>
+                <h4>Nome:</h4>
+                <label for="nome"><span style="color: dodgerblue">*</span>Nome:</label>  <input class="form-control" name="nome" type="text" value="<?php echo $Usuario->nome ?>">
 
+                <br>
+                <hr>
+                <br>
+                <h4>Senha:</h4>
+                <label for="senha"><span style="color: dodgerblue">*</span>Senha:</label><input class="form-control" name="senha" type="password" >
 
+                <br>
+                <hr>
+                <br>
+                <h4>Email:</h4>
+                <label for="email"><span style="color: dodgerblue">*</span>Email:</label><input class="form-control" name="email" type="email" value="<?php echo $Usuario->email ?>">
+
+                <br>
+                <hr>
+                <br>
+                <h4>Foto de Perfil:</h4>
+                <label for="foto_perfil"><span style="color: dodgerblue">*</span>Foto:</label><input class="form-control" name="foto_perfil" type="file" value="<?php echo $Usuario->foto_perfil ?>">
+            </div>
+            <br>
+            <div class="clearfix"></div>
+            <div class="text-right">
+                <a href="" class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                <input type="submit" class="btn btn-primary" value="Salvar">
+            </div>
+        </form>
+        <a href="../Perfil/<?php $Usuario->id ?>">Voltar</a>
+        <hr>
+
+    </div>
+<?php return;}?>
+
+<?php
+	$usuario_img = "img/usuarios/error.png";
+	$usuario_nome = "Nome do Usuario Aqui";
+	$usuario_email = "email@email.com";
+?>
 
 <div id="editarperfil" class="modal fade" role="dialog" >
 <div class="modal-dialog modal-md">
@@ -31,8 +76,7 @@
 
 	    </div>
     <div class="modal-body">
-      <!-- //class="form-horizontal -->
-			<form id="form_editar_perfil" method="post" role="form" action="/Usuario/alterar_post"  enctype="multipart/form-data">
+			<form id="form_editar_perfil">
 	      <div class="row">
 					<div class="col-sm-9 col-md-4 col-lg-4 col-xl-4 text-center">
 						<img class="border-purple img-fluid" id="img_user_show" src="<?php echo $Usuario->foto_perfil ?>" style="border-radius:50%;">
@@ -46,6 +90,7 @@
 										<button type="button" class="btn btn-purple purple btn-block" onclick="wayFile('img_perfil_new')">
 											Mudar a Foto
 										</button>
+										<script src="includes/img_insert.js"></script>
 									</div>
 								</div>
 							</div>
@@ -101,5 +146,5 @@
       	</div>
     </div>
 	</div>
+	<script src="includes/integridade_editar_perfil.js"></script>
 </div>
-<?php return;}?>
