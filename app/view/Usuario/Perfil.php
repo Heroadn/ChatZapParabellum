@@ -32,7 +32,7 @@
         <br>
         <hr>
         <br>
-        <a <?php echo 'href="../Alterar/' . $Usuario->id . '" > Alterar Informações'?> </a>
+        <a <?php echo 'href="../Alterar/' . $Usuario['id'] . '" ' ?>> Alterar Informações</a>
         <hr>
     </div>
 <?php return;}?>
