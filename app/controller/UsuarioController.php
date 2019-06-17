@@ -154,8 +154,8 @@ class UsuarioController extends Controller
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->id,true);
 
         $id = $token->id;
-        $Usuario = Usuarios::findById($id);
 
+        $Usuario = Usuarios::findById($id);
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
         $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
@@ -166,16 +166,10 @@ class UsuarioController extends Controller
         $fromDb = Usuarios::findBy('email',$Usuario->email);
 
         var_dump($Usuario);
+        $Usuario->save();
+        
+        header('Location:' . '/Usuario/Perfil/'. $token->id);
 
-        if( !isset($Usuario->nome) || !isset($Usuario->email) || $fromDb !== false)
-        {
-            header('Location:' . '/Usuario/Alterar/' . $token->id);
-            echo 'erro!';
-        }else
-        {
-            $Usuario->save();
-            header('Location:' . '/Usuario/Perfil/'.$Usuario['id']);
-        }
     }
 
 
