@@ -157,7 +157,7 @@ class SalaController extends Controller
 						$this->view->render();		
 					}
 					else{
-					    include(DIRECTORY_SEPARATOR .View . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
+					    include(DIRECTORY_SEPARATOR . VIEW . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
 					}
 				}
 				else {
