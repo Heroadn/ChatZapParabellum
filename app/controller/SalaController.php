@@ -4,6 +4,7 @@ use core\Assert;
 use core\Controller;
 use core\Token;
 use core\Upload;
+use core\View;
 use http\Header;
 use model\Salas;
 use model\Categorias;
@@ -156,7 +157,7 @@ class SalaController extends Controller
 						$this->view->render();		
 					}
 					else{
-						echo 'TÁ BANIDO, VACILÃO!!!!!<iframe width="0" height="0" src="https://sound.acid-software.net/insufficient_permissions.html"></iframe>';
+					    header('Location: '.View . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
 					}
 				}
 				else {
