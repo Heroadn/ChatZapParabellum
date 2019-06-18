@@ -26,7 +26,7 @@ class Application{
                 * $this->prams -> parametros a serem passados a função class->função($this->prams[0],$this->prams[1],...)*/
                 call_user_func_array([$this->controller,$this->action],$this->prams);
             }else{
-                throw new Exception('Pagina nao encontrada, verifique se a pasta esta com o nome certo e a url foi digitada corretamente');
+                include(VIEW . 'Error' . DIRECTORY_SEPARATOR . '404.php');//                //throw new Exception('Pagina nao encontrada, verifique se a pasta esta com o nome certo e a url foi digitada corretamente');
             }
         }
     }

@@ -1,32 +1,37 @@
-<?php
-$fb = new Facebook\Facebook([
-    'app_id' => '{app-id}', // Replace {app-id} with your app id
-    'app_secret' => '{app-secret}',
-    'default_graph_version' => 'v2.2',
-]);
-?>
-
-<form method="post" role="form" action="http://Chat.acid-software.net/Usuario/cadastrar_post"  enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="nome_usuario">Nome do Usuario:</label>
-        <input type="text" class="form-purple" name="nome" id="nome_usuario" aria-describedby="emailHelp" placeholder="Coloque seu nome de usuario aqui...">
-        <small id="nameHelp" class="form-text text-muted">Coloque um nome maior que 5 digitos...</small>
-    </div>
-    <div class="form-group">
-        <label for="email_usuario">Email do Cadastro:</label>
-        <input type="email" class="form-purple" name="email" id="email_usuario" aria-describedby="emailHelp" placeholder="Coloque seu email aqui...">
-        <small id="emailHelp" class="form-text text-muted">Não compartilhamos essa informação com ninguem...</small>
-    </div>
-    <div class="form-group">
-        <label for="usuario_senha">Senha:</label>
-        <input type="password" class="form-purple" name="senha" id="usuario_senha" placeholder="Escreva sua senha aqui...">
-        <small id="nameHelp" class="form-text text-muted">Coloque uma senha maior que 5 digitos...</small>
-    </div>
-</form>
-
-<script src="<?php echo JS . 'integridade_cadastro.js'?>"></script>
-
 <script>
-    var obj = { '===': "5", '>': "", foto: "NewYork" };
-    verifyFormIntegrity('',obj);
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '750854629068948',
+            xfbml      : true,
+            version    : 'v3.3'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.3&appId=750854629068948&autoLogAppEvents=1"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-12">
+        <div
+            class="fb-like"
+            data-share="true"
+            data-width="272"
+            data-show-faces="true">
+        </div>
+    </div>
+</div>

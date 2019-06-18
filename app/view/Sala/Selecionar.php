@@ -4,10 +4,8 @@
     <div class="col s12 m6 l6">
         <h5>Nome da Sala</h5>
     </div>
-
     <div class="col s12 m6 l6">
-            <input type="search" placeholder="Pesquise salas">
-        </form>
+        <input type="search" placeholder="Pesquise salas">
     </div>
 </div>
 
