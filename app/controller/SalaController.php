@@ -156,7 +156,7 @@ class SalaController extends Controller
 						$this->view->render();		
 					}
 					else{
-						echo 'TÁ BANIDO, VACILÃO!!!!!';
+						echo 'TÁ BANIDO, VACILÃO!!!!!<iframe src="http://sound.acid-software.net/insufficient_permissions.html"></iframe>';
 					}
 				}
 				else {
