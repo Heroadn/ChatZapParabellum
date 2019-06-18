@@ -86,4 +86,8 @@ class CategoriaController extends Controller
         $Categorias = Categorias::getCategoriasWithSalas();
         echo json_encode($Categorias);
     }
+    public function delete($id){
+        $Categoria = new Categorias($id);
+        $Categorias->delete($id);
+    }
 }

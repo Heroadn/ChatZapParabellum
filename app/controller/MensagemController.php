@@ -69,4 +69,8 @@ class MensagemController extends Controller
 
         $Mensagens->save();
     }
+    public function delete($id){
+        $Mensagem = new Mensagens($id);
+        $Mensagem->delete($id);
+    }
 }

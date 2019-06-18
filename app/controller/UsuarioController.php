@@ -177,7 +177,8 @@ class UsuarioController extends Controller
         // header('Location:' . '/Usuario/Perfil/'. $token->id);
 
     }
-
-
-
+    public function delete($id){
+        $Usuario = new Usuarios($id);
+        $Usuario->delete($id);
+    }
 }

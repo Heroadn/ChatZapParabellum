@@ -309,4 +309,8 @@ class SalaController extends Controller
 			}
 		}
 	}
+	public function delete($id){
+        $Sala = new Salas($id);
+        $Sala->delete($id);
+    }
 }
