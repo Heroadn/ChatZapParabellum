@@ -157,7 +157,7 @@ class SalaController extends Controller
 						$this->view->render();		
 					}
 					else{
-					    header('Location: '.View . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
+					    header('Location: '.DIRECTORY_SEPARATOR .View . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
 					}
 				}
 				else {
