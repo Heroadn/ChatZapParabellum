@@ -4,7 +4,6 @@ use core\Controller;
 use core\Token;
 use core\Assert;
 use core\Upload;
-use Facebook\Facebook;
 use model\Usuarios;
 
 class UsuarioController extends Controller
