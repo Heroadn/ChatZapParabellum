@@ -146,6 +146,11 @@ class UsuarioController extends Controller
             }
         }
     }
+    public function logout_post(){
+        session_start();
+        unset($_SESSION["Token"]);
+        header("Location: https://chat.acid-software.net/");
+    }
 
     public function alterar_post(){
         //foto_perfil
