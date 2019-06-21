@@ -141,6 +141,7 @@ class UsuarioController extends Controller
 
                 $_SESSION['Token'] = Token::encode($payload);
                 header('Location:' . '/Usuario/Perfil/'.$Usuario['id']);
+                session_start();
             }else{
                 header('Location:' . '/Usuario/Login/Erro');
             }

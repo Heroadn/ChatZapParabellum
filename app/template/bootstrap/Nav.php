@@ -16,10 +16,6 @@
           <a class="nav-link" href="http://chat.acid-software.net/">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/Usuario/Login">Login</a>
-
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/Sala/Destaque">Salas</a>
 
         </li>
@@ -116,9 +112,20 @@
           </div>
 
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sair</a>
-        </li>
+        <?php
+        if (isset($_SESSION['Token'])){
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sair</a>
+          </li>
+        }
+        else
+        {
+          <li class="nav-item">
+          <a class="nav-link" href="/Usuario/Login">Login</a>
+          </li>
+        }
+
+        ?>
       </ul>
     </div>
   </div>
