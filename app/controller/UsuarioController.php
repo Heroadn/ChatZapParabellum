@@ -24,6 +24,12 @@ class UsuarioController extends Controller
         $this->view->page_title = 'Perfil';
         $this->view->render();
     }
+    public function Logout($id=''){
+        $Usuario = Usuarios::findById($id);
+        $this->view(['Usuario' =>$Usuario]);
+        $this->view->page_title = 'Logout';
+        $this->view->render();
+    }
 
     /**
      * @param string $id
@@ -149,7 +155,7 @@ class UsuarioController extends Controller
     }
     public function logout_post(){
         unset($_SESSION["Token"]);
-        header("Location: /Usuario/Login");
+        header("Location: /Usuario/Logout");
         echo 'Logout Realizado';
     }
 
