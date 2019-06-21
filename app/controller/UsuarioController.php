@@ -148,9 +148,9 @@ class UsuarioController extends Controller
         }
     }
     public function logout_post(){
-        session_start();
         unset($_SESSION["Token"]);
-        header("Location: https://chat.acid-software.net/");
+        header("Location: /Usuario/Login");
+        echo 'Logout Realizado';
     }
 
     public function alterar_post(){

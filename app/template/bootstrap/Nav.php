@@ -116,7 +116,7 @@
         if (isset($_SESSION['Token'])){
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="/Usuario/Logout">Sair</a>
+            <a class="nav-link" href="/Usuario/logout_post">Sair</a>
           </li>
           <?php
         }
