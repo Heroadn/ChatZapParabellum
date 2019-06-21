@@ -114,15 +114,19 @@
         </li>
         <?php
         if (isset($_SESSION['Token'])){
+          ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sair</a>
+            <a class="nav-link" href="/Usuario/Logout">Sair</a>
           </li>
+          <?php
         }
         else
         {
+          ?>
           <li class="nav-item">
           <a class="nav-link" href="/Usuario/Login">Login</a>
           </li>
+          <?php
         }
 
         ?>
