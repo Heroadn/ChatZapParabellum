@@ -24,7 +24,7 @@
 
         </li>
         <li class="nav-item">
-          <a type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Perfil">Editar Pefil</a>
+          <a class="nav-link" data-toggle="modal" data-target="#Perfil">Editar Pefil</a>
           <div id="Perfil" class="modal fade" role="dialog" >
           <div class="modal-dialog modal-md">
 
