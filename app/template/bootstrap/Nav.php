@@ -136,8 +136,6 @@
       </ul>
     </div>
   </div>
-  <?php $this->getContent();?>
-  <script src="<?php JS . 'img_insert'?>"></script>
-  <script src="<?php JS . 'integridade_editar_perfil.js'?>"></script>
-  
+  <script src="../../../libs/js/img_insert.js"></script>
+  <script src="../../../libs/js/integridade_editar_perfil.js"></script>
 </nav>
