@@ -51,6 +51,6 @@
       </ul>
     </div>
   </div>
-  <script src="../../app/libs/js/img_insert.js"></script>
+  <script src= <?php JS . 'img_insert.js'?>></script>
   <script src="../../app/libs/js/integridade_editar_perfil.js"></script>
 </nav>
