@@ -2,6 +2,10 @@
     $controller = $this->getController();
     $action = $this->getAction();
 ?>
+<script src="app/libs/js/img_insert.js"></script>
+<script src="app/libs/js/integridade_editar_perfil.js"></script>
+
+
 <nav class="navbar navbar-expand-md navbar-dark purple">
   <div class="container">
     <a class="navbar-brand h1 mb-0 mr-5 menutitle" href="#" style="color: var(--font-light)">
