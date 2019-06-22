@@ -52,5 +52,5 @@
     </div>
   </div>
   <script src= <?php JS . 'img_insert.js'?>></script>
-  <script src="../../app/libs/js/integridade_editar_perfil.js"></script>
+  <script src=<?php JS . 'integridade_editar_perfil.js'?>></script>
 </nav>
