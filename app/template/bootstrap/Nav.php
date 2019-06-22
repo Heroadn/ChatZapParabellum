@@ -138,9 +138,13 @@
   </div>
 
   <script>
-  $('#myModal').on('shown.bs.modal', function () {
+  $('#exampleModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
+
+
+
   })
+  $('#myModal').modal('show')
   </script>
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" href="#exampleModal">
