@@ -2,8 +2,7 @@
     $controller = $this->getController();
     $action = $this->getAction();
 ?>
-<script src="app/libs/js/img_insert.js"></script>
-<script src="app/libs/js/integridade_editar_perfil.js"></script>
+
 
 
 <nav class="navbar navbar-expand-md navbar-dark purple">
@@ -137,4 +136,6 @@
       </ul>
     </div>
   </div>
+  <script src="app/libs/js/img_insert.js"></script>
+  <script src="app/libs/js/integridade_editar_perfil.js"></script>
 </nav>
