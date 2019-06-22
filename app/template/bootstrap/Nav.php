@@ -144,7 +144,7 @@
 
 
   })
-  $('#myModal').modal('show')
+  $('#exampleModal').modal('show')
   </script>
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" href="#exampleModal">
