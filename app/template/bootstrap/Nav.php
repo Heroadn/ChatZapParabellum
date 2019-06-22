@@ -28,7 +28,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#editarperfil">Editar Pefil</a>
-          <?php require("modal_editar_perfil.php") ?>
+          <?php require("../../app/libs/js/modal_editar_perfil.php") ?>
         </li>
         <?php
         if (isset($_SESSION['Token'])){
