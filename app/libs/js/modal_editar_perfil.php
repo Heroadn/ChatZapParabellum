@@ -41,14 +41,14 @@
 						<h5 class="p-text"> Nome de Usuario: <i style="font-size:30px"> <?php echo $usuario_nome ?>.</i></h5>
 							<div class="row">
 								<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-									<input type="text" class="form-control" id="trocar_nome" placeholder="Coloque seu novo nome aqui...">
+									<input type="text" class="form-control" id="" placeholder="Coloque seu novo nome aqui...">
 								</div>
 							</div>
 							<br>
 							<h5 class="p-text"> Email de Usuario: <i style="font-size:30px"> <?php echo $usuario_email ?> .</i></h5>
 								<div class="row">
 									<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-										<input type="text" class="form-control" id="trocar_nome" placeholder="Coloque seu novo email aqui...">
+										<input type="text" class="form-control" id="" placeholder="Coloque seu novo email aqui...">
 									</div>
 								</div>
 								<br>
