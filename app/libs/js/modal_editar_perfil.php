@@ -21,7 +21,7 @@
 			<form id="form_editar_perfil">
 	      <div class="row">
 					<div class="col-sm-9 col-md-4 col-lg-4 col-xl-4 text-center">
-						<img class="border-purple img-fluid" id="img_user_show" src="<?php echo $usuario_img ?>" style="border-radius:50%;">
+						<img class="border-purple img-fluid" id="img_user_show" src="<?php echo $Usuario->foto_perfil ?>" style="border-radius:50%;">
 							<div class="form-group">
 								<div class="row">
 									<div class="col">
@@ -38,14 +38,14 @@
 							</div>
 					</div>
 					<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-						<h5 class="p-text"> Nome de Usuario: <i style="font-size:30px"> <?php echo $usuario_nome ?>.</i></h5>
+						<h5 class="p-text"> Nome de Usuario: <i style="font-size:30px"> <?php echo $Usuario->nome ?>.</i></h5>
 							<div class="row">
 								<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 									<input type="text" class="form-control" id="" placeholder="Coloque seu novo nome aqui...">
 								</div>
 							</div>
 							<br>
-							<h5 class="p-text"> Email de Usuario: <i style="font-size:30px"> <?php echo $usuario_email ?> .</i></h5>
+							<h5 class="p-text"> Email de Usuario: <i style="font-size:30px"> <?php echo $Usuario->email ?> .</i></h5>
 								<div class="row">
 									<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 										<input type="text" class="form-control" id="" placeholder="Coloque seu novo email aqui...">
