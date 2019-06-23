@@ -17,7 +17,6 @@ define('JS_HEADER',serialize([
     'jquery.js',
     'bootstrap.min.js',
     'serializejson.js',
-    'engine.js'
-    'easter_eggs.js'
+    'easter_eggs.js',
     'themes.js'
 ]));
