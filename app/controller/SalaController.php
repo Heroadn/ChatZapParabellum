@@ -96,8 +96,10 @@ class SalaController extends Controller
     }
 
     public function Destaque($id=''){
-        $Salas = Salas::getRelevantes();
-        $this->view(['Salas' =>$Salas]);
+        $destaque = Salas::getRelevantes();
+        $todas = Salas::findAll();
+
+        $this->view(['Salas_Todas' =>$todas,'Salas_Destaque' =>$destaque]);
         $this->view->page_title = 'Destaque';
         $this->view->render();
     }
@@ -157,7 +159,7 @@ class SalaController extends Controller
 						$this->view->render();		
 					}
 					else{
-					    include(DIRECTORY_SEPARATOR . VIEW . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
+					    include(VIEW . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
 					}
 				}
 				else {
