@@ -1,8 +1,4 @@
-<?php
-	$usuario_img = "img/usuarios/error.png";
-	$usuario_nome = "Nome do Usuario Aqui";
-	$usuario_email = "email@email.com";
-?>
+
 
 <div id="editarperfil" class="modal fade" role="dialog" >
 <div class="modal-dialog modal-md">
@@ -32,7 +28,7 @@
 										<button type="button" class="btn btn-purple purple btn-block" onclick="wayFile('img_perfil_new')">
 											Mudar a Foto
 										</button>
-										<script src="includes/img_insert.js"></script>
+										<script src="<?php JS . 'img_insert.js'?>"></script>
 									</div>
 								</div>
 							</div>
@@ -88,5 +84,5 @@
       	</div>
     </div>
 	</div>
-	<script src="includes/integridade_editar_perfil.js"></script>
+	<script src="<?php JS . 'integridade_editar_perfil.js'?>"></script>
 </div>
