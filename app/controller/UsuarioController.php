@@ -12,8 +12,8 @@ class UsuarioController extends Controller
      * @param string $id
      * @param string $name
      */
-    public function Cadastrar($id='', $name=''){
-        $this->view(['id' =>$id, 'name' =>$name]);
+    public function Cadastrar($erro=''){
+        $this->view(['erro' =>$erro]);
         $this->view->page_title = 'Cadastrar';
         $this->view->render();
     }
@@ -96,24 +96,67 @@ class UsuarioController extends Controller
      * Metodo Cadastra o Usuario no banco de dados via Formulario "POST"
      */
     public function cadastrar_post(){
-        //foto_perfil
         $json = json_decode(file_get_contents('php://input'), true);
 
         $Usuario = new Usuarios();
         $Usuario->nome  = ($json) ? filter_var($json['nome'],  FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
         $Usuario->senha = ($json) ? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
-        $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'email');
+        $Usuario->email = ($json) ? filter_var($json['email'], FILTER_SANITIZE_EMAIL)  : filter_input(INPUT_POST, 'email');
         $Usuario->foto_perfil = ($json) ? Upload::save('foto_perfil','perfil_'.$Usuario->email.'_') : Upload::save('foto_perfil','perfil_'.$Usuario->email.'_');
         $Usuario->senha = password_hash($Usuario->senha, PASSWORD_BCRYPT);
         $Usuario->admin = "0";
 
-        $fromDb = Usuarios::findBy('email',$Usuario->email);
+        /*Mensagem de erro*/
+        $error = '';
 
-        if($Usuario->foto_perfil === false || !isset($Usuario->nome) || !isset($Usuario->senha) || !isset($Usuario->email) || $fromDb !== false){
-            header('Location:' . '/Usuario/Cadastrar/Erro=1');
-        }else{
+        /*Procura o usuario fornecido pelo email*/
+        $isUserRegistered = false;
+
+        /*Verifica o campo nome está vazio*/
+        if(empty($Usuario->nome))
+        {
+            $error = 'nome_vazio';
+        }
+
+        /*Verifica o campo nome está vazio*/
+        if(empty($Usuario->senha))
+        {
+            $error = 'senha_vazia';
+        }
+
+        /*Verifica o campo nome está vazio*/
+        if(empty($Usuario->email))
+        {
+            $error = 'email_vazio';
+        }else
+        {
+            $isUserRegistered = Usuarios::findBy('email',$Usuario->email);
+        }
+
+        /*Verifica se o usuario já existe no banco de dados*/
+        if($isUserRegistered)
+        {
+            $error = 'Conta_ja_existe';
+        }
+
+        /* Caso tenha algum erro de consistencia nas informaçoes fornecidas pelo Usuario
+         * ele sera redicionado novamente a pagina de cadastro mas
+         * sera enviado o erro pela url como '/Usuario/Cadastrar/causa do erro'
+         */
+        if($error)
+        {
+            header('Location:' . '/Usuario/Cadastrar/Erro='.$error);
+        }
+        else
+        {
+            /* Caso o Usuario não tenha fornecido uma foto, sera atribuida uma foto padrão */
+            if(!$Usuario->foto_perfil)
+            {
+                $Usuario->foto_perfil = IMG . 'ico_zapchat.png';
+            }
+
             $Usuario->save();
-            header('Location:' . '/Usuario/Cadastrar');
+            header('Location:' . '/Usuario/Login');
         }
     }
 

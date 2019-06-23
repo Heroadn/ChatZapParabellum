@@ -89,13 +89,12 @@ class Dao{
      * @param $string valor do campo
      * @return mixed
      */
-    public static function findBy($field, $string){
+    public static function findBy($field, $string = ''){
         try{
-            $sql = 'SELECT * FROM '.static::TABLE.'
-							WHERE '.$field.' = :'.$field.'';
+            $sql = 'SELECT * FROM ' .static::TABLE. ' WHERE ' .$field. ' = :'.$field;
 
             $p_sql = Db::getInstance()->prepare($sql);
-            $p_sql->bindParam(':'.$field,$string);
+            $p_sql->bindParam(':'.$field, $string);
             $p_sql->setFetchMode(PDO::FETCH_CLASS, ucfirst('\\model\\'. static::TABLE));
             $p_sql->execute();
             return $p_sql->fetch(PDO::FETCH_ASSOC);
