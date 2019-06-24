@@ -3,6 +3,14 @@ const test = [
 	{name: "Leandro", text: "olá, tudo bem?"},
 	{name: "Leandro", text: "oooiiiii!"},
 	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"}
 ]
 
 function testar(){
