@@ -75,8 +75,7 @@ var load = () => {
 		url: "https://chat.acid-software.net/Mensagem/Listar/2/2",
 		contentType: 'application/json;charset=UTF-8'
 	}).done(function(result){
-		const msgs = JSON.parse(result)
-
+		
 		//Adiciona as mensagens dentro do array
 		if(msgs.length != 0){
 			for(m in msgs){
