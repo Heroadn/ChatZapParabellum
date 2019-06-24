@@ -47,7 +47,7 @@ formChat.addEventListener('submit', function(event){
 
 		$.ajax({
 			method: "POST",
-			url: "http://chat.acid-software.net/Mensagem/cadastrar_post",
+			url: "https://chat.acid-software.net/Mensagem/cadastrar_post",
 			data: {
 				mensagem: striptags($("#mensgtextarea").val()),
 				salas_id: sala,
@@ -73,7 +73,7 @@ var load = () => {
 	$.ajax({
 		method: "GET",
 		//url: "http://chat.acid-software.net/Mensagem/Listar/2/2",
-		url: "http://localhost/test.php",
+		url: "https://localhost/test.php",
 		contentType: 'application/json;charset=UTF-8'
 	}).done(function(result){
 		const msgs = JSON.parse(result)
@@ -111,14 +111,14 @@ var load = () => {
 };
 
 function update(){
-	$.get('http://chat.acid-software.net/Sala/update_usuario/2', {},
+	$.get('https://chat.acid-software.net/Sala/update_usuario/2', {},
 		function(data){
 			console.log(data)
 		})
 }
 
 function usuarios(){
-	$.get('http://chat.acid-software.net/Sala/getUsuarios/2', {},
+	$.get('https://chat.acid-software.net/Sala/getUsuarios/2', {},
 		function(data){
 			if (data === 'b'){
 				alert('TÁ BANIDO, VACILÃO!');
