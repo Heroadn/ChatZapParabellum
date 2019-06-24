@@ -72,8 +72,7 @@ formChat.addEventListener('submit', function(event){
 var load = () => {
 	$.ajax({
 		method: "GET",
-		//url: "http://chat.acid-software.net/Mensagem/Listar/2/2",
-		url: "https://localhost/test.php",
+		url: "http://chat.acid-software.net/Mensagem/Listar/2/2",
 		contentType: 'application/json;charset=UTF-8'
 	}).done(function(result){
 		const msgs = JSON.parse(result)
