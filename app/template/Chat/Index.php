@@ -1,3 +1,7 @@
+<?php
+    $this->loadJs();
+    $this->loadCss();
+?>
 
 <div class="darken">
     <div class="menssages" id="boxChat" style="height: 400px;">
