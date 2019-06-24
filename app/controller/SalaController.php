@@ -114,7 +114,7 @@ class SalaController extends Controller
      */
     public function Conversar($id_sala = null){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-        $this->view_template = 'Chat';
+        $this->setTemplate('Chat');
 		
         if (isset($token->id) && isset($id_sala)){
 			$allowed = false;
