@@ -1,6 +1,6 @@
 <?php
-    $this->loadJs();
-    $this->loadCss();
+$this->loadJs();
+$this->loadCss();
 ?>
 
 <div class="darken">

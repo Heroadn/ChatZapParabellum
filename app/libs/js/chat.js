@@ -1,5 +1,21 @@
 const boxChat = document.getElementById("boxChat")
+<<<<<<< HEAD
 const formChat = document.getElementById("formChat")
+=======
+const test = [
+	{name: "Leandro", text: "olá, tudo bem?"},
+	{name: "Leandro", text: "oooiiiii!"},
+	{name: "Leandro", text: "oooiiiii!"},
+]
+
+function testar(){
+	for(let i = 0; i<test.length; i++){
+		createballon("Leandro", test[i].text)
+	}
+	createballon("me", test[2].text)
+}
+testar()
+>>>>>>> parent of c7947b5... Update chat.js
 
 
 function scrollDown(){
