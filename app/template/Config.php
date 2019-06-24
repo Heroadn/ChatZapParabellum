@@ -18,5 +18,6 @@ define('JS_HEADER',serialize([
     'bootstrap.min.js',
     'serializejson.js',
     'easter_eggs.js',
-    'themes.js'
+    'themes.js',
+    'popper.min.js'
 ]));
