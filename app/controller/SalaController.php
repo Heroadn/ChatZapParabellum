@@ -114,6 +114,7 @@ class SalaController extends Controller
      */
     public function Conversar($id_sala = null){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $this->view_template = 'Chat';
 		
         if (isset($token->id) && isset($id_sala)){
 			$allowed = false;
@@ -144,7 +145,8 @@ class SalaController extends Controller
 							$mod = 0;
 						}
 						//Verifica se o usuario esta na mesma sala
-						if($token->sala !== $id_sala){
+						if($token->sala !== $id_sala)
+						{
 							$token->time_sala = date("H:i:s");
 							$token->sala = $id_sala;
 						}
@@ -171,10 +173,12 @@ class SalaController extends Controller
 			}
         }
 		else {
-			if (!isset($token->id)){
-				header("Location:/Usuario/Login");
+			if (!isset($token->id))
+			{
+			    header("Location:/Usuario/Login");
 			}
-			else {
+			else
+			{
 				echo 'INFORME O ID DA SALA!';
 			}
 		}
