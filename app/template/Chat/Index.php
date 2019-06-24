@@ -1,4 +1,7 @@
-
+<?php
+    $this->loadJs();
+    $this->loadCss();
+    ?>
 <div class="darken">
 	<div class="menssages" id="boxChat" style="height: 650px; overflow: auto">
 		<br>
@@ -19,5 +22,5 @@
 	</form>
 </div>
 
-<script src="includes/chat.js"></script>
-<script src="includes/pessoas_online.js"></script>
+<script src="<?php echo JS . 'chat.js'?>"></script>
+<script src="<?php echo JS . 'pessoas_online.js'?>"></script>
