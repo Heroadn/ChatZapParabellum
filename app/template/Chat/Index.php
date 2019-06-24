@@ -19,5 +19,5 @@
     </form>
 </div>
 
-<script src="includes/chat.js"></script>
-<script src="includes/pessoas_online.js"></script>
+<script src="<?php echo JS . 'chat.js'?>"></script>
+<script src="<?php echo JS . 'pessoas_online.js'?>"></script>
