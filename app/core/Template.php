@@ -6,7 +6,7 @@ namespace core;
 
 class Template
 {
-    protected $view_template = TEMPLATE_SELECTED;
+    protected $view_template = 'bootstrap';
     protected $css_loaded = false;
     protected $js_loaded = false;
 
