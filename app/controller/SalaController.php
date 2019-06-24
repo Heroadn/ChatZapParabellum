@@ -114,7 +114,6 @@ class SalaController extends Controller
      */
     public function Conversar($id_sala = null){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-        $this->setTemplate('Chat');
 		
         if (isset($token->id) && isset($id_sala)){
 			$allowed = false;
@@ -158,6 +157,7 @@ class SalaController extends Controller
 
 						$this->view(['id_sala'=>$id_sala,'time_ativo'=>$token->time_ativo,'mod'=>$mod]);
 						$this->view->page_title = 'Conversar';
+                        $this->view->setTemplate('Chat');
 						$this->view->render();		
 					}
 					else{
