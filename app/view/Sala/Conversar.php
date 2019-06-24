@@ -9,32 +9,29 @@
         echo '<p>' .'Post de messangem ficara indisponivel.'. '</p>';
     }
 ?>
-<div id="time"></div>
-<div id="chat"></div>
+<div class="darken">
+	<div class="menssages h-80" id="boxChat">
 
-<form id="mensagem" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
-    <br>
-    <div class="form-group">
-        <label for="nome"><span style="color: dodgerblue">*</span>Mensagem:</label><input class="form-control" name="mensagem" type="text">
-        <input class="form-control" name="salas_id" type="hidden" value="<?php echo $id_sala;?>">
-    </div>
-
-    <div class="clearfix"></div>
-</form>
-<div class="text-right">
-    <input type="submit" onclick="postMensagem();" class="btn btn-primary" value="Salvar">
-</div>
-<div>
-	<a href="/Sala/sair/<?php echo $id_sala;?>"><button>Sair da sala</button></a>
-	<h2>Usuários:</h2>
-	<div id="usuarios" style="width:50%; float:left">
 	</div>
-	<h2>Enviar para:</h2>
-	<div id="enviarpara" style="width:50%; float:right">
-	</div>
+	<hr>
+	<form class="h-20" id="formChat">
+		<div class="form-group p-3 text-center">
+			<div class="row">
+				<div class="col-9">
+					<input type="text" class="form-darken-purple" id="mensgtextarea" placeholder="Digite">
+				</div>
+				<div class="col-3">
+					<button class="btn btn-purple purple">Enviar</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 
-<script>
+<script src="<?php echo JS . 'chat.js'?>"></script>
+<script src="<?php echo JS . 'pessoas_online.js'?>"></script>
+
+/*<script>
     var mensagens = [];
     var lastTimeID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
@@ -151,4 +148,4 @@
     setInterval(load,2000);
 	
 	
-</script>
+</script>*/
