@@ -43,7 +43,7 @@
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
 
-    $("*").keyup(function(e){
+    $("#mensagem").keyup(function(e){
         if(e.keyCode == 13){
             postMensagem();
         }
