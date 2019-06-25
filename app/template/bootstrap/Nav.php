@@ -23,7 +23,7 @@
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/Sala/">Paginas</a>
+          <a class="nav-link" href="/Sala/">Criar Sala</a>
 
         </li>
         <li class="nav-item">
@@ -41,6 +41,9 @@
         else
         {
           ?>
+          <li class="nav-item">
+          <a class="nav-link" href="/Usuario/Cadastrar">Cadastre-se!</a>
+          </li>
           <li class="nav-item">
           <a class="nav-link" href="/Usuario/Login">Login</a>
           </li>
