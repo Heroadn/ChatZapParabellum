@@ -1,18 +1,18 @@
 <?php
-    if(!isset($_SESSION['Token'])) {
-        header("Location:/Usuario/Login");
-    }
+if(!isset($_SESSION['Token'])) {
+    header("Location:/Usuario/Login");
+}
 
-    /** @var TYPE_NAME $id_sala */
-    if($id_sala === ''){
-        echo '<h3>' .'Sala não selecionada:'. '</h3>';
-        echo '<p>' .'Post de messangem ficara indisponivel.'. '</p>';
-    }
+/** @var TYPE_NAME $id_sala */
+if($id_sala === ''){
+    echo '<h3>' .'Sala não selecionada:'. '</h3>';
+    echo '<p>' .'Post de messangem ficara indisponivel.'. '</p>';
+}
 ?>
 <div id="time"></div>
 <div id="chat"></div>
 
-<div id="mensagem" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+<form id="mensagem" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
     <br>
     <div class="form-group">
         <label for="nome"><span style="color: dodgerblue">*</span>Mensagem:</label><input class="form-control" name="mensagem" type="text">
@@ -20,12 +20,10 @@
     </div>
 
     <div class="clearfix"></div>
-</div>
-
+</form>
 <div class="text-right">
-    <input type="submit" id="enviar" onclick="postMensagem();" class="btn btn-primary" value="Salvar">
+    <input type="submit" onclick="postMensagem();" class="btn btn-primary" value="Salvar">
 </div>
-
 <div>
     <a href="/Sala/sair/<?php echo $id_sala;?>"><button>Sair da sala</button></a>
     <h2>Usuários:</h2>
@@ -35,7 +33,6 @@
     <div id="enviarpara" style="width:50%; float:right">
     </div>
 </div>
-
 
 <script>
     var mensagens = [];
