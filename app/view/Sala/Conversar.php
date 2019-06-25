@@ -42,6 +42,13 @@
     var lastTimeID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
+
+    $("*").keyup(function(e){
+        if(e.keyCode == 13){
+            postMensagem();
+        }
+    })
+
     var postMensagem = () => {
         console.log($('#mensagem').serialize());
         var campos = $('#mensagem').serialize();
