@@ -28,11 +28,12 @@
 	</form>
 </div>
 
+<script src="<?php echo JS . 'chat.js'?>"></script>
 <script src="<?php echo JS . 'pessoas_online.js'?>"></script>
 
 <script>
     var mensagens = [];
-    var lastTimeMessageID = 1;
+    var lastTimeID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
     var postMensagem = () => {
@@ -42,7 +43,7 @@
 		console.log(campos);
         $.ajax({
             type: "POST",
-            url: "https://chat.acid-software.net/Mensagem/cadastrar_post",
+            url: "/Mensagem/cadastrar_post",
             json: campos,
             success:function (response){
                 //alert(response);
@@ -61,12 +62,10 @@
         document.getElementById("time").innerHTML = <?php echo "'".$time_ativo."'"?>;
         $.ajax({
             type: "GET",
-            url: "https://chat.acid-software.net/Mensagem/Listar/"+ sala +"/"+lastTimeMessageID,
+            url: "/Mensagem/Listar/"+ sala +"/"+lastTimeID,
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
-
-                console.log(response);
 				//alert(response);
                 json = response;
 
@@ -82,8 +81,8 @@
 					mensagem['remetente'] = json[m]['remetente'];
 					mensagem['para_id'] = json[m]['para_id'];
 
-                    if(mensagem['id'] !== lastTimeMessageID){
-                        lastTimeMessageID = mensagem['id'];
+                    if(mensagem['id'] !== lastTimeID){
+                        lastTimeID = mensagem['id'];
 						if (mensagem['para_id']){
 							document.getElementById("chat").innerHTML += "<br>(Reservadamente)" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
 						}
@@ -100,13 +99,13 @@
     };
 
 	function update(){
-		$.get('https://chat.acid-software.net/Sala/update_usuario/<?php echo $id_sala;?>', {},
+		$.get('/Sala/update_usuario/<?php echo $id_sala;?>', {},
 		function(data){
 			})
 	}
 
 	function usuarios(){
-		$.get('https://chat.acid-software.net/Sala/getUsuarios/<?php echo $id_sala;?>', {},
+		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
 		function(data){
 				if (data === 'b'){
 					alert('TÁ BANIDO, VACILÃO!');
@@ -140,7 +139,7 @@
 	}
 
 	function banir(id) {
-		var query = 'https://chat.acid-software.net/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
+		var query = '/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
 		$.get(query, {},
 		function(data){
 			})
