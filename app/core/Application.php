@@ -5,7 +5,7 @@ use Exception;
 
 class Application{
     protected $controller  = 'SalaController';
-    protected $action = 'Index';
+    protected $action = 'Destaque';
     protected $prams = [];
 
     /**
