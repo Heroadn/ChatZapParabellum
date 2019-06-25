@@ -4,8 +4,8 @@ use controller;
 use Exception;
 
 class Application{
-    protected $controller  = 'UsuarioController';
-    protected $action = 'Cadastrar';
+    protected $controller  = 'IndexController';
+    protected $action = 'Index';
     protected $prams = [];
 
     /**
