@@ -9,7 +9,6 @@ use http\Header;
 use model\Salas;
 use model\Categorias;
 use model\Usuarios;
-
 class SalaController extends Controller
 {
     /**
@@ -28,7 +27,28 @@ class SalaController extends Controller
 			header('Location: /Usuario/Login/');
 		}
     }
-
+	
+	public function Editar($id_sala=0){
+		$token = Token::getTokenFromHeadersOrSession('Token','Authorization');
+		
+		if (isset($token->id)){
+			if (intval($id_sala)){
+				$Categorias = Categorias::findAll();
+				$Sala = Salas::findAll(['id'=>$id_sala]);
+				$this->view(['Sala' =>$Sala, 'Categorias' =>$Categorias]);
+				$this->view->page_title = 'Editar Sala';
+				$this->view->render();
+			}
+			else{
+				echo 'Sem id...';
+			}
+		}
+		else{
+			header('Location: /Usuario/Login/');
+		}
+		
+	}
+	
     public function Listar($opcao='', $parametro=1, $inicio=1, $limit=10){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
         $isAdmin = isset($token->id) && Assert::equalsOrError(Usuarios::findById($token->id)->admin,true);
@@ -83,7 +103,6 @@ class SalaController extends Controller
 				$size = ceil(Salas::count() / $limit);
                 $Salas = Salas::findAll([], ['limit'=>['start'=>$page,'limit'=>$limit]]);
         }
-
         if(!$isAdmin) {
             foreach ($Salas as $sala) {
                 unset($sala->senha);
@@ -94,16 +113,13 @@ class SalaController extends Controller
 		
 		echo json_encode(array('Salas'=>$Salas,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }
-
     public function Destaque($id=''){
         $destaque = Salas::getRelevantes();
         $todas = Salas::findAll();
-
         $this->view(['Salas_Todas' =>$todas,'Salas_Destaque' =>$destaque]);
         $this->view->page_title = 'Destaque';
         $this->view->render();
     }
-
     public function Senha($id=''){
 		$this->view(['id' => $id]);
         $this->view->page_title = 'Digite a senha';
@@ -119,7 +135,6 @@ class SalaController extends Controller
 			$allowed = false;
 			$usuario_id = $token->id;
 			$Sala = Salas::findAll(['id'=>$id_sala]);
-
 			if (!empty($Sala)){
 				$senha_sala = $Sala[0]->senha;
 				if ($senha_sala){
@@ -134,7 +149,6 @@ class SalaController extends Controller
 				else {
 					$allowed = true;
 				}
-
 				if ($allowed){
 					if (!$Sala[0]->isBanido($token->id)){
 						if ($Sala[0]->moderador_id === $token->id){
@@ -149,12 +163,10 @@ class SalaController extends Controller
 							$token->time_sala = date("H:i:s");
 							$token->sala = $id_sala;
 						}
-
 						$token->time_ativo = gmdate("H:i:s", (strtotime(date("H:i:s")) - strtotime( $token->time_sala)));
 						$Sala = new Salas();
 						$Sala->addUsuario($usuario_id, $id_sala);
 						Token::saveTokenOnSession('Token',$token);
-
 						$this->view(['id_sala'=>$id_sala,'time_ativo'=>$token->time_ativo,'mod'=>$mod]);
 						$this->view->page_title = 'Conversar';
 						$this->view->render();		
@@ -182,7 +194,6 @@ class SalaController extends Controller
 			}
 		}
     }
-
     /**
      * @param string $id_sala
      */
@@ -191,11 +202,9 @@ class SalaController extends Controller
         $this->view->page_title = 'Conversar';
         $this->view->render();
     }
-
     /**
      *
      */
-
     /**
      *  Metodo recebe via post Sala{nome,senha e categoria_id}
      *  moderador_id é pego pela sessão
@@ -215,10 +224,45 @@ class SalaController extends Controller
         $Salas->moderador_id  = $token->id;
         $Salas->categorias_id = ($json)? filter_var($json['categorias_id'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'categorias_id');
         $Salas->save();
-
         header('location: '.'Sala/Conversar/');
     }
+	
+    public function editar_post($id_sala=0){
+        $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
+        $json = json_decode(file_get_contents('php://input'), true);
+		if ($token->id){
+			if (intval($id_sala)){
+				$Salas = new Salas($id_sala);
+				if ($token->id == $Salas->moderador_id){
+					$Salas->nome          = ($json)? filter_var($json['nome'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'nome');
+					$senha = ($json)? filter_var($json['senha'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'senha');
+					if ($senha){
+						$Salas->senha = md5($senha.SALT);
+					}
+					$Salas->tags = ($json)? filter_var($json['tags'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'tags');
+					$Salas->descricao = ($json)? filter_var($json['descricao'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'descricao');
+					if ($_FILES['foto_sala']['name']){
+						$Salas->foto_sala = ($json) ? Upload::save('foto_sala','sala_'.$Salas->nome.'_') : Upload::save('foto_sala','sala_'.$Salas->nome.'_');
+					}
+					$Salas->moderador_id  = $token->id;
+					$Salas->categorias_id = ($json)? filter_var($json['categorias_id'], FILTER_SANITIZE_STRING) : filter_input(INPUT_POST, 'categorias_id');
+					
+					$Salas->save();
 
+					header('location: '.'/Sala/Destaque');
+				}
+				else{
+					echo 'N é o moderador da sala';
+				}
+			}
+			else{
+				echo 'Tá sem id';
+			}
+		}
+		else{
+			header('Location: /Usuario/Login/');
+		}
+    }
     /**
      * Metodo retorna os usuarios de uma determinada sala
      *
@@ -238,7 +282,6 @@ class SalaController extends Controller
 			}
 		}
 	}
-
 	public function update_usuario($id_sala=null){
 		if ($id_sala){
             $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
