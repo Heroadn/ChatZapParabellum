@@ -31,7 +31,7 @@
 <script src="<?php echo JS . 'chat.js'?>"></script>
 <script src="<?php echo JS . 'pessoas_online.js'?>"></script>
 
-/*<script>
+<script>
     var mensagens = [];
     var lastTimeID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
@@ -101,9 +101,9 @@
 	function update(){
 		$.get('/Sala/update_usuario/<?php echo $id_sala;?>', {},
 		function(data){
-			})		
+			})
 	}
-	
+
 	function usuarios(){
 		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
 		function(data){
@@ -112,7 +112,7 @@
 				}
 				else {
 					var Usuarios = JSON.parse(data);
-					
+
 					//$('#usuarios').html('');
 					html = '';
 					html2 = '<input type="radio" name="msg_secreta" id="0" value=""><label for="0">todos</label>';
@@ -122,7 +122,7 @@
 							html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p><button style="float:right; width:50%" onclick="banir('+Usuarios[posicao].id+')">BANIR</button></div>';
 						}
 						else {
-								html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p></div>';						
+								html += '<div style="width:100%; float:left"><p style="float:left; width:50%">'+Usuarios[posicao].nome+'</p></div>';
 						}
 						html2 += '<input type="radio" name="msg_secreta" value="'+Usuarios[posicao].id+'"><label for="0">'+Usuarios[posicao].nome+'</label>';
 					}
@@ -142,10 +142,10 @@
 		var query = '/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
 		$.get(query, {},
 		function(data){
-			})	
+			})
 	};
     load();
     setInterval(load,2000);
-	
-	
-</script>*/
+
+
+</script>
