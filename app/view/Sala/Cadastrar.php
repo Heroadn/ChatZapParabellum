@@ -16,14 +16,14 @@
 		<div class="col-sm-12 col-md-6 mt-4">
 			<label for="foto_sala">Adicione uma imagem ao Chat</label>
 			<br>
-			<img class="border-purple img-fluid" id="img_criar_sala" src="img/salas/error.jpg" style="border-radius:50%; max-width: 200px;">
+			<img class="border-purple img-fluid" id="img_criar_sala" src="libs/img/salas/error.jpg" style="border-radius:50%; max-width: 200px;">
 			<br>
 			<input type="file" onchange="changeImg()" name="foto_sala" class="img-fluid img-thumbnail" id="foto_new" style="display: none;">
 			<br>
 			<button type="button" class="btn btn-purple purple btn-block" onclick="wayFile()">
 			Adicionar Foto
 			</button>
-			<script src="/app/libs/js/img_insert_sala.js"></script>
+			<script src="<?php echo JS . 'img_insert_sala.js'?>"></script>
 		</div>
 
 		<div class="col-sm-6 col-md-6 mt-4">
