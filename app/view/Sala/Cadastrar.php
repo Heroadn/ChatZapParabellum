@@ -16,7 +16,7 @@
 		<div class="col-sm-12 col-md-6 mt-4">
 			<label for="foto_sala">Adicione uma imagem ao Chat</label>
 			<br>
-			<img class="border-purple img-fluid" id="img_criar_sala" src="../libs/img/salas/error.jpg" style="border-radius:50%; max-width: 200px;">
+			<img class="border-purple img-fluid" id="img_criar_sala" src="app/lib/img/salas/error.jpg" style="border-radius:50%; max-width: 200px;">
 			<br>
 			<input type="file" onchange="changeImg()" name="foto_sala" class="img-fluid img-thumbnail" id="foto_new" style="display: none;">
 			<br>
