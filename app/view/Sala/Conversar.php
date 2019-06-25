@@ -66,6 +66,8 @@
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
+
+                console.log(response);
 				//alert(response);
                 json = response;
 
