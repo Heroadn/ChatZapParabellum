@@ -43,7 +43,7 @@
 		console.log(campos);
         $.ajax({
             type: "POST",
-            url: "/Mensagem/cadastrar_post",
+            url: "https://chat.acid-software.net/Mensagem/cadastrar_post",
             json: campos,
             success:function (response){
                 //alert(response);
@@ -62,7 +62,7 @@
         document.getElementById("time").innerHTML = <?php echo "'".$time_ativo."'"?>;
         $.ajax({
             type: "GET",
-            url: "/Mensagem/Listar/"+ sala +"/"+lastTimeID,
+            url: "https://chat.acid-software.net/Mensagem/Listar/"+ sala +"/"+lastTimeID,
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
@@ -99,13 +99,13 @@
     };
 
 	function update(){
-		$.get('/Sala/update_usuario/<?php echo $id_sala;?>', {},
+		$.get('https://chat.acid-software.net/Sala/update_usuario/<?php echo $id_sala;?>', {},
 		function(data){
 			})
 	}
 
 	function usuarios(){
-		$.get('/Sala/getUsuarios/<?php echo $id_sala;?>', {},
+		$.get('https://chat.acid-software.net/Sala/getUsuarios/<?php echo $id_sala;?>', {},
 		function(data){
 				if (data === 'b'){
 					alert('TÁ BANIDO, VACILÃO!');
@@ -139,7 +139,7 @@
 	}
 
 	function banir(id) {
-		var query = '/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
+		var query = 'https://chat.acid-software.net/Sala/banirUsuario/<?php echo $id_sala;?>/'+id;
 		$.get(query, {},
 		function(data){
 			})
