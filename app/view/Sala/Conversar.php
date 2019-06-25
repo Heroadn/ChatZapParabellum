@@ -33,7 +33,7 @@
 
 <script>
     var mensagens = [];
-    var lastTimeID = 1;
+    var lastTimeMessageID = 1;
     var sala = <?php echo ($id_sala) ? $id_sala: '0'?>;
 
     var postMensagem = () => {
@@ -62,7 +62,7 @@
         document.getElementById("time").innerHTML = <?php echo "'".$time_ativo."'"?>;
         $.ajax({
             type: "GET",
-            url: "https://chat.acid-software.net/Mensagem/Listar/"+ sala +"/"+lastTimeID,
+            url: "https://chat.acid-software.net/Mensagem/Listar/"+ sala +"/"+lastTimeMessageID,
             contentType: 'application/json;charset=UTF-8',
 
             success:function (response){
@@ -83,8 +83,8 @@
 					mensagem['remetente'] = json[m]['remetente'];
 					mensagem['para_id'] = json[m]['para_id'];
 
-                    if(mensagem['id'] !== lastTimeID){
-                        lastTimeID = mensagem['id'];
+                    if(mensagem['id'] !== lastTimeMessageID){
+                        lastTimeMessageID = mensagem['id'];
 						if (mensagem['para_id']){
 							document.getElementById("chat").innerHTML += "<br>(Reservadamente)" +  mensagem['remetente'] + ': ' + mensagem['mensagem'];
 						}
