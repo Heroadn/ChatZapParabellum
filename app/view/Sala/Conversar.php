@@ -146,6 +146,4 @@
 	};
     load();
     setInterval(load,2000);
-
-
 </script>
