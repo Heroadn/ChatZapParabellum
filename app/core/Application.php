@@ -4,8 +4,8 @@ use controller;
 use Exception;
 
 class Application{
-    protected $controller  = 'IndexController';
-    protected $action = 'Index';
+    protected $controller  = 'HomeController';
+    protected $action = 'Inicio';
     protected $prams = [];
 
     /**
@@ -38,8 +38,8 @@ class Application{
         $request = trim($_SERVER['REQUEST_URI'],'/');
         if(!empty($request)){
             $url = explode('/',$request);
-            $this->controller = isset($url[0]) ?  $url[0] . 'Controller' : 'IndexController';
-            $this->action = isset($url[1]) ? $url[1] : 'Index';
+            $this->controller = isset($url[0]) ?  $url[0] . 'Controller' : 'HomeController';
+            $this->action = isset($url[1]) ? $url[1] : 'Inicio';
 
             //Removendo o controller e action do url, e adicionando parametros adicionais na url no prams
             unset($url[0],$url[1]);
