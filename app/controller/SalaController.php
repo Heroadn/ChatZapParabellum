@@ -36,11 +36,11 @@ class SalaController extends Controller
         /*Caso o usuario seja um administrador
         * sera mostrado todas as informações sobre sala assim como informações sensiveis
         * senha, tempo etc.. */
-		
+
         $start = intval($inicio);
         $page = ($start * $limit) - $limit;
         $size = 0;
-		
+
         switch($opcao){
             case 'nome':
 				$size = ceil(count(Salas::findAll([],['like'=>['nome'=>$parametro]])) / $limit);
@@ -91,7 +91,7 @@ class SalaController extends Controller
         }
         header("Access-Control-Allow-Origin: *");
         header("Content-type:application/json");
-		
+
 		echo json_encode(array('Salas'=>$Salas,'pag'=>['page'=>($page / $limit) + 1,'size'=>$size]));
     }
 
@@ -114,7 +114,7 @@ class SalaController extends Controller
      */
     public function Conversar($id_sala = null){
         $token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
-		
+
         if (isset($token->id) && isset($id_sala)){
 			$allowed = false;
 			$usuario_id = $token->id;
@@ -157,7 +157,7 @@ class SalaController extends Controller
 
 						$this->view(['id_sala'=>$id_sala,'time_ativo'=>$token->time_ativo,'mod'=>$mod]);
 						$this->view->page_title = 'Conversar';
-						$this->view->render();		
+						$this->view->render();
 					}
 					else{
 					    include(VIEW . 'Error' . DIRECTORY_SEPARATOR . 'Banido.php');
@@ -246,7 +246,7 @@ class SalaController extends Controller
             $usuario_id = $token->id;
 			$Sala = new Salas($id_sala);
 			$Sala->updateTimeUsuario($usuario_id);
-			
+
 			//verifica se os outros usuários da sala expiraram
 			$usuarios = $Sala->getUsuarios();
 			foreach($usuarios as $u){
@@ -257,7 +257,7 @@ class SalaController extends Controller
 			}
 		}
 	}
-	
+
 	public static function update_all_usuarios(){
 		$Salas = Salas::findAll();
 		foreach($Salas as $s){
@@ -268,7 +268,7 @@ class SalaController extends Controller
 				if ($last_time>60){
 					$Sala->deleteUsuario($u->id);
 				}
-			}			
+			}
 		}
 	}
     /**
@@ -294,7 +294,7 @@ class SalaController extends Controller
             echo 'sem ID da sala!';
         }
     }
-	
+
 	public function banirUsuario($id_sala=null, $id_usuario=null){
 		if ($id_sala != null && $id_usuario != null){
 			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
@@ -305,7 +305,7 @@ class SalaController extends Controller
 			}
 		}
 	}
-	
+
 	public function desbanirUsuario($id_sala=null, $id_usuario=null){
 		if ($id_sala != null && $id_usuario != null){
 			$token  = Token::getTokenFromHeadersOrSession('Token','Authorization');
