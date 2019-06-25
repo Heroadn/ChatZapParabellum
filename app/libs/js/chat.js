@@ -1,7 +1,4 @@
 const boxChat = document.getElementById("boxChat")
-<<<<<<< HEAD
-const formChat = document.getElementById("formChat")
-=======
 const test = [
 	{name: "Leandro", text: "olá, tudo bem?"},
 	{name: "Leandro", text: "oooiiiii!"},
@@ -15,7 +12,6 @@ function testar(){
 	createballon("me", test[2].text)
 }
 testar()
->>>>>>> parent of c7947b5... Update chat.js
 
 
 function scrollDown(){
@@ -98,7 +94,7 @@ var load = () => {
 				let typePerson = (msgs[m].usuarios_id == myId) ? "me" : "other"
 				let privete = (msgs[m].para_id != null) ? "privete" : ""
 
-				//so nao entra se a messagem nao é minha e nao é para min e é privada
+				//so nao entra se a messagem nao é minha e nao é para mim e é privada
 				if(!(msgs[m].usuarios_id != myId && msgs[m].para_id != myId && msgs[m].para_id != null)){
 					createballon(typePerson, msgs[m], privete)
 				}
